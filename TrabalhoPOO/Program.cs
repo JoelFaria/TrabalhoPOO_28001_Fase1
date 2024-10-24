@@ -8,12 +8,7 @@ namespace TrabalhoPOO
         { 
             Produto produto = new Produto("n",3, "d", 4.5, "e", 4, "o", 4);
             produto.PrintDetails();
-
-            Console.WriteLine("Ola");
-            Console.WriteLine("Ola");
-
-            //ola
-
+           
         }
     }
 }
