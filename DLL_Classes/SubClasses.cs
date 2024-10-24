@@ -80,27 +80,20 @@ namespace TrabalhoPOO
     }
     public class Motherboard
     {
-        private string socket { get; set; }
-        private string chipset { get; set; }
+        private string Socket { get; set; }
         private int MemorySupport { get; set; }
         private string FormFactor { get; set; }
 
         public Motherboard(string socket, string chipset, int memorySupport, string formFactor)
         {
-            this.socket = socket;
-            this.chipset = chipset;
+            this.Socket = socket;
             this.MemorySupport = memorySupport;
             this.FormFactor = formFactor;
         }
         public string GetSocket
         {
-            get { return socket; }
-            set { socket = value; }
-        }
-        public string GetChipset
-        {
-            get { return chipset; }
-            set { chipset = value; }
+            get { return Socket; }
+            set { Socket = value; }
         }
         public int GetMemorySupport
         {
@@ -111,6 +104,41 @@ namespace TrabalhoPOO
         {
             get { return FormFactor; }
             set { FormFactor = value; }
+        }
+    }
+    public class RAM 
+    {         
+        private int Capacity { get; set; }
+        private string Type { get; set; }
+        private int Frequency { get; set; }
+        private int Latency { get; set; }
+
+        public RAM(int capacity, string type, int frequency, int latency)
+        {
+            this.Capacity = capacity;
+            this.Type = type;
+            this.Frequency = frequency;
+            this.Latency = latency;
+        }
+        public int GetCapacity
+        {
+            get { return Capacity; }
+            set { Capacity = value; }
+        }
+        public string GetType
+        {
+            get { return Type; }
+            set { Type = value; }
+        }
+        public int GetFrequency
+        {
+            get { return Frequency; }
+            set { Frequency = value; }
+        }
+        public int GetLatency
+        {
+            get { return Latency; }
+            set { Latency = value; }
         }
     }
 }
