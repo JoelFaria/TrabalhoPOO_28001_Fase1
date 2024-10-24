@@ -1,0 +1,74 @@
+﻿using TrabalhoPOO;
+
+namespace TrabalhoPOO
+{
+    public class Produto
+    {
+        private string Nome { get; set; }
+        private int Id { get; set; }
+        private string Descricao { get; set; }
+        private double Preco { get; set; }
+        private string Cat { get; set; }
+        private int Stock { get; set; }
+        private string Marca { get; set; }
+        private int garantiaMeses { get; set; }
+
+        public Produto(string nome, int id, string descricao, double preco, string cat, int stock, string marca, int garantia)
+        {
+            this.Nome = nome;
+            this.Id = id;
+            this.Descricao = descricao;
+            this.Preco = preco;
+            this.Cat = cat;
+            this.Stock = stock;
+            this.Marca = marca;
+            this.garantiaMeses = garantia;
+        }
+        public string NomeProduto
+        {
+            get { return Nome; }
+            set { Nome = value; }
+        }
+        public int IdProduto
+        {
+            get { return Id; }
+            set { Id = value; }
+        }
+        public string DescricaoProduto
+        {
+            get { return Descricao; }
+            set { Descricao = value; }
+        }
+        public double PrecoProduto
+        {
+            get { return Preco; }
+            set { Preco = value; }
+        }
+        public string CategoriaProduto
+        {
+            get { return Cat; }
+            set { Cat = value; }
+        }
+        public int StockProduto
+        {
+            get { return Stock; }
+            set { Stock = value; }
+        }
+        public string MarcaProduto
+        {
+            get { return Marca; }
+            set { Marca = value; }
+        }
+        public int GarantiaMesesProdutos
+        {
+            get { return garantiaMeses; }
+            set { garantiaMeses = value; }
+        }
+
+        public virtual void PrintDetails()
+        {
+            Console.Write($"Nome: {this.Nome}, Id: {this.Id}, Descrição: {this.Descricao}, Preço: {this.Preco}, Categoria: {this.Cat}, Stock: {this.Stock}, Marca:{this.Marca}, Garantia:{this.garantiaMeses}");
+        }
+    }
+}
+
