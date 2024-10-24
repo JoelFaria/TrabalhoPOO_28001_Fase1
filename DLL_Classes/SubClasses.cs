@@ -43,6 +43,13 @@ namespace TrabalhoPOO
             get { return MemoryType; }
             set { MemoryType = value; }
         }
+
+        public override void PrintDetails()
+        {
+            base.PrintDetails();
+            Console.WriteLine($"VRAM: {this.VRAM}, BaseClock: {this.BaseClock}, BoostClock: {this.BoostClock}, MemoryType: {this.MemoryType}");
+        }
+
     }
     public class cpu : Produto
     {
@@ -79,6 +86,11 @@ namespace TrabalhoPOO
             get { return Frequency; }
             set { Frequency = value; }
         }
+        public override void PrintDetails()
+        {
+            base.PrintDetails();
+            Console.WriteLine($"Cache: {this.Cache}, Socket: {this.Socket}, MemorySuport: {this.MemorySupport}, Frequency: {this.Frequency}");
+        }
     }
     public class Motherboard : Produto
     {
@@ -107,6 +119,11 @@ namespace TrabalhoPOO
         {
             get { return FormFactor; }
             set { FormFactor = value; }
+        }
+        public override void PrintDetails()
+        {
+            base.PrintDetails();
+            Console.WriteLine($"Socket: {this.Socket}, MemorySuport: {this.MemorySupport}, FormFactor: {this.FormFactor}");
         }
     }
     public class RAM : Produto
@@ -143,6 +160,11 @@ namespace TrabalhoPOO
         {
             get { return Latency; }
             set { Latency = value; }
+        }
+        public override void PrintDetails()
+        {
+            base.PrintDetails();
+            Console.WriteLine($"Capacity: {this.Capacity}, Type: {this.Type}, Frequency: {this.Frequency}, Latency: {this.Latency}");
         }
     }
 }

@@ -13,10 +13,10 @@ namespace TrabalhoPOO
     {
         public static void Main() 
         { 
-            Produto produto = new Produto("n",3, "d", 4.5, "e", 4, "o", 4);
-            produto.PrintDetails();
 
 
+            Gpu gpu = new Gpu(4, 4, 4, "e", "n", 3, "d", 4.5, "e", 4, "o", 4);
+            gpu.PrintDetails();
            
         }
     }

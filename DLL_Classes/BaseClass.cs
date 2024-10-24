@@ -73,7 +73,7 @@ namespace TrabalhoPOO
 
         public virtual void PrintDetails()
         {
-            Console.Write($"Nome: {this.Nome}, Id: {this.Id}, Descrição: {this.Descricao}, Preço: {this.Preco}, Categoria: {this.Cat}, Stock: {this.Stock}, Marca:{this.Marca}, Garantia:{this.garantiaMeses}");
+            Console.WriteLine($"Nome: {this.Nome}, Id: {this.Id}, Descrição: {this.Descricao}, Preço: {this.Preco}, Categoria: {this.Cat}, Stock: {this.Stock}, Marca:{this.Marca}, Garantia:{this.garantiaMeses}");
         }
     }
 }
