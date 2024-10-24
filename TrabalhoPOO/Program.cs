@@ -1,4 +1,11 @@
-﻿using System;
+﻿////////////////////////////////////////////////////////////////////////////////////////////////////////
+//FileName: Program.cs
+//FileType: Visual C# Source file
+//Author : Joel Faria
+//Description : Main
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+using System;
 
 namespace TrabalhoPOO
 {
@@ -8,6 +15,8 @@ namespace TrabalhoPOO
         { 
             Produto produto = new Produto("n",3, "d", 4.5, "e", 4, "o", 4);
             produto.PrintDetails();
+
+
            
         }
     }
