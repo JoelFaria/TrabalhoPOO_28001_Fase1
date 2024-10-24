@@ -13,15 +13,13 @@ namespace TrabalhoPOO
         private int VRAM { get; set; }
         private int BaseClock { get; set; }
         private int BoostClock { get; set; }
-        private string MemoryType { get; set; }
 
-        public Gpu(int vram, int baseClock, int boostClock, string memoryType, string nome, int id, string descricao, double preco, string cat, int stock, string marca, int garantia)
+        public Gpu(int vram, int baseClock, int boostClock, string nome, int id, string descricao, double preco, string cat, int stock, string marca, int garantia)
             : base(nome, id, descricao, preco, cat, stock, marca, garantia)
         {
             this.VRAM = vram;
             this.BaseClock = baseClock;
-            this.BoostClock = boostClock;
-            this.MemoryType = memoryType;
+            this.BoostClock = boostClock;         
         }
         public int GetVRAM
         {
@@ -38,16 +36,11 @@ namespace TrabalhoPOO
             get { return BoostClock; }
             set { BoostClock = value; }
         }
-        public string GetMemoryType
-        {
-            get { return MemoryType; }
-            set { MemoryType = value; }
-        }
 
         public override void PrintDetails()
         {
             base.PrintDetails();
-            Console.WriteLine($"VRAM: {this.VRAM}, BaseClock: {this.BaseClock}, BoostClock: {this.BoostClock}, MemoryType: {this.MemoryType}");
+            Console.WriteLine($"VRAM: {this.VRAM}, BaseClock: {this.BaseClock}, BoostClock: {this.BoostClock}");
         }
 
     }

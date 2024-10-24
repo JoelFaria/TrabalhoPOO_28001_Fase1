@@ -19,6 +19,8 @@ namespace TrabalhoPOO
         private string Marca { get; set; }
         private int garantiaMeses { get; set; }
 
+        #region Construtores
+
         public Produto(string nome, int id, string descricao, double preco, string cat, int stock, string marca, int garantia)
         {
             this.Nome = nome;
@@ -30,6 +32,9 @@ namespace TrabalhoPOO
             this.Marca = marca;
             this.garantiaMeses = garantia;
         }
+        #endregion
+
+        #region Propriedades
         public string NomeProduto
         {
             get { return Nome; }
@@ -50,7 +55,7 @@ namespace TrabalhoPOO
             get { return Preco; }
             set 
             { 
-                if(value <= 0)
+                if(value < 0)
                 {
                     throw new System.ArgumentException("Preço não pode ser negativo ou 0");
                 }
@@ -77,6 +82,8 @@ namespace TrabalhoPOO
             get { return garantiaMeses; }
             set { garantiaMeses = value; }
         }
+
+        #endregion
 
         public virtual void PrintDetails()
         {
