@@ -48,7 +48,14 @@ namespace TrabalhoPOO
         public double PrecoProduto
         {
             get { return Preco; }
-            set { Preco = value; }
+            set 
+            { 
+                if(value <= 0)
+                {
+                    throw new System.ArgumentException("Preço não pode ser negativo ou 0");
+                }
+                Preco = value; 
+            }
         }
         public string CategoriaProduto
         {
