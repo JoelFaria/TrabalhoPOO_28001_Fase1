@@ -47,7 +47,7 @@ namespace TrabalhoPOO
     public class cpu : Produto
     {
         private int Cache { get; set; }
-        private string socket { get; set; }
+        private string Socket { get; set; }
         private int MemorySupport { get; set; }
         private int Frequency { get; set; }
 
@@ -55,7 +55,7 @@ namespace TrabalhoPOO
             : base(nome, id, descricao, preco, cat, stock, marca, garantia)
         {
             this.Cache = cache;
-            this.socket = socket;
+            this.Socket = socket;
             this.MemorySupport = memorySupport;
             this.Frequency = frequency;
         }
@@ -66,8 +66,8 @@ namespace TrabalhoPOO
         }
         public string GetSocket
         {
-            get { return socket; }
-            set { socket = value; }
+            get { return Socket; }
+            set { Socket = value; }
         }
         public int GetMemorySupport
         {
