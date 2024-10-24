@@ -8,14 +8,15 @@ using System;
 
 namespace TrabalhoPOO
 {
-    public class Gpu
+    public class Gpu : Produto
     {
         private int VRAM { get; set; }
         private int BaseClock { get; set; }
         private int BoostClock { get; set; }
         private string MemoryType { get; set; }
 
-        public Gpu(int vram, int baseClock, int boostClock, string memoryType)
+        public Gpu(int vram, int baseClock, int boostClock, string memoryType, string nome, int id, string descricao, double preco, string cat, int stock, string marca, int garantia)
+            : base(nome, id, descricao, preco, cat, stock, marca, garantia)
         {
             this.VRAM = vram;
             this.BaseClock = baseClock;
@@ -43,14 +44,15 @@ namespace TrabalhoPOO
             set { MemoryType = value; }
         }
     }
-    public class cpu
+    public class cpu : Produto
     {
         private int Cache { get; set; }
         private string socket { get; set; }
         private int MemorySupport { get; set; }
         private int Frequency { get; set; }
 
-        public cpu(int cache, string socket, int memorySupport, int frequency)
+        public cpu(int cache, string socket, int memorySupport, int frequency, string nome, int id, string descricao, double preco, string cat, int stock, string marca, int garantia)
+            : base(nome, id, descricao, preco, cat, stock, marca, garantia)
         {
             this.Cache = cache;
             this.socket = socket;
@@ -78,13 +80,14 @@ namespace TrabalhoPOO
             set { Frequency = value; }
         }
     }
-    public class Motherboard
+    public class Motherboard : Produto
     {
         private string Socket { get; set; }
         private int MemorySupport { get; set; }
         private string FormFactor { get; set; }
 
-        public Motherboard(string socket, string chipset, int memorySupport, string formFactor)
+        public Motherboard(string socket, string chipset, int memorySupport, string formFactor, string nome, int id, string descricao, double preco, string cat, int stock, string marca, int garantia)
+            : base(nome, id, descricao, preco, cat, stock, marca, garantia)
         {
             this.Socket = socket;
             this.MemorySupport = memorySupport;
@@ -106,14 +109,15 @@ namespace TrabalhoPOO
             set { FormFactor = value; }
         }
     }
-    public class RAM 
-    {         
+    public class RAM : Produto
+    {
         private int Capacity { get; set; }
         private string Type { get; set; }
         private int Frequency { get; set; }
         private int Latency { get; set; }
 
-        public RAM(int capacity, string type, int frequency, int latency)
+        public RAM(int capacity, string type, int frequency, int latency, string nome, int id, string descricao, double preco, string cat, int stock, string marca, int garantia)
+            : base(nome, id, descricao, preco, cat, stock, marca, garantia)
         {
             this.Capacity = capacity;
             this.Type = type;
