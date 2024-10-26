@@ -29,6 +29,11 @@ namespace TrabalhoPOOwinforms
             if (count > 0)
             {
                 MessageBox.Show("Login Successful!", "info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Items items = new Items();
+                items.Show();
+                this.Hide();
+
+                items.FormClosed += (s, args) => this.Close();
             }
             else
             {
