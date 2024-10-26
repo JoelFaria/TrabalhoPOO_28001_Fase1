@@ -15,7 +15,7 @@ namespace TrabalhoPOO
         { 
 
 
-            Gpu gpu = new Gpu(4, 4, 4, "e", "n", 3, "d", -4, "e", 4, "o", 4);
+            Gpu gpu = new Gpu(4, 4, 4, "e", 6, "o", -4, "e", 4, "o", 4);
             gpu.PrintDetails();
            
         }
