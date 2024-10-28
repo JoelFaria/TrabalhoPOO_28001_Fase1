@@ -101,6 +101,7 @@
             txtPass.PasswordChar = '*';
             txtPass.Size = new Size(138, 23);
             txtPass.TabIndex = 5;
+            txtPass.TextChanged += txtPass_TextChanged;
             // 
             // checkBox1
             // 

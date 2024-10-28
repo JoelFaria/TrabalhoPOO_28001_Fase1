@@ -18,6 +18,20 @@ namespace TrabalhoPOOwinforms
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            if (txtUser.Text == "admin" && txtPass.Text == "admin")
+            {
+                MessageBox.Show("Admin login successful!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Abre a tela de administrador
+                AdminForm adminForm = new AdminForm();
+                adminForm.Show();
+                this.Hide();
+
+                // Fecha o formulário de login quando o AdminForm for fechado
+                adminForm.FormClosed += (s, args) => this.Close();
+                return;
+            }
+
             SqlConnection con = new SqlConnection("Data Source=JOELFARIA\\SQLEXPRESS;Initial Catalog=LoginApp;Integrated Security=True;TrustServerCertificate=True");
             con.Open();
             string query = "SELECT COUNT(*) FROM LoginTable WHERE username=@Username AND password=@Password";
@@ -48,8 +62,16 @@ namespace TrabalhoPOOwinforms
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Login login = new Login();
-            login.ShowDialog();
+            Forms2 forms2 = new Forms2();
+            forms2.Show();
+            this.Hide();
+
+            forms2.FormClosed += (s, args) => this.Close();
+        }
+
+        private void txtPass_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
