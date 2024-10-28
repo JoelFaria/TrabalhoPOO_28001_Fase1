@@ -48,12 +48,6 @@
             button2 = new Button();
             button3 = new Button();
             dataGridView1 = new DataGridView();
-            Nome = new DataGridViewTextBoxColumn();
-            Id = new DataGridViewTextBoxColumn();
-            Marca = new DataGridViewTextBoxColumn();
-            Garantia = new DataGridViewTextBoxColumn();
-            Stock = new DataGridViewTextBoxColumn();
-            Preço = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -203,6 +197,7 @@
             // button1
             // 
             button1.BackColor = Color.Gold;
+            button1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             button1.Location = new Point(227, 550);
             button1.Name = "button1";
             button1.Size = new Size(90, 40);
@@ -235,47 +230,11 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Nome, Id, Marca, Garantia, Stock, Preço });
             dataGridView1.Location = new Point(409, 130);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(645, 321);
             dataGridView1.TabIndex = 20;
-            // 
-            // Nome
-            // 
-            Nome.HeaderText = "Nome";
-            Nome.Name = "Nome";
-            Nome.ReadOnly = true;
-            // 
-            // Id
-            // 
-            Id.HeaderText = "Id";
-            Id.Name = "Id";
-            Id.ReadOnly = true;
-            // 
-            // Marca
-            // 
-            Marca.HeaderText = "Marca";
-            Marca.Name = "Marca";
-            Marca.ReadOnly = true;
-            // 
-            // Garantia
-            // 
-            Garantia.HeaderText = "Garantia";
-            Garantia.Name = "Garantia";
-            Garantia.ReadOnly = true;
-            // 
-            // Stock
-            // 
-            Stock.HeaderText = "Nº Stock";
-            Stock.Name = "Stock";
-            Stock.ReadOnly = true;
-            // 
-            // Preço
-            // 
-            Preço.HeaderText = "Preço";
-            Preço.Name = "Preço";
-            Preço.ReadOnly = true;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // AdminForm
             // 
@@ -305,6 +264,7 @@
             Controls.Add(label7);
             Name = "AdminForm";
             Text = "AdminForm";
+            Load += AdminForm_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -332,11 +292,5 @@
         private Button button2;
         private Button button3;
         private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn Nome;
-        private DataGridViewTextBoxColumn Id;
-        private DataGridViewTextBoxColumn Marca;
-        private DataGridViewTextBoxColumn Garantia;
-        private DataGridViewTextBoxColumn Stock;
-        private DataGridViewTextBoxColumn Preço;
     }
 }
