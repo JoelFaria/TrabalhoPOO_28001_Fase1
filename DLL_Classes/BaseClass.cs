@@ -90,5 +90,44 @@ namespace TrabalhoPOO
             Console.WriteLine($"Nome: {this.Nome}, Id: {this.Id}, Descrição: {this.Descricao}, Preço: {this.Preco}, Categoria: {this.Cat}, Stock: {this.Stock}, Marca:{this.Marca}, Garantia:{this.garantiaMeses}");
         }
     }
+
+    public class Usuario 
+    {
+       /// public string Id { get; set; }
+        public string Nome { get; set; }
+       // public string Email { get; set; }
+        public string Senha { get; set; }
+
+        public Usuario(/*string id,*/ string nome,/* string email*/ string senha)
+        {
+           // this.Id = id;
+            this.Nome = nome;
+           // this.Email = email;
+            this.Senha = senha;
+        }
+
+       //public string idUsuario
+       // {
+       //     get { return Id; }
+       //     set { Id = value; }
+       // }
+        public string nomeUsuario
+        {
+            get { return Nome; }
+            set { Nome = value; }
+        }
+        //public string emailUsuario
+        //{
+        //    get { return Email; }
+        //    set { Email = value; }
+        //}
+        public string senhaUsuario
+        {
+            get { return Senha; }
+            set { Senha = value; }
+        }
+
+    }
+
 }
 

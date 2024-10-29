@@ -187,7 +187,7 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label8.Location = new Point(665, 80);
+            label8.Location = new Point(769, 82);
             label8.Name = "label8";
             label8.Size = new Size(130, 25);
             label8.TabIndex = 16;
@@ -230,9 +230,9 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(409, 130);
+            dataGridView1.Location = new Point(458, 130);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(645, 321);
+            dataGridView1.Size = new Size(745, 321);
             dataGridView1.TabIndex = 20;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -241,7 +241,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Menu;
-            ClientSize = new Size(1078, 630);
+            ClientSize = new Size(1306, 630);
             Controls.Add(dataGridView1);
             Controls.Add(button3);
             Controls.Add(button2);
