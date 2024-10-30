@@ -159,19 +159,22 @@ namespace TrabalhoPOOwinforms
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0) 
+            if (e.RowIndex >= 0) // Ignora cabeçalhos
             {
-                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                // Obtém a linha selecionada
+                DataGridViewRow selectedRow = dataGridView1.Rows[e.RowIndex];
 
-                
-                textId.Text = row.Cells["id"].Value.ToString(); 
-                textName.Text = row.Cells["name"].Value.ToString();
-                textDescription.Text = row.Cells["description"].Value.ToString();
-                textPrice.Text = row.Cells["price"].Value.ToString();
-                textStock.Text = row.Cells["stock"].Value.ToString();
-                textBrand.Text = row.Cells["brand"].Value.ToString();
-                textGuarantee.Text = row.Cells["guarantee"].Value.ToString();
-                comboBox1.SelectedItem = row.Cells["type"].Value.ToString();
+                // Preenche as TextBoxes com os dados da linha selecionada
+                textId.Text = selectedRow.Cells["id"].Value.ToString();
+                textName.Text = selectedRow.Cells["name"].Value.ToString();
+                textDescription.Text = selectedRow.Cells["description"].Value.ToString(); // Certifique-se de que o nome da coluna está correto
+                textPrice.Text = selectedRow.Cells["price"].Value.ToString();
+                textStock.Text = selectedRow.Cells["stock"].Value.ToString();
+                textBrand.Text = selectedRow.Cells["brand"].Value.ToString();
+                textGuarantee.Text = selectedRow.Cells["guarantee"].Value.ToString();
+
+                // Preenche a ComboBox com a categoria
+                comboBox1.SelectedItem = selectedRow.Cells["type"].Value.ToString(); // Certifique-se de que o nome da coluna está correto
             }
         }
 
@@ -197,7 +200,6 @@ namespace TrabalhoPOOwinforms
                 MessageBox.Show("Por favor, selecione uma categoria.");
                 return;
             }
-
            
             if (
                 string.IsNullOrWhiteSpace(textPrice.Text) ||
