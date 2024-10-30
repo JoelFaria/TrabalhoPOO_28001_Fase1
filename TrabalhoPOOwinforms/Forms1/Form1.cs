@@ -23,15 +23,22 @@ namespace TrabalhoPOOwinforms
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@Username", username);
-                cmd.Parameters.AddWithValue("@Password", password);
+                if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+                {
+                    MessageBox.Show("Preencha todos os campos", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@Username", username);
+                    cmd.Parameters.AddWithValue("@Password", password);
 
-                con.Open();
-                int count = Convert.ToInt32(cmd.ExecuteScalar());
-                con.Close();
+                    con.Open();
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    con.Close();
 
-                login = count > 0;
+                    login = count > 0;
+                }
             }
 
             return login;
