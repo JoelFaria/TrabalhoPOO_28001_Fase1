@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            textBox7 = new TextBox();
-            textBox5 = new TextBox();
-            textBox4 = new TextBox();
-            textBox3 = new TextBox();
-            textBox2 = new TextBox();
-            textBox1 = new TextBox();
+            textDescription = new TextBox();
+            textGuarantee = new TextBox();
+            textBrand = new TextBox();
+            textStock = new TextBox();
+            textPrice = new TextBox();
+            textName = new TextBox();
             comboBox1 = new ComboBox();
             label7 = new Label();
             label6 = new Label();
@@ -48,6 +48,8 @@
             button2 = new Button();
             button3 = new Button();
             dataGridView1 = new DataGridView();
+            textId = new TextBox();
+            label9 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -56,50 +58,50 @@
             panel1.BackColor = Color.LavenderBlush;
             panel1.Location = new Point(-5, -2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(226, 633);
+            panel1.Size = new Size(226, 655);
             panel1.TabIndex = 0;
             // 
-            // textBox7
+            // textDescription
             // 
-            textBox7.Location = new Point(227, 224);
-            textBox7.Name = "textBox7";
-            textBox7.Size = new Size(141, 23);
-            textBox7.TabIndex = 15;
+            textDescription.Location = new Point(227, 224);
+            textDescription.Name = "textDescription";
+            textDescription.Size = new Size(141, 23);
+            textDescription.TabIndex = 15;
             // 
-            // textBox5
+            // textGuarantee
             // 
-            textBox5.Location = new Point(227, 496);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(141, 23);
-            textBox5.TabIndex = 13;
+            textGuarantee.Location = new Point(227, 496);
+            textGuarantee.Name = "textGuarantee";
+            textGuarantee.Size = new Size(141, 23);
+            textGuarantee.TabIndex = 13;
             // 
-            // textBox4
+            // textBrand
             // 
-            textBox4.Location = new Point(227, 428);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(141, 23);
-            textBox4.TabIndex = 12;
+            textBrand.Location = new Point(227, 428);
+            textBrand.Name = "textBrand";
+            textBrand.Size = new Size(141, 23);
+            textBrand.TabIndex = 12;
             // 
-            // textBox3
+            // textStock
             // 
-            textBox3.Location = new Point(227, 356);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(141, 23);
-            textBox3.TabIndex = 11;
+            textStock.Location = new Point(227, 356);
+            textStock.Name = "textStock";
+            textStock.Size = new Size(141, 23);
+            textStock.TabIndex = 11;
             // 
-            // textBox2
+            // textPrice
             // 
-            textBox2.Location = new Point(227, 288);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(141, 23);
-            textBox2.TabIndex = 10;
+            textPrice.Location = new Point(227, 288);
+            textPrice.Name = "textPrice";
+            textPrice.Size = new Size(141, 23);
+            textPrice.TabIndex = 10;
             // 
-            // textBox1
+            // textName
             // 
-            textBox1.Location = new Point(227, 154);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(141, 23);
-            textBox1.TabIndex = 9;
+            textName.Location = new Point(227, 154);
+            textName.Name = "textName";
+            textName.Size = new Size(141, 23);
+            textName.TabIndex = 9;
             // 
             // comboBox1
             // 
@@ -198,34 +200,37 @@
             // 
             button1.BackColor = Color.Gold;
             button1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(227, 550);
+            button1.Location = new Point(227, 578);
             button1.Name = "button1";
             button1.Size = new Size(90, 40);
             button1.TabIndex = 17;
             button1.Text = "Update";
             button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
             button2.BackColor = Color.YellowGreen;
             button2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button2.Location = new Point(323, 550);
+            button2.Location = new Point(323, 578);
             button2.Name = "button2";
             button2.Size = new Size(80, 40);
             button2.TabIndex = 18;
             button2.Text = "Save";
             button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
             // 
             // button3
             // 
             button3.BackColor = Color.LightCoral;
             button3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button3.Location = new Point(409, 550);
+            button3.Location = new Point(409, 578);
             button3.Name = "button3";
             button3.Size = new Size(80, 40);
             button3.TabIndex = 19;
             button3.Text = "Delete";
             button3.UseVisualStyleBackColor = false;
+            button3.Click += button3_Click;
             // 
             // dataGridView1
             // 
@@ -236,28 +241,50 @@
             dataGridView1.TabIndex = 20;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
+            // textId
+            // 
+            textId.Location = new Point(227, 549);
+            textId.Name = "textId";
+            textId.ReadOnly = true;
+            textId.Size = new Size(141, 23);
+            textId.TabIndex = 21;
+            textId.TextChanged += textBox6_TextChanged;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label9.Location = new Point(227, 525);
+            label9.Name = "label9";
+            label9.Size = new Size(23, 21);
+            label9.TabIndex = 22;
+            label9.Text = "Id";
+            label9.Click += label9_Click;
+            // 
             // AdminForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Menu;
-            ClientSize = new Size(1306, 630);
+            ClientSize = new Size(1306, 644);
+            Controls.Add(label9);
+            Controls.Add(textId);
             Controls.Add(dataGridView1);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(label8);
-            Controls.Add(textBox7);
+            Controls.Add(textDescription);
             Controls.Add(panel1);
-            Controls.Add(textBox5);
+            Controls.Add(textGuarantee);
             Controls.Add(label1);
-            Controls.Add(textBox4);
+            Controls.Add(textBrand);
             Controls.Add(label2);
-            Controls.Add(textBox3);
+            Controls.Add(textStock);
             Controls.Add(label3);
-            Controls.Add(textBox2);
+            Controls.Add(textPrice);
             Controls.Add(label4);
-            Controls.Add(textBox1);
+            Controls.Add(textName);
             Controls.Add(label5);
             Controls.Add(comboBox1);
             Controls.Add(label6);
@@ -281,16 +308,18 @@
         private Label label4;
         private Label label3;
         private ComboBox comboBox1;
-        private TextBox textBox7;
-        private TextBox textBox5;
-        private TextBox textBox4;
-        private TextBox textBox3;
-        private TextBox textBox2;
-        private TextBox textBox1;
+        private TextBox textDescription;
+        private TextBox textGuarantee;
+        private TextBox textBrand;
+        private TextBox textStock;
+        private TextBox textPrice;
+        private TextBox textName;
         private Label label8;
         private Button button1;
         private Button button2;
         private Button button3;
         private DataGridView dataGridView1;
+        private TextBox textId;
+        private Label label9;
     }
 }

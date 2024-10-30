@@ -24,24 +24,32 @@ namespace TrabalhoPOOwinforms
 
         public class RegisterClass
         {
-            private string con = "Data Source=JOELFARIA\\SQLEXPRESS;Initial Catalog=LoginApp;Integrated Security=True;TrustServerCertificate=True";
+            string connectingString = "Data Source=JOELFARIA\\SQLEXPRESS;Initial Catalog=LoginApp;Integrated Security=True;TrustServerCertificate=True";
+            string query = "INSERT INTO LoginTable (username, password, email) VALUES (@Username, @Password, @Email)";
 
-            public bool RegisterUser(Usuario usuario)
+            public void RegisterUser(User user)
             {
-                using (SqlConnection conn = new SqlConnection(con))
+                using (SqlConnection con = new SqlConnection(connectingString))
                 {
-                    conn.Open();
-                    string query = "INSERT INTO LoginTable (username, password, email) VALUES (@Username, @Password, @Email)";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@Username", usuario.nomeUsuario);
-                    cmd.Parameters.AddWithValue("@Password", usuario.Senha);
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@Username", user.nomeUser);
+                    cmd.Parameters.AddWithValue("@Password", user.PasswordUser);
+                    cmd.Parameters.AddWithValue("@Email", user.emailUser);
 
-                    int count = (int)cmd.ExecuteScalar();
-
-                    return count > 0;
+                    try
+                    {
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("User registered successfully!");
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message);
+                    }
 
                 }
             }
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -61,60 +69,11 @@ namespace TrabalhoPOOwinforms
         {
             string username = textBox1.Text;
             string password = textBox3.Text;
+            string email = textBox2.Text;
 
-            Usuario usuario = new Usuario(username, password);
+            User user = new User(username, email, password);
 
-            bool register = registerClass.RegisterUser(usuario);
-
-            if (register) 
-            {
-                MessageBox.Show("Register Successful!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Login login = new Login();
-                login.Show();
-                this.Hide();
-
-                login.FormClosed += (s, args) => this.Close();
-            }
-            else
-            {
-                MessageBox.Show("Register Failed!");
-            }
-
-
-            //string Username = textBox1.Text;
-            //string Email = textBox2.Text;
-            //string Password = textBox3.Text;
-
-            //if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password))
-            //{
-            //    MessageBox.Show("Please fill all the fields!");
-            //}
-            //else
-            //{
-
-            //    SqlConnection con = new SqlConnection("Data Source=JOELFARIA\\SQLEXPRESS;Initial Catalog=LoginApp;Integrated Security=True;TrustServerCertificate=True");
-            //    con.Open();
-            //    string query = "INSERT INTO LoginTable (username, password, email) VALUES (@Username, @Password, @Email)";
-            //    SqlCommand cmd = new SqlCommand(query, con);
-            //    cmd.Parameters.AddWithValue("@Username", Username);
-            //    cmd.Parameters.AddWithValue("@Password", Password);
-            //    cmd.Parameters.AddWithValue("@Email", Email);
-            //    int count = cmd.ExecuteNonQuery();
-            //    con.Close();
-            //    if (count > 0)
-            //    {
-            //        MessageBox.Show("Register Successful!", "info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //        Login login = new Login();
-            //        login.Show();
-            //        this.Hide();
-
-            //        login.FormClosed += (s, args) => this.Close();
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("Register Failed!");
-            //    }
-            //}
+            registerClass.RegisterUser(user);
 
         }
 

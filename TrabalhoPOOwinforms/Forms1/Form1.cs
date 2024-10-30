@@ -8,35 +8,35 @@ namespace TrabalhoPOOwinforms
 {
     public partial class Login : Form
     {
-        private LoginClass loginClass = new LoginClass();
-
         public Login()
         {
             InitializeComponent();
         }
 
 
-        public class LoginClass
+        public bool VerifyLogin(string username, string password)
         {
-            private string con = "Data Source=JOELFARIA\\SQLEXPRESS;Initial Catalog=LoginApp;Integrated Security=True;TrustServerCertificate=True";
-            
-            public bool ValidarLogin(Usuario usuario)
+            bool login = false;
+
+            string connectionString = "Data Source=JOELFARIA\\SQLEXPRESS;Initial Catalog=LoginApp;Integrated Security=True;TrustServerCertificate=True";
+            string query = "SELECT COUNT(*) FROM LoginTable WHERE Username = @Username AND Password = @Password";
+
+            using (SqlConnection con = new SqlConnection(connectionString))
             {
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@Username", username);
+                cmd.Parameters.AddWithValue("@Password", password);
 
-                using(SqlConnection conn = new SqlConnection(con))
-                {
-                    conn.Open();
-                    string query = "SELECT COUNT(*) FROM LoginTable WHERE username=@Username AND password=@Password";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@Username", usuario.nomeUsuario);
-                    cmd.Parameters.AddWithValue("@Password", usuario.Senha);
+                con.Open();
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+                con.Close();
 
-                    int count = (int)cmd.ExecuteScalar();
-
-                    return count > 0;
-                }    
+                login = count > 0;
             }
+
+            return login;
         }
+    
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
@@ -44,40 +44,30 @@ namespace TrabalhoPOOwinforms
         }
         private void button1_Click(object sender, EventArgs e)
         {
-
             string username = txtUser.Text;
             string password = txtPass.Text;
 
-            Usuario usuario = new Usuario(username, password);
-
-            bool ValidarLogin = loginClass.ValidarLogin(usuario);
-
-            if (ValidarLogin)
+            if (VerifyLogin(username, password))
             {
+                MessageBox.Show("Login bem-sucedido!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 if (username == "admin" && password == "admin")
                 {
-                    MessageBox.Show("Admin login successful!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Abre a tela de administrador
                     AdminForm adminForm = new AdminForm();
                     adminForm.Show();
-
-                    // Fecha o formulário de login quando o AdminForm for fechado
-                    adminForm.FormClosed += (s, args) => this.Close();
-                    return;
+                    this.Hide();
                 }
                 else
                 {
                     Items items = new Items();
                     items.Show();
+                    this.Hide();
 
                 }
-                this.Hide();
             }
             else
             {
-                MessageBox.Show("Login failed!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Nome de usuário ou senha incorretos.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void button2_Click(object sender, EventArgs e)

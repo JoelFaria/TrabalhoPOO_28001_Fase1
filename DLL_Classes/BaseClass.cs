@@ -21,10 +21,9 @@ namespace TrabalhoPOO
 
         #region Construtores
 
-        public Produto(string nome, int id, string descricao, double preco, string cat, int stock, string marca, int garantia)
+        public Produto(string nome, string descricao, double preco, string cat, int stock, string marca, int garantia)
         {
             this.Nome = nome;
-            this.Id = id;
             this.Descricao = descricao;
             this.Preco = preco;
             this.Cat = cat;
@@ -39,11 +38,6 @@ namespace TrabalhoPOO
         {
             get { return Nome; }
             set { Nome = value; }
-        }
-        public int IdProduto
-        {
-            get { return Id; }
-            set { Id = value; }
         }
         public string DescricaoProduto
         {
@@ -91,40 +85,34 @@ namespace TrabalhoPOO
         }
     }
 
-    public class Usuario 
+    public class User 
     {
-       /// public string Id { get; set; }
-        public string Nome { get; set; }
-       // public string Email { get; set; }
-        public string Senha { get; set; }
+           public string Id { get; set; }
+           public string Nome { get; set; }
+           public string Email { get; set; }
+           public string Password { get; set; }
 
-        public Usuario(/*string id,*/ string nome,/* string email*/ string senha)
+        public User(string nome, string email, string password)
         {
-           // this.Id = id;
-            this.Nome = nome;
-           // this.Email = email;
-            this.Senha = senha;
+           this.Nome = nome;
+           this.Email = email;
+           this.Password = password;
         }
 
-       //public string idUsuario
-       // {
-       //     get { return Id; }
-       //     set { Id = value; }
-       // }
-        public string nomeUsuario
+        public string nomeUser
         {
             get { return Nome; }
             set { Nome = value; }
         }
-        //public string emailUsuario
-        //{
-        //    get { return Email; }
-        //    set { Email = value; }
-        //}
-        public string senhaUsuario
+        public string emailUser
+        { 
+           get { return Email; }
+            set { Email = value; }
+        }
+        public string PasswordUser
         {
-            get { return Senha; }
-            set { Senha = value; }
+            get { return Password; }
+            set { Password = value; }
         }
 
     }

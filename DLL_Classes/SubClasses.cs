@@ -15,7 +15,7 @@ namespace TrabalhoPOO
         private int BoostClock { get; set; }
 
         public Gpu(int vram, int baseClock, int boostClock, string nome, int id, string descricao, double preco, string cat, int stock, string marca, int garantia)
-            : base(nome, id, descricao, preco, cat, stock, marca, garantia)
+            : base(nome, descricao, preco, cat, stock, marca, garantia)
         {
             this.VRAM = vram;
             this.BaseClock = baseClock;
@@ -44,15 +44,15 @@ namespace TrabalhoPOO
         }
 
     }
-    public class cpu : Produto
+    public class Cpu : Produto
     {
         private int Cache { get; set; }
         private string Socket { get; set; }
         private int MemorySupport { get; set; }
         private int Frequency { get; set; }
 
-        public cpu(int cache, string socket, int memorySupport, int frequency, string nome, int id, string descricao, double preco, string cat, int stock, string marca, int garantia)
-            : base(nome, id, descricao, preco, cat, stock, marca, garantia)
+        public Cpu(int cache, string socket, int memorySupport, int frequency, string nome, int id, string descricao, double preco, string cat, int stock, string marca, int garantia)
+            : base(nome, descricao, preco, cat, stock, marca, garantia)
         {
             this.Cache = cache;
             this.Socket = socket;
@@ -92,7 +92,7 @@ namespace TrabalhoPOO
         private string FormFactor { get; set; }
 
         public Motherboard(string socket, string chipset, int memorySupport, string formFactor, string nome, int id, string descricao, double preco, string cat, int stock, string marca, int garantia)
-            : base(nome, id, descricao, preco, cat, stock, marca, garantia)
+            : base(nome, descricao, preco, cat, stock, marca, garantia)
         {
             this.Socket = socket;
             this.MemorySupport = memorySupport;
@@ -127,7 +127,7 @@ namespace TrabalhoPOO
         private int Latency { get; set; }
 
         public RAM(int capacity, string type, int frequency, int latency, string nome, int id, string descricao, double preco, string cat, int stock, string marca, int garantia)
-            : base(nome, id, descricao, preco, cat, stock, marca, garantia)
+            : base(nome, descricao, preco, cat, stock, marca, garantia)
         {
             this.Capacity = capacity;
             this.Type = type;
