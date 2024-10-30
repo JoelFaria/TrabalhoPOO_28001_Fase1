@@ -25,7 +25,9 @@ namespace TrabalhoPOOwinforms
 
             LoadStockData();
         }
-
+        /// <summary>
+        /// Insere os dados do produto na DataGridView
+        /// </summary>
         private void LoadStockData()
         {
             string connectionString = "Data Source=JOELFARIA\\SQLEXPRESS;Initial Catalog=LoginApp;Integrated Security=True;TrustServerCertificate=True";
@@ -47,7 +49,10 @@ namespace TrabalhoPOOwinforms
                 }
             }
         }
-
+        /// <summary>
+        /// Guarda os dados do produto
+        /// </summary>
+        /// <param name="produto"></param>
         private void SaveProductData(Produto produto)
         {
             string connectionString = "Data Source=JOELFARIA\\SQLEXPRESS;Initial Catalog=LoginApp;Integrated Security=True;TrustServerCertificate=True";
@@ -77,7 +82,11 @@ namespace TrabalhoPOOwinforms
                 }
             }
         }
-
+        /// <summary>
+        /// Atualiza os dados do produto
+        /// </summary>
+        /// <param name="produto"></param>
+        /// <param name="id"></param>
         private void UpdateProductData(Produto produto, int id)
         {
             string connectionString = "Data Source=JOELFARIA\\SQLEXPRESS;Initial Catalog=LoginApp;Integrated Security=True;TrustServerCertificate=True";
@@ -108,7 +117,10 @@ namespace TrabalhoPOOwinforms
                 }
             }
         }
-
+        /// <summary>
+        /// Apaga os dados do produto
+        /// </summary>
+        /// <param name="id"></param>
         private void DeleteProductData(int id)
         {
             string connectionString = "Data Source=JOELFARIA\\SQLEXPRESS;Initial Catalog=LoginApp;Integrated Security=True;TrustServerCertificate=True";
@@ -156,7 +168,11 @@ namespace TrabalhoPOOwinforms
         private void label8_Click_1(object sender, EventArgs e)
         {
         }
-
+        /// <summary>
+        /// Extrai os dados da linha selecionada e preenche as TextBoxes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0) // Ignora cabeçalhos
@@ -192,7 +208,11 @@ namespace TrabalhoPOOwinforms
         {
 
         }
-
+        /// <summary>
+        /// Butao para adicionar um produto
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
             if (comboBox1.SelectedItem == null)
@@ -227,7 +247,11 @@ namespace TrabalhoPOOwinforms
 
             SaveProductData(produto);
         }
-
+        /// <summary>
+        /// Butao para atualizar um produto
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
             if (int.TryParse(textId.Text, out int id))
@@ -249,7 +273,11 @@ namespace TrabalhoPOOwinforms
                 MessageBox.Show("ID inválido.");
             }
         }
-
+        /// <summary>
+        /// Butao para eliminar um produto
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button3_Click(object sender, EventArgs e)
         {
             if (int.TryParse(textId.Text, out int id))
