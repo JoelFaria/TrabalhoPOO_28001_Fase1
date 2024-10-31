@@ -59,5 +59,15 @@ namespace TrabalhoPOOwinforms.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Desenho_PC_PNG {
+            get {
+                object obj = ResourceManager.GetObject("Desenho_PC_PNG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

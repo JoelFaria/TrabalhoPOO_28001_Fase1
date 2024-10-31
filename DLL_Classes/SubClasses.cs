@@ -14,7 +14,7 @@ namespace TrabalhoPOO
         private int BaseClock { get; set; }
         private int BoostClock { get; set; }
 
-        public Gpu(int vram, int baseClock, int boostClock, string nome, int id, string descricao, double preco, string cat, int stock, string marca, int garantia)
+        public Gpu(int vram, int baseClock, int boostClock, string nome, string descricao, double preco, string cat, int stock, string marca, int garantia)
             : base(nome, descricao, preco, cat, stock, marca, garantia)
         {
             this.VRAM = vram;
@@ -51,7 +51,7 @@ namespace TrabalhoPOO
         private int MemorySupport { get; set; }
         private int Frequency { get; set; }
 
-        public Cpu(int cache, string socket, int memorySupport, int frequency, string nome, int id, string descricao, double preco, string cat, int stock, string marca, int garantia)
+        public Cpu(int cache, string socket, int memorySupport, int frequency, string nome, string descricao, double preco, string cat, int stock, string marca, int garantia)
             : base(nome, descricao, preco, cat, stock, marca, garantia)
         {
             this.Cache = cache;
@@ -91,7 +91,7 @@ namespace TrabalhoPOO
         private int MemorySupport { get; set; }
         private string FormFactor { get; set; }
 
-        public Motherboard(string socket, string chipset, int memorySupport, string formFactor, string nome, int id, string descricao, double preco, string cat, int stock, string marca, int garantia)
+        public Motherboard(string socket, string chipset, int memorySupport, string formFactor, string nome, string descricao, double preco, string cat, int stock, string marca, int garantia)
             : base(nome, descricao, preco, cat, stock, marca, garantia)
         {
             this.Socket = socket;
@@ -126,7 +126,7 @@ namespace TrabalhoPOO
         private int Frequency { get; set; }
         private int Latency { get; set; }
 
-        public RAM(int capacity, string type, int frequency, int latency, string nome, int id, string descricao, double preco, string cat, int stock, string marca, int garantia)
+        public RAM(int capacity, string type, int frequency, int latency, string nome, string descricao, double preco, string cat, int stock, string marca, int garantia)
             : base(nome, descricao, preco, cat, stock, marca, garantia)
         {
             this.Capacity = capacity;

@@ -23,6 +23,8 @@ namespace TrabalhoPOOwinforms
             comboBox1.Items.Add("RAM");
             comboBox1.Items.Add("Motherboard");
 
+            HideFields();
+
             LoadStockData();
         }
         /// <summary>
@@ -105,7 +107,7 @@ namespace TrabalhoPOOwinforms
                     cmd.Parameters.AddWithValue("@Brand", produto.MarcaProduto);
                     cmd.Parameters.AddWithValue("@Guarantee", produto.GarantiaMesesProdutos);
                     cmd.Parameters.AddWithValue("@Description", produto.DescricaoProduto);
-                    cmd.Parameters.AddWithValue("@Id", id); 
+                    cmd.Parameters.AddWithValue("@Id", id);
 
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("Produto atualizado com sucesso!");
@@ -163,6 +165,20 @@ namespace TrabalhoPOOwinforms
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            HideFields();
+
+            switch (comboBox1.SelectedItem)
+            {
+                case "GPU":
+                    textVRAM.Visible = true;
+                    textBaseClock.Visible = true;
+                    textBoostClock.Visible = true;
+                    VRAMlabel.Visible = true;
+                    Baselabel.Visible = true;
+                    Boostlabel.Visible = true;
+                    break;
+               
+            }
         }
 
         private void label8_Click_1(object sender, EventArgs e)
@@ -177,20 +193,17 @@ namespace TrabalhoPOOwinforms
         {
             if (e.RowIndex >= 0) // Ignora cabeçalhos
             {
-                // Obtém a linha selecionada
                 DataGridViewRow selectedRow = dataGridView1.Rows[e.RowIndex];
 
-                // Preenche as TextBoxes com os dados da linha selecionada
                 textId.Text = selectedRow.Cells["id"].Value.ToString();
                 textName.Text = selectedRow.Cells["name"].Value.ToString();
-                textDescription.Text = selectedRow.Cells["description"].Value.ToString(); // Certifique-se de que o nome da coluna está correto
+                textDescription.Text = selectedRow.Cells["description"].Value.ToString(); 
                 textPrice.Text = selectedRow.Cells["price"].Value.ToString();
                 textStock.Text = selectedRow.Cells["stock"].Value.ToString();
                 textBrand.Text = selectedRow.Cells["brand"].Value.ToString();
                 textGuarantee.Text = selectedRow.Cells["guarantee"].Value.ToString();
 
-                // Preenche a ComboBox com a categoria
-                comboBox1.SelectedItem = selectedRow.Cells["type"].Value.ToString(); // Certifique-se de que o nome da coluna está correto
+                comboBox1.SelectedItem = selectedRow.Cells["type"].Value.ToString(); 
             }
         }
 
@@ -220,7 +233,7 @@ namespace TrabalhoPOOwinforms
                 MessageBox.Show("Por favor, selecione uma categoria.");
                 return;
             }
-           
+
             if (
                 string.IsNullOrWhiteSpace(textPrice.Text) ||
                 !double.TryParse(textPrice.Text, out double preco) ||
@@ -228,7 +241,7 @@ namespace TrabalhoPOOwinforms
                 !int.TryParse(textStock.Text, out int stock) ||
                 string.IsNullOrWhiteSpace(textGuarantee.Text) ||
                 !int.TryParse(textGuarantee.Text, out int garantia) ||
-                string.IsNullOrWhiteSpace(textDescription.Text) 
+                string.IsNullOrWhiteSpace(textDescription.Text)
             )
             {
                 MessageBox.Show("Por favor, preencha todos os campos corretamente.");
@@ -237,7 +250,7 @@ namespace TrabalhoPOOwinforms
 
             Produto produto = new Produto(
                 nome: textName.Text,
-                descricao: textDescription.Text, 
+                descricao: textDescription.Text,
                 preco: preco,
                 cat: comboBox1.SelectedItem?.ToString() ?? string.Empty,
                 stock: stock,
@@ -289,5 +302,30 @@ namespace TrabalhoPOOwinforms
                 MessageBox.Show("ID inválido.");
             }
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Login login = new Login();
+            login.Show();
+            this.Hide();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void HideFields()
+        {
+            textVRAM.Visible = false;
+            textBaseClock.Visible = false;
+            textBoostClock.Visible = false;
+            VRAMlabel.Visible = false;
+            Baselabel.Visible = false;
+            Boostlabel.Visible = false;
+        }
+
+        
+
     }
 }

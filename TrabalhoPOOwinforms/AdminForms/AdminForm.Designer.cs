@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            textBox1 = new TextBox();
+            pictureBox1 = new PictureBox();
+            button4 = new Button();
             textDescription = new TextBox();
             textGuarantee = new TextBox();
             textBrand = new TextBox();
@@ -50,16 +53,62 @@
             dataGridView1 = new DataGridView();
             textId = new TextBox();
             label9 = new Label();
+            textVRAM = new TextBox();
+            textBaseClock = new TextBox();
+            textBoostClock = new TextBox();
+            VRAMlabel = new Label();
+            Baselabel = new Label();
+            Boostlabel = new Label();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.LavenderBlush;
+            panel1.Controls.Add(textBox1);
+            panel1.Controls.Add(pictureBox1);
+            panel1.Controls.Add(button4);
             panel1.Location = new Point(-5, -2);
             panel1.Name = "panel1";
             panel1.Size = new Size(226, 655);
             panel1.TabIndex = 0;
+            // 
+            // textBox1
+            // 
+            textBox1.BackColor = Color.LavenderBlush;
+            textBox1.BorderStyle = BorderStyle.None;
+            textBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox1.Location = new Point(49, 52);
+            textBox1.Name = "textBox1";
+            textBox1.ReadOnly = true;
+            textBox1.Size = new Size(123, 22);
+            textBox1.TabIndex = 2;
+            textBox1.Text = "Admin's Page";
+            textBox1.TextChanged += textBox1_TextChanged;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.Desenho_PC_PNG;
+            pictureBox1.Location = new Point(34, 109);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(170, 163);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 1;
+            pictureBox1.TabStop = false;
+            // 
+            // button4
+            // 
+            button4.BackColor = Color.Cyan;
+            button4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button4.Location = new Point(49, 580);
+            button4.Name = "button4";
+            button4.Size = new Size(118, 54);
+            button4.TabIndex = 0;
+            button4.Text = "Logout";
+            button4.UseVisualStyleBackColor = false;
+            button4.Click += button4_Click;
             // 
             // textDescription
             // 
@@ -189,7 +238,7 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label8.Location = new Point(769, 82);
+            label8.Location = new Point(839, 82);
             label8.Name = "label8";
             label8.Size = new Size(130, 25);
             label8.TabIndex = 16;
@@ -237,7 +286,7 @@
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(458, 130);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(745, 321);
+            dataGridView1.Size = new Size(850, 321);
             dataGridView1.TabIndex = 20;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -261,12 +310,66 @@
             label9.Text = "Id";
             label9.Click += label9_Click;
             // 
+            // textVRAM
+            // 
+            textVRAM.Location = new Point(572, 549);
+            textVRAM.Name = "textVRAM";
+            textVRAM.Size = new Size(100, 23);
+            textVRAM.TabIndex = 23;
+            // 
+            // textBaseClock
+            // 
+            textBaseClock.Location = new Point(734, 549);
+            textBaseClock.Name = "textBaseClock";
+            textBaseClock.Size = new Size(100, 23);
+            textBaseClock.TabIndex = 24;
+            // 
+            // textBoostClock
+            // 
+            textBoostClock.Location = new Point(869, 549);
+            textBoostClock.Name = "textBoostClock";
+            textBoostClock.Size = new Size(100, 23);
+            textBoostClock.TabIndex = 25;
+            // 
+            // VRAMlabel
+            // 
+            VRAMlabel.AutoSize = true;
+            VRAMlabel.Location = new Point(572, 525);
+            VRAMlabel.Name = "VRAMlabel";
+            VRAMlabel.Size = new Size(43, 15);
+            VRAMlabel.TabIndex = 26;
+            VRAMlabel.Text = "VRAM:";
+            // 
+            // Baselabel
+            // 
+            Baselabel.AutoSize = true;
+            Baselabel.Location = new Point(734, 525);
+            Baselabel.Name = "Baselabel";
+            Baselabel.Size = new Size(64, 15);
+            Baselabel.TabIndex = 27;
+            Baselabel.Text = "BaseClock:";
+            // 
+            // Boostlabel
+            // 
+            Boostlabel.AutoSize = true;
+            Boostlabel.Location = new Point(869, 525);
+            Boostlabel.Name = "Boostlabel";
+            Boostlabel.Size = new Size(70, 15);
+            Boostlabel.TabIndex = 28;
+            Boostlabel.Text = "BoostClock:";
+            // 
             // AdminForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Menu;
-            ClientSize = new Size(1306, 644);
+            ClientSize = new Size(1412, 644);
+            Controls.Add(Boostlabel);
+            Controls.Add(Baselabel);
+            Controls.Add(VRAMlabel);
+            Controls.Add(textBoostClock);
+            Controls.Add(textBaseClock);
+            Controls.Add(textVRAM);
             Controls.Add(label9);
             Controls.Add(textId);
             Controls.Add(dataGridView1);
@@ -292,6 +395,9 @@
             Name = "AdminForm";
             Text = "AdminForm";
             Load += AdminForm_Load;
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -321,5 +427,14 @@
         private DataGridView dataGridView1;
         private TextBox textId;
         private Label label9;
+        private TextBox textBox1;
+        private PictureBox pictureBox1;
+        private Button button4;
+        private TextBox textVRAM;
+        private TextBox textBaseClock;
+        private TextBox textBoostClock;
+        private Label VRAMlabel;
+        private Label Baselabel;
+        private Label Boostlabel;
     }
 }
