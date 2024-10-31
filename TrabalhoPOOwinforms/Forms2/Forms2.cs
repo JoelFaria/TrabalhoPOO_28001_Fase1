@@ -35,16 +35,24 @@ namespace TrabalhoPOOwinforms
                     cmd.Parameters.AddWithValue("@Username", user.nomeUser);
                     cmd.Parameters.AddWithValue("@Password", user.PasswordUser);
                     cmd.Parameters.AddWithValue("@Email", user.emailUser);
+                    int a = Convert.ToInt32(cmd.ExecuteScalar());
 
-                    try
+                    if (a > 0)
                     {
-                        con.Open();
-                        cmd.ExecuteNonQuery();
-                        MessageBox.Show("User registered successfully!");
+                        MessageBox.Show("User already exists!");
                     }
-                    catch(Exception ex)
+                    else
                     {
-                        MessageBox.Show("Error: " + ex.Message);
+                        try
+                        {
+                            con.Open();
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("User registered successfully!");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error: " + ex.Message);
+                        }
                     }
 
                 }
