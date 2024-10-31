@@ -45,22 +45,23 @@
             // 
             button1.BackColor = Color.SeaGreen;
             button1.ForeColor = Color.White;
-            button1.Location = new Point(560, 318);
+            button1.Location = new Point(640, 424);
+            button1.Margin = new Padding(3, 4, 3, 4);
             button1.Name = "button1";
-            button1.Size = new Size(100, 47);
+            button1.Size = new Size(114, 63);
             button1.TabIndex = 0;
             button1.Text = "Login";
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
-            this.AcceptButton = button1;
             // 
             // button2
             // 
             button2.BackColor = Color.Crimson;
             button2.ForeColor = Color.White;
-            button2.Location = new Point(693, 318);
+            button2.Location = new Point(792, 424);
+            button2.Margin = new Padding(3, 4, 3, 4);
             button2.Name = "button2";
-            button2.Size = new Size(100, 47);
+            button2.Size = new Size(114, 63);
             button2.TabIndex = 1;
             button2.Text = "Cancel";
             button2.UseVisualStyleBackColor = false;
@@ -71,9 +72,9 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = SystemColors.ActiveCaptionText;
-            label1.Location = new Point(500, 117);
+            label1.Location = new Point(571, 156);
             label1.Name = "label1";
-            label1.Size = new Size(84, 21);
+            label1.Size = new Size(103, 28);
             label1.TabIndex = 2;
             label1.Text = "Username:";
             // 
@@ -82,25 +83,27 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.ForeColor = SystemColors.ActiveCaptionText;
-            label2.Location = new Point(500, 183);
+            label2.Location = new Point(571, 244);
             label2.Name = "label2";
-            label2.Size = new Size(79, 21);
+            label2.Size = new Size(97, 28);
             label2.TabIndex = 3;
             label2.Text = "Password:";
             // 
             // txtUser
             // 
-            txtUser.Location = new Point(602, 117);
+            txtUser.Location = new Point(688, 156);
+            txtUser.Margin = new Padding(3, 4, 3, 4);
             txtUser.Name = "txtUser";
-            txtUser.Size = new Size(138, 23);
+            txtUser.Size = new Size(157, 27);
             txtUser.TabIndex = 4;
             // 
             // txtPass
             // 
-            txtPass.Location = new Point(602, 183);
+            txtPass.Location = new Point(688, 244);
+            txtPass.Margin = new Padding(3, 4, 3, 4);
             txtPass.Name = "txtPass";
             txtPass.PasswordChar = '*';
-            txtPass.Size = new Size(138, 23);
+            txtPass.Size = new Size(157, 27);
             txtPass.TabIndex = 5;
             txtPass.TextChanged += txtPass_TextChanged;
             // 
@@ -108,9 +111,10 @@
             // 
             checkBox1.AutoSize = true;
             checkBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            checkBox1.Location = new Point(602, 240);
+            checkBox1.Location = new Point(688, 320);
+            checkBox1.Margin = new Padding(3, 4, 3, 4);
             checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(138, 25);
+            checkBox1.Size = new Size(168, 32);
             checkBox1.TabIndex = 6;
             checkBox1.Text = "Show Password";
             checkBox1.UseVisualStyleBackColor = true;
@@ -122,9 +126,9 @@
             linkLabel1.AutoSize = true;
             linkLabel1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             linkLabel1.LinkColor = Color.Black;
-            linkLabel1.Location = new Point(677, 392);
+            linkLabel1.Location = new Point(774, 523);
             linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(92, 17);
+            linkLabel1.Size = new Size(123, 23);
             linkLabel1.TabIndex = 7;
             linkLabel1.TabStop = true;
             linkLabel1.Text = "CreateAccount";
@@ -133,19 +137,21 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(113, 98);
+            pictureBox1.Location = new Point(129, 131);
+            pictureBox1.Margin = new Padding(3, 4, 3, 4);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(270, 236);
+            pictureBox1.Size = new Size(309, 315);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 8;
             pictureBox1.TabStop = false;
             // 
             // Login
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AcceptButton = button1;
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LavenderBlush;
-            ClientSize = new Size(862, 445);
+            ClientSize = new Size(985, 593);
             Controls.Add(pictureBox1);
             Controls.Add(linkLabel1);
             Controls.Add(checkBox1);
@@ -155,6 +161,7 @@
             Controls.Add(label1);
             Controls.Add(button2);
             Controls.Add(button1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Login";
             Text = "Login";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
