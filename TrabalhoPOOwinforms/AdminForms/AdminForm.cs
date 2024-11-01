@@ -55,10 +55,11 @@ namespace TrabalhoPOOwinforms
         /// Guarda os dados do produto
         /// </summary>
         /// <param name="produto"></param>
-        private void SaveProductData(Produto produto)
+        private int SaveProductData(Produto produto)
         {
+            int generatedId = -1;
             string connectionString = "Data Source=JOELFARIA\\SQLEXPRESS;Initial Catalog=LoginApp;Integrated Security=True;TrustServerCertificate=True";
-            string query = "INSERT INTO StockTable (type, name, price, stock, brand, guarantee, description) VALUES (@Type, @Name, @Price, @Stock, @Brand, @Guarantee, @Description)";
+            string query = "INSERT INTO StockTable (type, name, price, stock, brand, guarantee, description) OUTPUT INSERTED.id VALUES (@Type, @Name, @Price, @Stock, @Brand, @Guarantee, @Description)";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -74,7 +75,8 @@ namespace TrabalhoPOOwinforms
                     cmd.Parameters.AddWithValue("@Guarantee", produto.GarantiaMesesProdutos);
                     cmd.Parameters.AddWithValue("@Description", produto.DescricaoProduto);
 
-                    cmd.ExecuteNonQuery();
+                    // Obtém o ID gerado
+                    generatedId = (int)cmd.ExecuteScalar();
                     MessageBox.Show("Produto adicionado com sucesso!");
                     LoadStockData();
                 }
@@ -83,6 +85,8 @@ namespace TrabalhoPOOwinforms
                     MessageBox.Show("Erro ao adicionar produto: " + ex.Message);
                 }
             }
+
+            return generatedId;
         }
         /// <summary>
         /// Atualiza os dados do produto
@@ -147,6 +151,32 @@ namespace TrabalhoPOOwinforms
             }
         }
 
+        private void SaveGPUData(int productId)
+        {
+            string connectionString = "Data Source=JOELFARIA\\SQLEXPRESS;Initial Catalog=LoginApp;Integrated Security=True;TrustServerCertificate=True";
+            string query = "INSERT INTO GpuTable (productId, vram, baseClock, boostClock) VALUES (@ProductId, @VRAM, @BaseClock, @BoostClock)";
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@ProductId", productId);
+                    cmd.Parameters.AddWithValue("@VRAM", int.Parse(textVRAM.Text));
+                    cmd.Parameters.AddWithValue("@BaseClock", int.Parse(textBaseClock.Text));
+                    cmd.Parameters.AddWithValue("@BoostClock", int.Parse(textBoostClock.Text));
+
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("GPU adicionada com sucesso!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro ao adicionar GPU: " + ex.Message);
+                }
+            }
+        }
+
         private void label8_Click(object sender, EventArgs e)
         {
         }
@@ -165,8 +195,10 @@ namespace TrabalhoPOOwinforms
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Primeiro, oculta todos os campos
             HideFields();
 
+            // Exibe apenas os campos específicos do tipo de produto selecionado
             switch (comboBox1.SelectedItem)
             {
                 case "GPU":
@@ -177,7 +209,37 @@ namespace TrabalhoPOOwinforms
                     Baselabel.Visible = true;
                     Boostlabel.Visible = true;
                     break;
-               
+
+                case "CPU":
+                    textCache.Visible = true;
+                    textSocket.Visible = true;
+                    textMem.Visible = true;
+                    textFrequency.Visible = true;
+                    CacheLabel.Visible = true;
+                    SocketLabel.Visible = true;
+                    MemoryLabel.Visible = true;
+                    FrequencyLabel.Visible = true;
+                    break;
+
+                case "Motherboard":
+                    textSocketMB.Visible = true;
+                    textMemorySupport.Visible = true;
+                    textFormFactor.Visible = true;
+                    SocketLabelMB.Visible = true;
+                    MemorySupportLabelMB.Visible = true;  // Memória suportada para Motherboard
+                    FormFactorLabel.Visible = true;
+                    break;
+
+                case "RAM":
+                    textFrequencyRAM.Visible = true;
+                    textCapacity.Visible = true;
+                    textType.Visible = true;
+                    textLatency.Visible = true;
+                    FrequencylabelRAM.Visible = true;
+                    Capacitylabel.Visible = true;
+                    Typelabel.Visible = true;
+                    Latencylabel.Visible = true;
+                    break;
             }
         }
 
@@ -197,13 +259,13 @@ namespace TrabalhoPOOwinforms
 
                 textId.Text = selectedRow.Cells["id"].Value.ToString();
                 textName.Text = selectedRow.Cells["name"].Value.ToString();
-                textDescription.Text = selectedRow.Cells["description"].Value.ToString(); 
+                textDescription.Text = selectedRow.Cells["description"].Value.ToString();
                 textPrice.Text = selectedRow.Cells["price"].Value.ToString();
                 textStock.Text = selectedRow.Cells["stock"].Value.ToString();
                 textBrand.Text = selectedRow.Cells["brand"].Value.ToString();
                 textGuarantee.Text = selectedRow.Cells["guarantee"].Value.ToString();
 
-                comboBox1.SelectedItem = selectedRow.Cells["type"].Value.ToString(); 
+                comboBox1.SelectedItem = selectedRow.Cells["type"].Value.ToString();
             }
         }
 
@@ -248,17 +310,33 @@ namespace TrabalhoPOOwinforms
                 return;
             }
 
-            Produto produto = new Produto(
-                nome: textName.Text,
-                descricao: textDescription.Text,
-                preco: preco,
-                cat: comboBox1.SelectedItem?.ToString() ?? string.Empty,
-                stock: stock,
-                marca: textBrand.Text,
-                garantia: garantia
-            );
+            string productType = comboBox1.SelectedItem?.ToString() ?? string.Empty;
 
-            SaveProductData(produto);
+            if (productType == "GPU")
+            {
+                Gpu novaGpu = new Gpu(
+                    vram: int.Parse(textVRAM.Text),
+                    baseClock: int.Parse(textBaseClock.Text),
+                    boostClock: int.Parse(textBoostClock.Text),
+                    nome: textName.Text,
+                    descricao: textDescription.Text,
+                    preco: preco,
+                    cat: productType,
+                    stock: stock,
+                    marca: textBrand.Text,
+                    garantia: garantia
+                );
+
+                // Salva o produto na StockTable e obtém o ID gerado
+                int productId = SaveProductData(novaGpu);
+
+                // Salva os dados da GPU na GpuTable com o ID gerado
+                SaveGPUData(productId);
+            }
+            else
+            {
+                MessageBox.Show("Tipo de produto não suportado.");
+            }
         }
         /// <summary>
         /// Butao para atualizar um produto
@@ -312,20 +390,53 @@ namespace TrabalhoPOOwinforms
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void HideFields()
         {
+            // Oculta todos os campos relacionados a todos os tipos de produtos
             textVRAM.Visible = false;
             textBaseClock.Visible = false;
             textBoostClock.Visible = false;
             VRAMlabel.Visible = false;
             Baselabel.Visible = false;
             Boostlabel.Visible = false;
+
+            textCache.Visible = false;
+            textSocket.Visible = false;
+            textMem.Visible = false;
+            textFrequency.Visible = false;
+            CacheLabel.Visible = false;
+            SocketLabel.Visible = false;
+            MemoryLabel.Visible = false;  // Para CPU
+            FrequencyLabel.Visible = false;
+
+            textSocketMB.Visible = false;
+            textMemorySupport.Visible = false;  // Torna textMemorySupport invisível
+            textFormFactor.Visible = false;
+            SocketLabelMB.Visible = false;
+            MemorySupportLabelMB.Visible = false; // Rótulo específico para Memory Support da Motherboard
+            FormFactorLabel.Visible = false;
+
+            textFrequencyRAM.Visible = false;
+            textCapacity.Visible = false;
+            textType.Visible = false;
+            textLatency.Visible = false;
+            FrequencylabelRAM.Visible = false;
+            Capacitylabel.Visible = false;
+            Typelabel.Visible = false;
+            Latencylabel.Visible = false;
         }
 
-        
+        private void textCache_TextChanged(object sender, EventArgs e)
+        {
 
+        }
+
+        private void Capacitylabel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

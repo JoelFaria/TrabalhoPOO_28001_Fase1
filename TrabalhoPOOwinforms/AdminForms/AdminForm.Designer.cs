@@ -59,6 +59,28 @@
             VRAMlabel = new Label();
             Baselabel = new Label();
             Boostlabel = new Label();
+            textCache = new TextBox();
+            textSocket = new TextBox();
+            textMem = new TextBox();
+            CacheLabel = new Label();
+            SocketLabel = new Label();
+            MemoryLabel = new Label();
+            FrequencyLabel = new Label();
+            textFrequency = new TextBox();
+            SocketLabelMB = new Label();
+            MemorySupportLabelMB = new Label();
+            FormFactorLabel = new Label();
+            textSocketMB = new TextBox();
+            textMemorySupport = new TextBox();
+            textFormFactor = new TextBox();
+            textCapacity = new TextBox();
+            textType = new TextBox();
+            textFrequencyRAM = new TextBox();
+            textLatency = new TextBox();
+            Capacitylabel = new Label();
+            Typelabel = new Label();
+            FrequencylabelRAM = new Label();
+            Latencylabel = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -167,9 +189,9 @@
             label7.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label7.Location = new Point(227, 472);
             label7.Name = "label7";
-            label7.Size = new Size(127, 21);
+            label7.Size = new Size(82, 21);
             label7.TabIndex = 6;
-            label7.Text = "Garantia (Meses)";
+            label7.Text = "Guarantee";
             // 
             // label6
             // 
@@ -177,9 +199,9 @@
             label6.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label6.Location = new Point(227, 404);
             label6.Name = "label6";
-            label6.Size = new Size(53, 21);
+            label6.Size = new Size(51, 21);
             label6.TabIndex = 5;
-            label6.Text = "Marca";
+            label6.Text = "Brand";
             // 
             // label5
             // 
@@ -197,9 +219,9 @@
             label4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label4.Location = new Point(227, 264);
             label4.Name = "label4";
-            label4.Size = new Size(49, 21);
+            label4.Size = new Size(44, 21);
             label4.TabIndex = 3;
-            label4.Text = "Preço";
+            label4.Text = "Price";
             label4.Click += label4_Click;
             // 
             // label3
@@ -208,9 +230,9 @@
             label3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label3.Location = new Point(227, 200);
             label3.Name = "label3";
-            label3.Size = new Size(77, 21);
+            label3.Size = new Size(89, 21);
             label3.TabIndex = 2;
-            label3.Text = "Descrição";
+            label3.Text = "Description";
             label3.Click += label3_Click;
             // 
             // label2
@@ -219,9 +241,9 @@
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.Location = new Point(227, 130);
             label2.Name = "label2";
-            label2.Size = new Size(53, 21);
+            label2.Size = new Size(52, 21);
             label2.TabIndex = 1;
-            label2.Text = "Nome";
+            label2.Text = "Name";
             // 
             // label1
             // 
@@ -229,9 +251,9 @@
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.Location = new Point(227, 58);
             label1.Name = "label1";
-            label1.Size = new Size(40, 21);
+            label1.Size = new Size(42, 21);
             label1.TabIndex = 0;
-            label1.Text = "Tipo";
+            label1.Text = "Type";
             label1.Click += label1_Click;
             // 
             // label8
@@ -358,12 +380,212 @@
             Boostlabel.TabIndex = 28;
             Boostlabel.Text = "BoostClock:";
             // 
+            // textCache
+            // 
+            textCache.Location = new Point(572, 549);
+            textCache.Name = "textCache";
+            textCache.Size = new Size(100, 23);
+            textCache.TabIndex = 29;
+            textCache.TextChanged += textCache_TextChanged;
+            // 
+            // textSocket
+            // 
+            textSocket.Location = new Point(734, 549);
+            textSocket.Name = "textSocket";
+            textSocket.Size = new Size(100, 23);
+            textSocket.TabIndex = 30;
+            // 
+            // textMem
+            // 
+            textMem.Location = new Point(869, 549);
+            textMem.Name = "textMem";
+            textMem.Size = new Size(100, 23);
+            textMem.TabIndex = 31;
+            // 
+            // CacheLabel
+            // 
+            CacheLabel.AutoSize = true;
+            CacheLabel.Location = new Point(572, 525);
+            CacheLabel.Name = "CacheLabel";
+            CacheLabel.Size = new Size(43, 15);
+            CacheLabel.TabIndex = 32;
+            CacheLabel.Text = "Cache:";
+            // 
+            // SocketLabel
+            // 
+            SocketLabel.AutoSize = true;
+            SocketLabel.Location = new Point(734, 525);
+            SocketLabel.Name = "SocketLabel";
+            SocketLabel.Size = new Size(45, 15);
+            SocketLabel.TabIndex = 33;
+            SocketLabel.Text = "Socket:";
+            // 
+            // MemoryLabel
+            // 
+            MemoryLabel.AutoSize = true;
+            MemoryLabel.Location = new Point(869, 525);
+            MemoryLabel.Name = "MemoryLabel";
+            MemoryLabel.Size = new Size(100, 15);
+            MemoryLabel.TabIndex = 34;
+            MemoryLabel.Text = "Memory Support:";
+            // 
+            // FrequencyLabel
+            // 
+            FrequencyLabel.AutoSize = true;
+            FrequencyLabel.Location = new Point(1013, 525);
+            FrequencyLabel.Name = "FrequencyLabel";
+            FrequencyLabel.Size = new Size(65, 15);
+            FrequencyLabel.TabIndex = 35;
+            FrequencyLabel.Text = "Frequency:";
+            // 
+            // textFrequency
+            // 
+            textFrequency.Location = new Point(1013, 549);
+            textFrequency.Name = "textFrequency";
+            textFrequency.Size = new Size(100, 23);
+            textFrequency.TabIndex = 36;
+            // 
+            // SocketLabelMB
+            // 
+            SocketLabelMB.AutoSize = true;
+            SocketLabelMB.Location = new Point(572, 525);
+            SocketLabelMB.Name = "SocketLabelMB";
+            SocketLabelMB.Size = new Size(45, 15);
+            SocketLabelMB.TabIndex = 37;
+            SocketLabelMB.Text = "Socket:";
+            // 
+            // MemorySupportLabelMB
+            // 
+            MemorySupportLabelMB.AutoSize = true;
+            MemorySupportLabelMB.Location = new Point(734, 525);
+            MemorySupportLabelMB.Name = "MemorySupportLabelMB";
+            MemorySupportLabelMB.Size = new Size(97, 15);
+            MemorySupportLabelMB.TabIndex = 38;
+            MemorySupportLabelMB.Text = "MemorySupport:";
+            // 
+            // FormFactorLabel
+            // 
+            FormFactorLabel.AutoSize = true;
+            FormFactorLabel.Location = new Point(869, 525);
+            FormFactorLabel.Name = "FormFactorLabel";
+            FormFactorLabel.Size = new Size(71, 15);
+            FormFactorLabel.TabIndex = 39;
+            FormFactorLabel.Text = "FormFactor:";
+            // 
+            // textSocketMB
+            // 
+            textSocketMB.Location = new Point(572, 549);
+            textSocketMB.Name = "textSocketMB";
+            textSocketMB.Size = new Size(100, 23);
+            textSocketMB.TabIndex = 40;
+            // 
+            // textMemorySupport
+            // 
+            textMemorySupport.Location = new Point(734, 549);
+            textMemorySupport.Name = "textMemorySupport";
+            textMemorySupport.Size = new Size(100, 23);
+            textMemorySupport.TabIndex = 41;
+            // 
+            // textFormFactor
+            // 
+            textFormFactor.Location = new Point(869, 549);
+            textFormFactor.Name = "textFormFactor";
+            textFormFactor.Size = new Size(100, 23);
+            textFormFactor.TabIndex = 42;
+            // 
+            // textCapacity
+            // 
+            textCapacity.Location = new Point(572, 549);
+            textCapacity.Name = "textCapacity";
+            textCapacity.Size = new Size(100, 23);
+            textCapacity.TabIndex = 43;
+            // 
+            // textType
+            // 
+            textType.Location = new Point(734, 549);
+            textType.Name = "textType";
+            textType.Size = new Size(100, 23);
+            textType.TabIndex = 44;
+            // 
+            // textFrequencyRAM
+            // 
+            textFrequencyRAM.Location = new Point(869, 549);
+            textFrequencyRAM.Name = "textFrequencyRAM";
+            textFrequencyRAM.Size = new Size(100, 23);
+            textFrequencyRAM.TabIndex = 45;
+            // 
+            // textLatency
+            // 
+            textLatency.Location = new Point(1013, 549);
+            textLatency.Name = "textLatency";
+            textLatency.Size = new Size(100, 23);
+            textLatency.TabIndex = 46;
+            // 
+            // Capacitylabel
+            // 
+            Capacitylabel.AutoSize = true;
+            Capacitylabel.Location = new Point(572, 525);
+            Capacitylabel.Name = "Capacitylabel";
+            Capacitylabel.Size = new Size(56, 15);
+            Capacitylabel.TabIndex = 47;
+            Capacitylabel.Text = "Capacity:";
+            Capacitylabel.Click += Capacitylabel_Click;
+            // 
+            // Typelabel
+            // 
+            Typelabel.AutoSize = true;
+            Typelabel.Location = new Point(734, 525);
+            Typelabel.Name = "Typelabel";
+            Typelabel.Size = new Size(35, 15);
+            Typelabel.TabIndex = 48;
+            Typelabel.Text = "Type:";
+            // 
+            // FrequencylabelRAM
+            // 
+            FrequencylabelRAM.AutoSize = true;
+            FrequencylabelRAM.Location = new Point(869, 525);
+            FrequencylabelRAM.Name = "FrequencylabelRAM";
+            FrequencylabelRAM.Size = new Size(65, 15);
+            FrequencylabelRAM.TabIndex = 49;
+            FrequencylabelRAM.Text = "Frequency:";
+            // 
+            // Latencylabel
+            // 
+            Latencylabel.AutoSize = true;
+            Latencylabel.Location = new Point(1013, 525);
+            Latencylabel.Name = "Latencylabel";
+            Latencylabel.Size = new Size(51, 15);
+            Latencylabel.TabIndex = 50;
+            Latencylabel.Text = "Latency:";
+            // 
             // AdminForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Menu;
             ClientSize = new Size(1412, 644);
+            Controls.Add(Latencylabel);
+            Controls.Add(FrequencylabelRAM);
+            Controls.Add(Typelabel);
+            Controls.Add(Capacitylabel);
+            Controls.Add(textLatency);
+            Controls.Add(textFrequencyRAM);
+            Controls.Add(textType);
+            Controls.Add(textCapacity);
+            Controls.Add(textFormFactor);
+            Controls.Add(textMemorySupport);
+            Controls.Add(textSocketMB);
+            Controls.Add(FormFactorLabel);
+            Controls.Add(MemorySupportLabelMB);
+            Controls.Add(SocketLabelMB);
+            Controls.Add(textFrequency);
+            Controls.Add(FrequencyLabel);
+            Controls.Add(MemoryLabel);
+            Controls.Add(SocketLabel);
+            Controls.Add(CacheLabel);
+            Controls.Add(textMem);
+            Controls.Add(textSocket);
+            Controls.Add(textCache);
             Controls.Add(Boostlabel);
             Controls.Add(Baselabel);
             Controls.Add(VRAMlabel);
@@ -436,5 +658,27 @@
         private Label VRAMlabel;
         private Label Baselabel;
         private Label Boostlabel;
+        private TextBox textCache;
+        private TextBox textSocket;
+        private TextBox textMem;
+        private Label CacheLabel;
+        private Label SocketLabel;
+        private Label MemoryLabel;
+        private Label FrequencyLabel;
+        private TextBox textFrequency;
+        private Label SocketLabelMB;
+        private Label MemorySupportLabelMB;
+        private Label FormFactorLabel;
+        private TextBox textSocketMB;
+        private TextBox textMemorySupport;
+        private TextBox textFormFactor;
+        private TextBox textCapacity;
+        private TextBox textType;
+        private TextBox textFrequencyRAM;
+        private TextBox textLatency;
+        private Label Capacitylabel;
+        private Label Typelabel;
+        private Label FrequencylabelRAM;
+        private Label Latencylabel;
     }
 }
