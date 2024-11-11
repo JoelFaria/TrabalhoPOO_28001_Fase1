@@ -9,6 +9,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 using TrabalhoPOO;
+using Motherboard = DLL_Classes.Motherboard;
+using Cpu = DLL_Classes.Cpu;
+using Gpu = DLL_Classes.Gpu;
+using RAM = DLL_Classes.RAM;
+using Produto = DLL_Classes.Produto;
+
 
 namespace TrabalhoPOOwinforms
 {
@@ -435,6 +441,11 @@ namespace TrabalhoPOOwinforms
         }
 
         private void Capacitylabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textName_TextChanged(object sender, EventArgs e)
         {
 
         }

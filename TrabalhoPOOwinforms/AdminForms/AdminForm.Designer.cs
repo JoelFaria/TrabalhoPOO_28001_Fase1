@@ -173,6 +173,7 @@
             textName.Name = "textName";
             textName.Size = new Size(141, 23);
             textName.TabIndex = 9;
+            textName.TextChanged += textName_TextChanged;
             // 
             // comboBox1
             // 

@@ -4,9 +4,13 @@
 //Author : Joel Faria
 //Description : ClassePai 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-using TrabalhoPOO;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace TrabalhoPOO
+namespace DLL_Classes
 {
     public class Produto
     {
@@ -23,13 +27,13 @@ namespace TrabalhoPOO
 
         public Produto(string nome, string descricao, double preco, string cat, int stock, string marca, int garantia)
         {
-            this.Nome = nome;
-            this.Descricao = descricao;
-            this.Preco = preco;
-            this.Cat = cat;
-            this.Stock = stock;
-            this.Marca = marca;
-            this.garantiaMeses = garantia;
+            Nome = nome;
+            Descricao = descricao;
+            Preco = preco;
+            Cat = cat;
+            Stock = stock;
+            Marca = marca;
+            garantiaMeses = garantia;
         }
         #endregion
 
@@ -47,13 +51,13 @@ namespace TrabalhoPOO
         public double PrecoProduto
         {
             get { return Preco; }
-            set 
-            { 
-                if(value < 0)
+            set
+            {
+                if (value < 0)
                 {
-                    throw new System.ArgumentException("Preço não pode ser negativo ou 0");
+                    throw new ArgumentException("Preço não pode ser negativo ou 0");
                 }
-                Preco = value; 
+                Preco = value;
             }
         }
         public string CategoriaProduto
@@ -78,38 +82,6 @@ namespace TrabalhoPOO
         }
 
         #endregion
-
-    }
-
-    public class User 
-    {
-           public string Id { get; set; }
-           public string Nome { get; set; }
-           public string Email { get; set; }
-           public string Password { get; set; }
-
-        public User(string nome, string email, string password)
-        {
-           this.Nome = nome;
-           this.Email = email;
-           this.Password = password;
-        }
-
-        public string nomeUser
-        {
-            get { return Nome; }
-            set { Nome = value; }
-        }
-        public string emailUser
-        { 
-           get { return Email; }
-            set { Email = value; }
-        }
-        public string PasswordUser
-        {
-            get { return Password; }
-            set { Password = value; }
-        }
 
     }
 

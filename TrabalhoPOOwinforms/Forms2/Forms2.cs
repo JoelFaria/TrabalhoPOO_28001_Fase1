@@ -8,7 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
+using Microsoft.VisualBasic.ApplicationServices;
 using TrabalhoPOO;
+using User = TrabalhoPOO.User;
 
 namespace TrabalhoPOOwinforms
 {
@@ -20,13 +22,12 @@ namespace TrabalhoPOOwinforms
         {
             InitializeComponent();
         }
-
-
+        
         public class RegisterClass
         {
             string connectingString = "Data Source=JOELFARIA\\SQLEXPRESS;Initial Catalog=LoginApp;Integrated Security=True;TrustServerCertificate=True";
             string query = "INSERT INTO LoginTable (username, password, email) VALUES (@Username, @Password, @Email)";
-
+            
             public void RegisterUser(User user)
             {
                 using (SqlConnection con = new SqlConnection(connectingString))
@@ -59,7 +60,6 @@ namespace TrabalhoPOOwinforms
             }
 
         }
-
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -101,6 +101,7 @@ namespace TrabalhoPOOwinforms
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
+
         {
 
         }
