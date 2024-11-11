@@ -79,10 +79,6 @@ namespace TrabalhoPOO
 
         #endregion
 
-        public virtual void PrintDetails()
-        {
-            Console.WriteLine($"Nome: {this.Nome}, Id: {this.Id}, Descrição: {this.Descricao}, Preço: {this.Preco}, Categoria: {this.Cat}, Stock: {this.Stock}, Marca:{this.Marca}, Garantia:{this.garantiaMeses}");
-        }
     }
 
     public class User 
