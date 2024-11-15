@@ -1,4 +1,5 @@
 Loja Online de Peças de PC
+
 Descrição
 Este projeto tem como objetivo a criação de uma plataforma de loja online para a gestão e venda de peças de computador. A loja permite a visualização de produtos, categorização por tipo de componente (CPU, GPU, RAM, Motherboard, etc.), e gestão de estoque. O sistema está implementado em C# utilizando conceitos de programação orientada a objetos e banco de dados SQL para armazenar as informações.
 
