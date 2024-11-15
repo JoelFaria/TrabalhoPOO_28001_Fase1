@@ -9,10 +9,7 @@ using System;
 
 namespace TrabalhoPOO
 {
-    /// <summary>
-    /// Classe base que representa um produto genérico no sistema.
-    /// Inclui propriedades como Nome, Id, Descrição, Preço, Categoria, Stock, Marca e Garantia.
-    /// </summary>
+
     public class Produto
     {
         // Propriedades privadas
@@ -49,9 +46,7 @@ namespace TrabalhoPOO
         #endregion
 
         #region Propriedades Públicas
-        /// <summary>
-        /// Nome do produto (com validação no set).
-        /// </summary>
+
         public string NomeProduto
         {
             get { return Nome; }
@@ -64,10 +59,6 @@ namespace TrabalhoPOO
                 Nome = value;
             }
         }
-
-        /// <summary>
-        /// Descrição do produto.
-        /// </summary>
         public string DescricaoProduto
         {
             get { return Descricao; }
@@ -81,9 +72,6 @@ namespace TrabalhoPOO
             }
         }
 
-        /// <summary>
-        /// Preço do produto (com validação para não aceitar valores negativos ou zero).
-        /// </summary>
         public double PrecoProduto
         {
             get { return Preco; }
@@ -97,9 +85,6 @@ namespace TrabalhoPOO
             }
         }
 
-        /// <summary>
-        /// Categoria do produto.
-        /// </summary>
         public string CategoriaProduto
         {
             get { return Cat; }
@@ -113,9 +98,6 @@ namespace TrabalhoPOO
             }
         }
 
-        /// <summary>
-        /// Quantidade de produtos em stock (com validação para aceitar apenas valores não negativos).
-        /// </summary>
         public int StockProduto
         {
             get { return Stock; }
@@ -129,9 +111,6 @@ namespace TrabalhoPOO
             }
         }
 
-        /// <summary>
-        /// Marca do produto.
-        /// </summary>
         public string MarcaProduto
         {
             get { return Marca; }
@@ -145,9 +124,6 @@ namespace TrabalhoPOO
             }
         }
 
-        /// <summary>
-        /// Garantia do produto em meses.
-        /// </summary>
         public int GarantiaMesesProdutos
         {
             get { return GarantiaMeses; }
