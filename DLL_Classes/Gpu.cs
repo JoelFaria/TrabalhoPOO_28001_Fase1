@@ -37,9 +37,6 @@ namespace TrabalhoPOO
         #endregion
 
         #region Propriedades Públicas
-        /// <summary>
-        /// Memória VRAM em GB (com validação no set).
-        /// </summary>
         public int GetVRAM
         {
             get { return VRAM; }
@@ -53,9 +50,6 @@ namespace TrabalhoPOO
             }
         }
 
-        /// <summary>
-        /// Frequência base em MHz (com validação no set).
-        /// </summary>
         public int GetBaseClock
         {
             get { return BaseClock; }
@@ -68,10 +62,6 @@ namespace TrabalhoPOO
                 BaseClock = value;
             }
         }
-
-        /// <summary>
-        /// Frequência boost em MHz (com validação no set).
-        /// </summary>
         public int GetBoostClock
         {
             get { return BoostClock; }

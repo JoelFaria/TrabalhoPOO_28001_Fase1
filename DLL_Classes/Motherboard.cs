@@ -9,13 +9,9 @@ using System;
 
 namespace TrabalhoPOO
 {
-    /// <summary>
-    /// Classe que representa uma motherboard (placa-mãe) no sistema.
-    /// Herda da classe base Produto.
-    /// </summary>
     public class Motherboard : Produto
     {
-        // Propriedades específicas da motherboard
+        // Propriedades específicas da motherboard 
         private string Socket { get; set; } // Tipo de socket suportado
         private int MemorySupport { get; set; } // Capacidade máxima de memória suportada (em GB)
         private string FormFactor { get; set; } // Tipo de formato da placa (e.g., ATX, Micro-ATX)
@@ -45,10 +41,7 @@ namespace TrabalhoPOO
 
         #endregion
 
-        #region Propriedades Públicas
-        /// <summary>
-        /// Tipo de socket suportado pela motherboard.
-        /// </summary>
+        #region Propriedades Públicas>
         public string SocketMotherboard
         {
             get { return Socket; }
@@ -62,9 +55,6 @@ namespace TrabalhoPOO
             }
         }
 
-        /// <summary>
-        /// Capacidade máxima de memória suportada (em GB).
-        /// </summary>
         public int MemorySupportMotherboard
         {
             get { return MemorySupport; }
@@ -77,10 +67,6 @@ namespace TrabalhoPOO
                 MemorySupport = value;
             }
         }
-
-        /// <summary>
-        /// Formato físico da motherboard (e.g., ATX, Micro-ATX).
-        /// </summary>
         public string FormFactorMotherboard
         {
             get { return FormFactor; }

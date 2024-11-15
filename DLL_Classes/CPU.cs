@@ -8,10 +8,6 @@ using System;
 
 namespace TrabalhoPOO
 {
-    /// <summary>
-    /// Classe que representa um processador (CPU), derivada da classe Produto.
-    /// Contém propriedades específicas como Cache, Socket, Suporte de Memória e Frequência.
-    /// </summary>
     public class Cpu : Produto
     {
         private int Cache { get; set; } // Cache em MB
@@ -47,9 +43,7 @@ namespace TrabalhoPOO
         #endregion
 
         #region Propriedades Públicas
-        /// <summary>
-        /// Cache do processador em MB (com validação no set).
-        /// </summary>
+
         public int GetCache
         {
             get { return Cache; }
@@ -63,9 +57,6 @@ namespace TrabalhoPOO
             }
         }
 
-        /// <summary>
-        /// Tipo de socket do processador (com validação no set).
-        /// </summary>
         public string GetSocket
         {
             get { return Socket; }
@@ -79,9 +70,6 @@ namespace TrabalhoPOO
             }
         }
 
-        /// <summary>
-        /// Suporte máximo de memória em GB (com validação no set).
-        /// </summary>
         public int GetMemorySupport
         {
             get { return MemorySupport; }
@@ -94,10 +82,6 @@ namespace TrabalhoPOO
                 MemorySupport = value;
             }
         }
-
-        /// <summary>
-        /// Frequência base do processador em MHz (com validação no set).
-        /// </summary>
         public int GetFrequency
         {
             get { return Frequency; }

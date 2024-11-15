@@ -47,9 +47,7 @@ namespace TrabalhoPOO
         #endregion
 
         #region Propriedades Públicas
-        /// <summary>
-        /// Capacidade da RAM em GB (com validação no set).
-        /// </summary>
+
         public int GetCapacity
         {
             get { return Capacity; }
@@ -63,9 +61,6 @@ namespace TrabalhoPOO
             }
         }
 
-        /// <summary>
-        /// Tipo de RAM (ex.: DDR4, DDR5) (com validação no set).
-        /// </summary>
         public string GetType
         {
             get { return Type; }
@@ -78,10 +73,6 @@ namespace TrabalhoPOO
                 Type = value;
             }
         }
-
-        /// <summary>
-        /// Frequência da RAM em MHz (com validação no set).
-        /// </summary>
         public int GetFrequency
         {
             get { return Frequency; }
@@ -94,10 +85,6 @@ namespace TrabalhoPOO
                 Frequency = value;
             }
         }
-
-        /// <summary>
-        /// Latência da RAM em CL (com validação no set).
-        /// </summary>
         public int GetLatency
         {
             get { return Latency; }
