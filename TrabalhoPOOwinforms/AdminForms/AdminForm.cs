@@ -265,7 +265,6 @@ namespace TrabalhoPOOwinforms
                 textStock.Text = selectedRow.Cells["stock"].Value.ToString();
                 textBrand.Text = selectedRow.Cells["brand"].Value.ToString();
                 textGuarantee.Text = selectedRow.Cells["guarantee"].Value.ToString();
-
                 comboBox1.SelectedItem = selectedRow.Cells["type"].Value.ToString();
             }
         }
