@@ -1,46 +1,115 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿////////////////////////////////////////////////////////////////////////////////////////////////////////
+// FileName: BaseClass.cs
+// FileType: Visual C# Source File
+// Author: Joel Faria
+// Description: Classe para representar uma Cpu no sistema, derivada da classe Produto.
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+using System;
 
 namespace TrabalhoPOO
 {
+    /// <summary>
+    /// Classe que representa um processador (CPU), derivada da classe Produto.
+    /// Contém propriedades específicas como Cache, Socket, Suporte de Memória e Frequência.
+    /// </summary>
     public class Cpu : Produto
     {
-        private int Cache { get; set; }
-        private string Socket { get; set; }
-        private int MemorySupport { get; set; }
-        private int Frequency { get; set; }
+        private int Cache { get; set; } // Cache em MB
+        private string Socket { get; set; } // Tipo de socket da CPU
+        private int MemorySupport { get; set; } // Suporte de memória máximo em GB
+        private int Frequency { get; set; } // Frequência base em MHz
 
+        #region Construtores
+
+        /// <summary>
+        /// Construtor para inicializar um novo processador.
+        /// </summary>
+        /// <param name="cache">Cache do processador em MB.</param>
+        /// <param name="socket">Socket do processador.</param>
+        /// <param name="memorySupport">Suporte máximo de memória em GB.</param>
+        /// <param name="frequency">Frequência base em MHz.</param>
+        /// <param name="nome">Nome do produto.</param>
+        /// <param name="descricao">Descrição do produto.</param>
+        /// <param name="preco">Preço do produto.</param>
+        /// <param name="cat">Categoria do produto.</param>
+        /// <param name="stock">Quantidade em stock.</param>
+        /// <param name="marca">Marca do produto.</param>
+        /// <param name="garantia">Garantia do produto em meses.</param>
         public Cpu(int cache, string socket, int memorySupport, int frequency, string nome, string descricao, double preco, string cat, int stock, string marca, int garantia)
             : base(nome, descricao, preco, cat, stock, marca, garantia)
         {
-            this.Cache = cache;
-            this.Socket = socket;
-            this.MemorySupport = memorySupport;
-            this.Frequency = frequency;
+            Cache = cache;
+            Socket = socket;
+            MemorySupport = memorySupport;
+            Frequency = frequency;
         }
+
+        #endregion
+
+        #region Propriedades Públicas
+        /// <summary>
+        /// Cache do processador em MB (com validação no set).
+        /// </summary>
         public int GetCache
         {
             get { return Cache; }
-            set { Cache = value; }
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentException("A cache deve ser maior que zero.");
+                }
+                Cache = value;
+            }
         }
+
+        /// <summary>
+        /// Tipo de socket do processador (com validação no set).
+        /// </summary>
         public string GetSocket
         {
             get { return Socket; }
-            set { Socket = value; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("O socket não pode ser vazio.");
+                }
+                Socket = value;
+            }
         }
+
+        /// <summary>
+        /// Suporte máximo de memória em GB (com validação no set).
+        /// </summary>
         public int GetMemorySupport
         {
             get { return MemorySupport; }
-            set { MemorySupport = value; }
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentException("O suporte de memória deve ser maior que zero.");
+                }
+                MemorySupport = value;
+            }
         }
+
+        /// <summary>
+        /// Frequência base do processador em MHz (com validação no set).
+        /// </summary>
         public int GetFrequency
         {
             get { return Frequency; }
-            set { Frequency = value; }
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentException("A frequência deve ser maior que zero.");
+                }
+                Frequency = value;
+            }
         }
+        #endregion
     }
 }
