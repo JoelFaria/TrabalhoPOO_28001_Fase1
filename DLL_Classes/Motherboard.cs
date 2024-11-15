@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Motherboard = DLL_Classes.Motherboard;
 
-namespace DLL_Classes
+namespace TrabalhoPOO
 {
     public class Motherboard : Produto
     {

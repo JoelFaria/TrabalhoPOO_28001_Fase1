@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RAM = DLL_Classes.RAM;
 
-namespace DLL_Classes
+namespace TrabalhoPOO
 {
     public class RAM : Produto
     {

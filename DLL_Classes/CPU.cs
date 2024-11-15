@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Cpu = DLL_Classes.Cpu;
 
-namespace DLL_Classes
+
+namespace TrabalhoPOO
 {
     public class Cpu : Produto
     {
