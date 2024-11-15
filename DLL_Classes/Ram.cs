@@ -1,4 +1,11 @@
-﻿using System;
+﻿////////////////////////////////////////////////////////////////////////////////////////////////////////
+// FileName: BaseClass.cs
+// FileType: Visual C# Source File
+// Author: Joel Faria
+// Description: Classe para representar uma memória RAM no sistema. Derivada da classe Produto.
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+using System;
 
 namespace TrabalhoPOO
 {
@@ -13,6 +20,7 @@ namespace TrabalhoPOO
         private int Frequency { get; set; }
         private int Latency { get; set; }
 
+        #region Construtores
         /// <summary>
         /// Construtor para inicializar uma nova memória RAM.
         /// </summary>
@@ -36,6 +44,9 @@ namespace TrabalhoPOO
             Latency = latency;
         }
 
+        #endregion
+
+        #region Propriedades Públicas
         /// <summary>
         /// Capacidade da RAM em GB (com validação no set).
         /// </summary>
@@ -99,5 +110,6 @@ namespace TrabalhoPOO
                 Latency = value;
             }
         }
+        #endregion
     }
 }
