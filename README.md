@@ -7,8 +7,11 @@ Este projeto tem como objetivo a criação de uma plataforma de loja online para
 ## Funcionalidades
 
 Gestão de Produtos: Permite adicionar, editar e remover produtos, com informações como nome, preço, descrição, marca, stock e garantia.
+
 Categorias de Produtos: Organiza os produtos em categorias, como CPU, GPU, RAM, entre outras.
+
 Controle de Estoque: Acompanha a quantidade disponível de cada produto e gera alertas caso o stock esteja baixo.
+
 Garantia e Suporte: Cada produto tem um período de garantia associado, oferecendo suporte ao cliente em caso de problemas com os produtos.
 
 ## Tecnologias Utilizadas:
