@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DLL_Classes\DLL_Classes.csproj" />
+    <ProjectReference Include="..\Funcoes\Funcoes.csproj" />
   </ItemGroup>
 
   <ItemGroup>

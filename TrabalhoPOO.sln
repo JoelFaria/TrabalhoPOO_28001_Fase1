@@ -5,7 +5,9 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DLL_Classes", "DLL_Classes\DLL_Classes.csproj", "{531E5DBE-0589-470F-9FC3-26948A05D80B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrabalhoPOOwinforms", "TrabalhoPOOwinforms\TrabalhoPOOwinforms.csproj", "{A7028602-35D5-4C0A-AF26-841BF8487609}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrabalhoPOOwinforms", "TrabalhoPOOwinforms\TrabalhoPOOwinforms.csproj", "{A7028602-35D5-4C0A-AF26-841BF8487609}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funcoes", "Funcoes\Funcoes.csproj", "{337885DE-C168-4CF0-8B14-D038DF0CB7A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{A7028602-35D5-4C0A-AF26-841BF8487609}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7028602-35D5-4C0A-AF26-841BF8487609}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7028602-35D5-4C0A-AF26-841BF8487609}.Release|Any CPU.Build.0 = Release|Any CPU
+		{337885DE-C168-4CF0-8B14-D038DF0CB7A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{337885DE-C168-4CF0-8B14-D038DF0CB7A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{337885DE-C168-4CF0-8B14-D038DF0CB7A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{337885DE-C168-4CF0-8B14-D038DF0CB7A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
