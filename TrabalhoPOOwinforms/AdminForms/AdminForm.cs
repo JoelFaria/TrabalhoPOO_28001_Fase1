@@ -251,7 +251,6 @@ namespace TrabalhoPOOwinforms
             }
         }
 
-
         /// <summary>
         /// Butao para eliminar um produto
         /// </summary>
