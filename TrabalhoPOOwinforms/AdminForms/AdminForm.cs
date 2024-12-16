@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 using TrabalhoPOO;
+using Funcoes;
+using System.Text.RegularExpressions;
 
 
 namespace TrabalhoPOOwinforms
@@ -28,6 +30,11 @@ namespace TrabalhoPOOwinforms
 
             LoadStockData();
         }
+
+        xyz a = new xyz();
+
+
+
         /// <summary>
         /// Insere os dados do produto na DataGridView
         /// </summary>
@@ -49,105 +56,6 @@ namespace TrabalhoPOOwinforms
                 catch (Exception ex)
                 {
                     MessageBox.Show("Erro ao carregar dados: " + ex.Message);
-                }
-            }
-        }
-        /// <summary>
-        /// Guarda os dados do produto
-        /// </summary>
-        /// <param name="produto"></param>
-        private int SaveProductData(Produto produto)
-        {
-            int generatedId = -1;
-            string connectionString = "Data Source=JOELFARIA\\SQLEXPRESS;Initial Catalog=LoginApp;Integrated Security=True;TrustServerCertificate=True";
-            string query = "INSERT INTO StockTable (type, name, price, stock, brand, guarantee, description) OUTPUT INSERTED.id VALUES (@Type, @Name, @Price, @Stock, @Brand, @Guarantee, @Description)";
-
-            using (SqlConnection con = new SqlConnection(connectionString))
-            {
-                try
-                {
-                    con.Open();
-                    SqlCommand cmd = new SqlCommand(query, con);
-                    cmd.Parameters.AddWithValue("@Type", produto.CategoriaProduto);
-                    cmd.Parameters.AddWithValue("@Name", produto.NomeProduto);
-                    cmd.Parameters.AddWithValue("@Price", produto.PrecoProduto);
-                    cmd.Parameters.AddWithValue("@Stock", produto.StockProduto);
-                    cmd.Parameters.AddWithValue("@Brand", produto.MarcaProduto);
-                    cmd.Parameters.AddWithValue("@Guarantee", produto.GarantiaMesesProdutos);
-                    cmd.Parameters.AddWithValue("@Description", produto.DescricaoProduto);
-
-                    // Obtém o ID gerado
-                    generatedId = (int)cmd.ExecuteScalar();
-                    MessageBox.Show("Produto adicionado com sucesso!");
-                    LoadStockData();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Erro ao adicionar produto: " + ex.Message);
-                }
-            }
-
-            return generatedId;
-        }
-        /// <summary>
-        /// Atualiza os dados do produto
-        /// </summary>
-        /// <param name="produto"></param>
-        /// <param name="id"></param>
-        private void UpdateProductData(Produto produto, int id)
-        {
-            string connectionString = "Data Source=JOELFARIA\\SQLEXPRESS;Initial Catalog=LoginApp;Integrated Security=True;TrustServerCertificate=True";
-            string query = "UPDATE StockTable SET type = @Type, name = @Name, price = @Price, stock = @Stock, brand = @Brand, guarantee = @Guarantee, description=@Description WHERE id = @Id";
-
-            using (SqlConnection con = new SqlConnection(connectionString))
-            {
-                try
-                {
-                    con.Open();
-                    SqlCommand cmd = new SqlCommand(query, con);
-                    cmd.Parameters.AddWithValue("@Type", produto.CategoriaProduto);
-                    cmd.Parameters.AddWithValue("@Name", produto.NomeProduto);
-                    cmd.Parameters.AddWithValue("@Price", produto.PrecoProduto);
-                    cmd.Parameters.AddWithValue("@Stock", produto.StockProduto);
-                    cmd.Parameters.AddWithValue("@Brand", produto.MarcaProduto);
-                    cmd.Parameters.AddWithValue("@Guarantee", produto.GarantiaMesesProdutos);
-                    cmd.Parameters.AddWithValue("@Description", produto.DescricaoProduto);
-                    cmd.Parameters.AddWithValue("@Id", id);
-
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("Produto atualizado com sucesso!");
-                    LoadStockData();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Erro ao atualizar produto: " + ex.Message);
-                }
-            }
-        }
-        /// <summary>
-        /// Apaga os dados do produto
-        /// </summary>
-        /// <param name="id"></param>
-        private void DeleteProductData(int id)
-        {
-            string connectionString = "Data Source=JOELFARIA\\SQLEXPRESS;Initial Catalog=LoginApp;Integrated Security=True;TrustServerCertificate=True";
-            string query = "DELETE FROM StockTable WHERE id = @Id";
-
-            using (SqlConnection con = new SqlConnection(connectionString))
-            {
-                try
-                {
-                    con.Open();
-                    SqlCommand cmd = new SqlCommand(query, con);
-                    cmd.Parameters.AddWithValue("@Id", id);
-
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("Produto eliminado com sucesso!");
-                    LoadStockData();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Erro ao eliminar produto: " + ex.Message);
                 }
             }
         }
@@ -281,7 +189,7 @@ namespace TrabalhoPOOwinforms
 
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
-
+            
         }
         /// <summary>
         /// Butao para adicionar um produto
@@ -290,53 +198,29 @@ namespace TrabalhoPOOwinforms
         /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedItem == null)
+            Produto produto = new Produto(
+                nome: textName.Text,
+                descricao: textDescription.Text,
+                preco: double.Parse(textPrice.Text),
+                cat: comboBox1.SelectedItem?.ToString() ?? string.Empty,
+                stock: int.Parse(textStock.Text),
+                marca: textBrand.Text,
+                garantia: int.Parse(textGuarantee.Text)
+            );
+
+            bool Sucesso = a.AddProduct(produto);
+
+            if (Sucesso) 
             {
-                MessageBox.Show("Por favor, selecione uma categoria.");
-                return;
-            }
+                LoadStockData();
+                MessageBox.Show("Produto adicionado com sucesso!");
 
-            if (
-                string.IsNullOrWhiteSpace(textPrice.Text) ||
-                !double.TryParse(textPrice.Text, out double preco) ||
-                string.IsNullOrWhiteSpace(textStock.Text) ||
-                !int.TryParse(textStock.Text, out int stock) ||
-                string.IsNullOrWhiteSpace(textGuarantee.Text) ||
-                !int.TryParse(textGuarantee.Text, out int garantia) ||
-                string.IsNullOrWhiteSpace(textDescription.Text)
-            )
-            {
-                MessageBox.Show("Por favor, preencha todos os campos corretamente.");
-                return;
-            }
-
-            string productType = comboBox1.SelectedItem?.ToString() ?? string.Empty;
-
-            if (productType == "GPU")
-            {
-                Gpu novaGpu = new Gpu(
-                    vram: int.Parse(textVRAM.Text),
-                    baseClock: int.Parse(textBaseClock.Text),
-                    boostClock: int.Parse(textBoostClock.Text),
-                    nome: textName.Text,
-                    descricao: textDescription.Text,
-                    preco: preco,
-                    cat: productType,
-                    stock: stock,
-                    marca: textBrand.Text,
-                    garantia: garantia
-                );
-
-                // Salva o produto na StockTable e obtém o ID gerado
-                int productId = SaveProductData(novaGpu);
-
-                // Salva os dados da GPU na GpuTable com o ID gerado
-                SaveGPUData(productId);
             }
             else
             {
-                MessageBox.Show("Tipo de produto não suportado.");
+                MessageBox.Show("Erro ao adicionar produto.");
             }
+
         }
         /// <summary>
         /// Butao para atualizar um produto
@@ -345,25 +229,29 @@ namespace TrabalhoPOOwinforms
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            if (int.TryParse(textId.Text, out int id))
-            {
-                Produto produto = new Produto(
-                    nome: textName.Text,
-                    descricao: textDescription.Text,
-                    preco: double.Parse(textPrice.Text),
-                    cat: comboBox1.SelectedItem?.ToString() ?? string.Empty,
-                    stock: int.Parse(textStock.Text),
-                    marca: textBrand.Text,
-                    garantia: int.Parse(textGuarantee.Text)
-                );
+            Produto produto = new Produto(
+                 nome: textName.Text,
+                 descricao: textDescription.Text,
+                 preco: double.Parse(textPrice.Text),
+                 cat: comboBox1.SelectedItem?.ToString() ?? string.Empty,
+                 stock: int.Parse(textStock.Text),
+                 marca: textBrand.Text,
+                 garantia: int.Parse(textGuarantee.Text)
+             );
 
-                UpdateProductData(produto, id);
+            bool Sucesso = a.UpdateProduct(produto, int.Parse(textId.Text));
+
+            if (Sucesso) {
+                MessageBox.Show("Produto atualizado com sucesso!");
+                LoadStockData();
             }
             else
             {
-                MessageBox.Show("ID inválido.");
+                MessageBox.Show("Erro ao atualizar produto.");
             }
         }
+
+
         /// <summary>
         /// Butao para eliminar um produto
         /// </summary>
@@ -371,13 +259,25 @@ namespace TrabalhoPOOwinforms
         /// <param name="e"></param>
         private void button3_Click(object sender, EventArgs e)
         {
-            if (int.TryParse(textId.Text, out int id))
-            {
-                DeleteProductData(id);
+            Produto produto = new Produto(
+                 nome: textName.Text,
+                 descricao: textDescription.Text,
+                 preco: double.Parse(textPrice.Text),
+                 cat: comboBox1.SelectedItem?.ToString() ?? string.Empty,
+                 stock: int.Parse(textStock.Text),
+                 marca: textBrand.Text,
+                 garantia: int.Parse(textGuarantee.Text)
+             );
+
+            bool Sucesso = a.DeleteProduct(int.Parse(textId.Text));
+
+            if (Sucesso) {
+                MessageBox.Show("Produto eliminado com sucesso!");
+                LoadStockData();
             }
             else
             {
-                MessageBox.Show("ID inválido.");
+                MessageBox.Show("Erro ao eliminar produto.");
             }
         }
 

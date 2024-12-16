@@ -1,7 +1,12 @@
-using Microsoft.Data.SqlClient;
-using System.Data.SqlClient;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 using TrabalhoPOO;
 
 namespace TrabalhoPOOwinforms

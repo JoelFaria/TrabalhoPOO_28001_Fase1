@@ -35,13 +35,13 @@ namespace TrabalhoPOO
         /// <param name="garantia">Garantia do produto em meses.</param>
         public Produto(string nome, string descricao, double preco, string cat, int stock, string marca, int garantia)
         {
-            Nome = nome;
-            Descricao = descricao;
-            Preco = preco;
-            Cat = cat;
-            Stock = stock;
-            Marca = marca;
-            GarantiaMeses = garantia;
+            this.Nome = nome;
+            this.Descricao = descricao;
+            this.Preco = preco;
+            this.Cat = cat;
+            this.Stock = stock;
+            this.Marca = marca;
+            this.GarantiaMeses = garantia;
         }
         #endregion
 
