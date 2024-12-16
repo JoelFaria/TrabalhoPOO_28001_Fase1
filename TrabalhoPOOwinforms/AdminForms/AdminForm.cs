@@ -31,8 +31,8 @@ namespace TrabalhoPOOwinforms
             LoadStockData();
         }
 
-        xyz a = new xyz();
-
+        Funcoes1 a = new Funcoes1();
+        string connectionString = "Data Source=JOELFARIA\\SQLEXPRESS;Initial Catalog=LoginApp;Integrated Security=True;TrustServerCertificate=True";
 
 
         /// <summary>
@@ -40,7 +40,6 @@ namespace TrabalhoPOOwinforms
         /// </summary>
         private void LoadStockData()
         {
-            string connectionString = "Data Source=JOELFARIA\\SQLEXPRESS;Initial Catalog=LoginApp;Integrated Security=True;TrustServerCertificate=True";
             string query = "SELECT * FROM StockTable";
 
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -62,7 +61,6 @@ namespace TrabalhoPOOwinforms
 
         private void SaveGPUData(int productId)
         {
-            string connectionString = "Data Source=JOELFARIA\\SQLEXPRESS;Initial Catalog=LoginApp;Integrated Security=True;TrustServerCertificate=True";
             string query = "INSERT INTO GpuTable (productId, vram, baseClock, boostClock) VALUES (@ProductId, @VRAM, @BaseClock, @BoostClock)";
 
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -199,14 +197,14 @@ namespace TrabalhoPOOwinforms
         private void button2_Click(object sender, EventArgs e)
         {
             Produto produto = new Produto(
-                nome: textName.Text,
-                descricao: textDescription.Text,
-                preco: double.Parse(textPrice.Text),
-                cat: comboBox1.SelectedItem?.ToString() ?? string.Empty,
-                stock: int.Parse(textStock.Text),
-                marca: textBrand.Text,
-                garantia: int.Parse(textGuarantee.Text)
-            );
+            nome: textName.Text,
+            descricao: textDescription.Text,
+            preco: double.Parse(textPrice.Text),
+            cat: comboBox1.SelectedItem?.ToString() ?? string.Empty,
+            stock: int.Parse(textStock.Text),
+            marca: textBrand.Text,
+            garantia: int.Parse(textGuarantee.Text)
+);
 
             bool Sucesso = a.AddProduct(produto);
 
@@ -230,14 +228,14 @@ namespace TrabalhoPOOwinforms
         private void button1_Click(object sender, EventArgs e)
         {
             Produto produto = new Produto(
-                 nome: textName.Text,
-                 descricao: textDescription.Text,
-                 preco: double.Parse(textPrice.Text),
-                 cat: comboBox1.SelectedItem?.ToString() ?? string.Empty,
-                 stock: int.Parse(textStock.Text),
-                 marca: textBrand.Text,
-                 garantia: int.Parse(textGuarantee.Text)
-             );
+            nome: textName.Text,
+            descricao: textDescription.Text,
+            preco: double.Parse(textPrice.Text),
+            cat: comboBox1.SelectedItem?.ToString() ?? string.Empty,
+            stock: int.Parse(textStock.Text),
+            marca: textBrand.Text,
+            garantia: int.Parse(textGuarantee.Text)
+            );
 
             bool Sucesso = a.UpdateProduct(produto, int.Parse(textId.Text));
 
@@ -259,14 +257,14 @@ namespace TrabalhoPOOwinforms
         private void button3_Click(object sender, EventArgs e)
         {
             Produto produto = new Produto(
-                 nome: textName.Text,
-                 descricao: textDescription.Text,
-                 preco: double.Parse(textPrice.Text),
-                 cat: comboBox1.SelectedItem?.ToString() ?? string.Empty,
-                 stock: int.Parse(textStock.Text),
-                 marca: textBrand.Text,
-                 garantia: int.Parse(textGuarantee.Text)
-             );
+            nome: textName.Text,
+            descricao: textDescription.Text,
+            preco: double.Parse(textPrice.Text),
+            cat: comboBox1.SelectedItem?.ToString() ?? string.Empty,
+            stock: int.Parse(textStock.Text),
+            marca: textBrand.Text,
+            garantia: int.Parse(textGuarantee.Text)
+            );
 
             bool Sucesso = a.DeleteProduct(int.Parse(textId.Text));
 

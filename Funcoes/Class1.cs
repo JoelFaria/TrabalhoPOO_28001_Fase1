@@ -11,7 +11,7 @@ using TrabalhoPOO;
 
 namespace Funcoes
 {
-    public class xyz
+    public class Funcoes
     {
         private string connectionString = "Data Source=JOELFARIA\\SQLEXPRESS;Initial Catalog=LoginApp;Integrated Security=True;TrustServerCertificate=True";
 
