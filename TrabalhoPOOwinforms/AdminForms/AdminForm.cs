@@ -58,29 +58,112 @@ namespace TrabalhoPOOwinforms
                 }
             }
         }
-
-        private void SaveGPUData(int productId)
+        public void SaveGPU()
         {
-            string query = "INSERT INTO GpuTable (productId, vram, baseClock, boostClock) VALUES (@ProductId, @VRAM, @BaseClock, @BoostClock)";
+            Gpu gpu = new Gpu(
+                vram: int.Parse(textVRAM.Text),
+                baseClock: int.Parse(textBaseClock.Text),
+                boostClock: int.Parse(textBoostClock.Text),
+                nome: textName.Text,
+                descricao: textDescription.Text,
+                preco: double.Parse(textPrice.Text),
+                cat: comboBox1.SelectedItem?.ToString() ?? string.Empty,
+                stock: int.Parse(textStock.Text),
+                marca: textBrand.Text,
+                garantia: int.Parse(textGuarantee.Text)
+            );
 
-            using (SqlConnection con = new SqlConnection(connectionString))
+                a.AddNewProduct(gpu);
+
+
+        }
+
+        public void SaveCPU()
+        {
+            Cpu cpu = new Cpu(
+                cache: int.Parse(textCache.Text),
+                socket: textSocket.Text,
+                memorySupport: int.Parse(textMem.Text),
+                frequency: int.Parse(textFrequency.Text),
+                nome: textName.Text,
+                descricao: textDescription.Text,
+                preco: double.Parse(textPrice.Text),
+                cat: comboBox1.SelectedItem?.ToString() ?? string.Empty,
+                stock: int.Parse(textStock.Text),
+                marca: textBrand.Text,
+                garantia: int.Parse(textGuarantee.Text)
+            );
+
+                 a.AddNewProduct(cpu);
+
+        }
+
+        public void SaveMotherboard()
+        {
+            Motherboard motherboard = new Motherboard(
+                socket: textSocketMB.Text,
+                memorySupport: int.Parse(textMemorySupport.Text),
+                formFactor: textFormFactor.Text,
+                nome: textName.Text,
+                descricao: textDescription.Text,
+                preco: double.Parse(textPrice.Text),
+                cat: comboBox1.SelectedItem?.ToString() ?? string.Empty,
+                stock: int.Parse(textStock.Text),
+                marca: textBrand.Text,
+                garantia: int.Parse(textGuarantee.Text)
+            );
+
+            a.AddNewProduct(motherboard);
+
+        }
+
+        public void SaveRAM()
+        {
+            RAM ram = new RAM(
+                frequency: int.Parse(textFrequencyRAM.Text),
+                capacity: int.Parse(textCapacity.Text),
+                type: textType.Text,
+                latency: int.Parse(textLatency.Text),
+                nome: textName.Text,
+                descricao: textDescription.Text,
+                preco: double.Parse(textPrice.Text),
+                cat: comboBox1.SelectedItem?.ToString() ?? string.Empty,
+                stock: int.Parse(textStock.Text),
+                marca: textBrand.Text,
+                garantia: int.Parse(textGuarantee.Text)
+            );
+
+             a.AddNewProduct(ram);
+
+        }
+
+
+
+        public void SaveProduct()
+        {
+            string SelectedItem = comboBox1.SelectedItem.ToString();
+
+            switch (SelectedItem)
             {
-                try
-                {
-                    con.Open();
-                    SqlCommand cmd = new SqlCommand(query, con);
-                    cmd.Parameters.AddWithValue("@ProductId", productId);
-                    cmd.Parameters.AddWithValue("@VRAM", int.Parse(textVRAM.Text));
-                    cmd.Parameters.AddWithValue("@BaseClock", int.Parse(textBaseClock.Text));
-                    cmd.Parameters.AddWithValue("@BoostClock", int.Parse(textBoostClock.Text));
+                case "GPU":
+                    SaveGPU();
+                    break;
 
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("GPU adicionada com sucesso!");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Erro ao adicionar GPU: " + ex.Message);
-                }
+                case "CPU":
+                    SaveCPU();
+                    break;
+
+                case "Motherboard":
+                    SaveMotherboard();
+                    break;
+
+                case "RAM":
+                    SaveRAM();
+                    break;
+
+                default:
+                    MessageBox.Show("Selecione um tipo de produto.");
+                    break;
             }
         }
 
@@ -196,35 +279,9 @@ namespace TrabalhoPOOwinforms
         /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
-            Produto produto = new Produto(
-            nome: textName.Text,
-            descricao: textDescription.Text,
-            preco: double.Parse(textPrice.Text),
-            cat: comboBox1.SelectedItem?.ToString() ?? string.Empty,
-            stock: int.Parse(textStock.Text),
-            marca: textBrand.Text,
-            garantia: int.Parse(textGuarantee.Text)
-);
-
-            bool Sucesso = a.AddProduct(produto);
-
-            if (Sucesso) 
-            {
-                LoadStockData();
-                MessageBox.Show("Produto adicionado com sucesso!");
-
-            }
-            else
-            {
-                MessageBox.Show("Erro ao adicionar produto.");
-            }
-
+            SaveProduct();
         }
-        /// <summary>
-        /// Butao para atualizar um produto
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void button1_Click(object sender, EventArgs e)
         {
             Produto produto = new Produto(
