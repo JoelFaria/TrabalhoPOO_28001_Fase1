@@ -58,6 +58,9 @@ namespace TrabalhoPOOwinforms
                 }
             }
         }
+
+        #region Metodo de salvar produtos
+
         public void SaveGPU()
         {
             Gpu gpu = new Gpu(
@@ -83,7 +86,7 @@ namespace TrabalhoPOOwinforms
             Cpu cpu = new Cpu(
                 cache: int.Parse(textCache.Text),
                 socket: textSocket.Text,
-                memorySupport: int.Parse(textMem.Text),
+                memorySupport: textMem.Text,
                 frequency: int.Parse(textFrequency.Text),
                 nome: textName.Text,
                 descricao: textDescription.Text,
@@ -102,7 +105,7 @@ namespace TrabalhoPOOwinforms
         {
             Motherboard motherboard = new Motherboard(
                 socket: textSocketMB.Text,
-                memorySupport: int.Parse(textMemorySupport.Text),
+                memorySupport: textMemorySupport.Text,
                 formFactor: textFormFactor.Text,
                 nome: textName.Text,
                 descricao: textDescription.Text,
@@ -137,7 +140,7 @@ namespace TrabalhoPOOwinforms
 
         }
 
-
+        
 
         public void SaveProduct()
         {
@@ -166,7 +169,9 @@ namespace TrabalhoPOOwinforms
                     break;
             }
         }
+        #endregion
 
+        #region coisas que nao sao usadas
         private void label8_Click(object sender, EventArgs e)
         {
         }
@@ -181,6 +186,230 @@ namespace TrabalhoPOOwinforms
 
         private void label4_Click(object sender, EventArgs e)
         {
+        }
+     
+
+        private void label8_Click_1(object sender, EventArgs e)
+        {
+        }
+      
+        private void AdminForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        #endregion
+
+        #region Butoes de adicionar, atualizar e eliminar produtos
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SaveProduct();
+            } 
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao adicionar produto.", ex.Message);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int id = int.Parse(textId.Text);
+
+            // Verificar o tipo de produto selecionado e instanciar o objeto correto
+            Produto produto;
+
+            // Verificar o tipo do produto a partir do ComboBox
+            if (comboBox1.SelectedItem.ToString() == "GPU")
+            {
+                produto = new Gpu(
+                    vram: int.Parse(textVRAM.Text),
+                    baseClock: int.Parse(textBaseClock.Text),
+                    boostClock: int.Parse(textBoostClock.Text),
+                    nome: textName.Text,
+                    descricao: textDescription.Text,
+                    preco: double.Parse(textPrice.Text),
+                    cat: comboBox1.SelectedItem?.ToString() ?? string.Empty,
+                    stock: int.Parse(textStock.Text),
+                    marca: textBrand.Text,
+                    garantia: int.Parse(textGuarantee.Text)
+                );
+            }
+            else if (comboBox1.SelectedItem.ToString() == "CPU")
+            {
+                produto = new Cpu(
+                    cache: int.Parse(textCache.Text),
+                    socket: textSocket.Text,
+                    memorySupport: textMem.Text,
+                    frequency: int.Parse(textFrequency.Text),
+                    nome: textName.Text,
+                    descricao: textDescription.Text,
+                    preco: double.Parse(textPrice.Text),
+                    cat: comboBox1.SelectedItem?.ToString() ?? string.Empty,
+                    stock: int.Parse(textStock.Text),
+                    marca: textBrand.Text,
+                    garantia: int.Parse(textGuarantee.Text)
+                );
+            }
+            else if (comboBox1.SelectedItem.ToString() == "Motherboard")
+            {
+                produto = new Motherboard(
+                    socket: textSocketMB.Text,
+                    memorySupport: textMemorySupport.Text,
+                    formFactor: textFormFactor.Text,
+                    nome: textName.Text,
+                    descricao: textDescription.Text,
+                    preco: double.Parse(textPrice.Text),
+                    cat: comboBox1.SelectedItem?.ToString() ?? string.Empty,
+                    stock: int.Parse(textStock.Text),
+                    marca: textBrand.Text,
+                    garantia: int.Parse(textGuarantee.Text)
+                );
+            }
+            else if (comboBox1.SelectedItem.ToString() == "RAM")
+            {
+                produto = new RAM(
+                    frequency: int.Parse(textFrequencyRAM.Text),
+                    capacity: int.Parse(textCapacity.Text),
+                    type: textType.Text,
+                    latency: int.Parse(textLatency.Text),
+                    nome: textName.Text,
+                    descricao: textDescription.Text,
+                    preco: double.Parse(textPrice.Text),
+                    cat: comboBox1.SelectedItem?.ToString() ?? string.Empty,
+                    stock: int.Parse(textStock.Text),
+                    marca: textBrand.Text,
+                    garantia: int.Parse(textGuarantee.Text)
+                );
+            }
+            else
+            {
+                MessageBox.Show("Tipo de produto não selecionado ou inválido.");
+                return;
+            }
+
+            bool sucesso = a.UpdateProduct(produto, id);
+
+            if (sucesso)
+            {
+                MessageBox.Show("Produto atualizado com sucesso!");
+                LoadStockData();
+            }
+            else
+            {
+                MessageBox.Show("Erro ao atualizar produto.");
+            }
+        }
+
+        /// <summary>
+        /// Butao para eliminar um produto
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+      private void button3_Click(object sender, EventArgs e)
+       {
+            /* Produto produto = new Produto(
+             nome: textName.Text,
+             descricao: textDescription.Text,
+             preco: double.Parse(textPrice.Text),
+             cat: comboBox1.SelectedItem?.ToString() ?? string.Empty,
+             stock: int.Parse(textStock.Text),
+             marca: textBrand.Text,
+             garantia: int.Parse(textGuarantee.Text)
+             );
+
+             bool Sucesso = a.DeleteProduct(int.Parse(textId.Text));
+
+             if (Sucesso) {
+                 MessageBox.Show("Produto eliminado com sucesso!");
+                 LoadStockData();
+             }
+             else
+             {
+                 MessageBox.Show("Erro ao eliminar produto.");
+             }
+       */
+        }
+
+        #endregion
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Login login = new Login();
+            login.Show();
+            this.Hide();
+        }
+
+        #region Coisas nao usadas
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textCache_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Capacitylabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
+        #region Metodo de Esconder campos
+        private void HideFields()
+        {
+            // Oculta todos os campos relacionados a todos os tipos de produtos
+            textVRAM.Visible = false;
+            textBaseClock.Visible = false;
+            textBoostClock.Visible = false;
+            VRAMlabel.Visible = false;
+            Baselabel.Visible = false;
+            Boostlabel.Visible = false;
+
+            textCache.Visible = false;
+            textSocket.Visible = false;
+            textMem.Visible = false;
+            textFrequency.Visible = false;
+            CacheLabel.Visible = false;
+            SocketLabel.Visible = false;
+            MemoryLabel.Visible = false;  // Para CPU
+            FrequencyLabel.Visible = false;
+
+            textSocketMB.Visible = false;
+            textMemorySupport.Visible = false;  // Torna textMemorySupport invisível
+            textFormFactor.Visible = false;
+            SocketLabelMB.Visible = false;
+            MemorySupportLabelMB.Visible = false; // Rótulo específico para Memory Support da Motherboard
+            FormFactorLabel.Visible = false;
+
+            textFrequencyRAM.Visible = false;
+            textCapacity.Visible = false;
+            textType.Visible = false;
+            textLatency.Visible = false;
+            FrequencylabelRAM.Visible = false;
+            Capacitylabel.Visible = false;
+            Typelabel.Visible = false;
+            Latencylabel.Visible = false;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -233,14 +462,8 @@ namespace TrabalhoPOOwinforms
             }
         }
 
-        private void label8_Click_1(object sender, EventArgs e)
-        {
-        }
-        /// <summary>
-        /// Extrai os dados da linha selecionada e preenche as TextBoxes
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        #endregion
+
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0) // Ignora cabeçalhos
@@ -258,151 +481,5 @@ namespace TrabalhoPOOwinforms
             }
         }
 
-        private void AdminForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-        /// <summary>
-        /// Butao para adicionar um produto
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button2_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                SaveProduct();
-            } 
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erro ao adicionar produto.", ex.Message);
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Produto produto = new Produto(
-            nome: textName.Text,
-            descricao: textDescription.Text,
-            preco: double.Parse(textPrice.Text),
-            cat: comboBox1.SelectedItem?.ToString() ?? string.Empty,
-            stock: int.Parse(textStock.Text),
-            marca: textBrand.Text,
-            garantia: int.Parse(textGuarantee.Text)
-            );
-
-            bool Sucesso = a.UpdateProduct(produto, int.Parse(textId.Text));
-
-            if (Sucesso) {
-                MessageBox.Show("Produto atualizado com sucesso!");
-                LoadStockData();
-            }
-            else
-            {
-                MessageBox.Show("Erro ao atualizar produto.");
-            }
-        }
-
-        /// <summary>
-        /// Butao para eliminar um produto
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button3_Click(object sender, EventArgs e)
-        {
-            Produto produto = new Produto(
-            nome: textName.Text,
-            descricao: textDescription.Text,
-            preco: double.Parse(textPrice.Text),
-            cat: comboBox1.SelectedItem?.ToString() ?? string.Empty,
-            stock: int.Parse(textStock.Text),
-            marca: textBrand.Text,
-            garantia: int.Parse(textGuarantee.Text)
-            );
-
-            bool Sucesso = a.DeleteProduct(int.Parse(textId.Text));
-
-            if (Sucesso) {
-                MessageBox.Show("Produto eliminado com sucesso!");
-                LoadStockData();
-            }
-            else
-            {
-                MessageBox.Show("Erro ao eliminar produto.");
-            }
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            Login login = new Login();
-            login.Show();
-            this.Hide();
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void HideFields()
-        {
-            // Oculta todos os campos relacionados a todos os tipos de produtos
-            textVRAM.Visible = false;
-            textBaseClock.Visible = false;
-            textBoostClock.Visible = false;
-            VRAMlabel.Visible = false;
-            Baselabel.Visible = false;
-            Boostlabel.Visible = false;
-
-            textCache.Visible = false;
-            textSocket.Visible = false;
-            textMem.Visible = false;
-            textFrequency.Visible = false;
-            CacheLabel.Visible = false;
-            SocketLabel.Visible = false;
-            MemoryLabel.Visible = false;  // Para CPU
-            FrequencyLabel.Visible = false;
-
-            textSocketMB.Visible = false;
-            textMemorySupport.Visible = false;  // Torna textMemorySupport invisível
-            textFormFactor.Visible = false;
-            SocketLabelMB.Visible = false;
-            MemorySupportLabelMB.Visible = false; // Rótulo específico para Memory Support da Motherboard
-            FormFactorLabel.Visible = false;
-
-            textFrequencyRAM.Visible = false;
-            textCapacity.Visible = false;
-            textType.Visible = false;
-            textLatency.Visible = false;
-            FrequencylabelRAM.Visible = false;
-            Capacitylabel.Visible = false;
-            Typelabel.Visible = false;
-            Latencylabel.Visible = false;
-        }
-
-        private void textCache_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Capacitylabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

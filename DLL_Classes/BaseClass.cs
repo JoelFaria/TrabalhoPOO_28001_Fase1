@@ -10,7 +10,7 @@ using System;
 namespace TrabalhoPOO
 {
 
-    public class Produto
+    public abstract class Produto
     {
         // Propriedades privadas
         private string Nome { get; set; } // Nome do produto

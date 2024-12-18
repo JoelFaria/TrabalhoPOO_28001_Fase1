@@ -13,7 +13,7 @@ namespace TrabalhoPOO
     {
         // Propriedades específicas da motherboard 
         private string Socket { get; set; } // Tipo de socket suportado
-        private int MemorySupport { get; set; } // Capacidade máxima de memória suportada (em GB)
+        private string MemorySupport { get; set; } // Capacidade máxima de memória suportada (em GB)
         private string FormFactor { get; set; } // Tipo de formato da placa (e.g., ATX, Micro-ATX)
 
         #region Construtores
@@ -31,7 +31,7 @@ namespace TrabalhoPOO
         /// <param name="stock">Quantidade em stock.</param>
         /// <param name="marca">Marca do produto.</param>
         /// <param name="garantia">Garantia do produto em meses.</param>
-        public Motherboard(string socket, int memorySupport, string formFactor, string nome, string descricao, double preco, string cat, int stock, string marca, int garantia)
+        public Motherboard(string socket, string memorySupport, string formFactor, string nome, string descricao, double preco, string cat, int stock, string marca, int garantia)
             : base(nome, descricao, preco, cat, stock, marca, garantia)
         {
             this.Socket = socket;
@@ -55,12 +55,12 @@ namespace TrabalhoPOO
             }
         }
 
-        public int MemorySupportMotherboard
+        public string MemorySupportMotherboard
         {
             get { return MemorySupport; }
             set
             {
-                if (value <= 0)
+                if (string.IsNullOrEmpty(value))
                 {
                     throw new ArgumentException("A capacidade de memória deve ser maior que zero.");
                 }

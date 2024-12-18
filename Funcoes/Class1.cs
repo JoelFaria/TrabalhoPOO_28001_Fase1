@@ -45,89 +45,93 @@ namespace Funcoes
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    string querry = "UPDATE StockTable SET Name = @Name, Description = @Description, Price = @Price, Type = @Type, Stock = @Stock, Brand = @Brand, Guarantee = @Guarantee WHERE Id = @Id";
 
-                    using (SqlCommand cmd = new SqlCommand(querry, conn))
+                    // Atualizar tabela StockTable
+                    string queryStock = "UPDATE StockTable SET Name = @Name, Description = @Description, Price = @Price, " +
+                                        "Type = @Type, Stock = @Stock, Brand = @Brand, Guarantee = @Guarantee WHERE Id = @Id";
+
+                    using (SqlCommand cmdStock = new SqlCommand(queryStock, conn))
                     {
-                        cmd.Parameters.AddWithValue("@Name", produto.NomeProduto);
-                        cmd.Parameters.AddWithValue("@Description", produto.DescricaoProduto);
-                        cmd.Parameters.AddWithValue("@Price", produto.PrecoProduto);
-                        cmd.Parameters.AddWithValue("@Type", produto.CategoriaProduto);
-                        cmd.Parameters.AddWithValue("@Stock", produto.StockProduto);
-                        cmd.Parameters.AddWithValue("@Brand", produto.MarcaProduto);
-                        cmd.Parameters.AddWithValue("@Guarantee", produto.GarantiaMesesProdutos);
-                        cmd.ExecuteNonQuery();
+                        cmdStock.Parameters.AddWithValue("@Name", produto.NomeProduto);
+                        cmdStock.Parameters.AddWithValue("@Description", produto.DescricaoProduto);
+                        cmdStock.Parameters.AddWithValue("@Price", produto.PrecoProduto);
+                        cmdStock.Parameters.AddWithValue("@Type", produto.CategoriaProduto);
+                        cmdStock.Parameters.AddWithValue("@Stock", produto.StockProduto);
+                        cmdStock.Parameters.AddWithValue("@Brand", produto.MarcaProduto);
+                        cmdStock.Parameters.AddWithValue("@Guarantee", produto.GarantiaMesesProdutos);
+                        cmdStock.Parameters.AddWithValue("@Id", Id); // Adicionado corretamente
 
+                        cmdStock.ExecuteNonQuery();
                     }
 
+                    // Atualizar tabela específica com base no tipo do produto
                     switch (produto)
                     {
                         case Gpu gpu:
-
                             string queryGpu = "UPDATE Gpu SET VRAM = @VRAM, BaseClock = @BaseClock, OverClock = @OverClock WHERE ProductId = @ProductId";
-                            using (SqlCommand cmd = new SqlCommand(queryGpu, conn))
+                            using (SqlCommand cmdGpu = new SqlCommand(queryGpu, conn))
                             {
-                                cmd.Parameters.AddWithValue("@ProductId", Id);
-                                cmd.Parameters.AddWithValue("@VRAM", gpu.GetVRAM);
-                                cmd.Parameters.AddWithValue("@BaseClock", gpu.GetBaseClock);
-                                cmd.Parameters.AddWithValue("@OverClock", gpu.GetBoostClock);
-                                cmd.ExecuteNonQuery();
+                                cmdGpu.Parameters.AddWithValue("@ProductId", Id);
+                                cmdGpu.Parameters.AddWithValue("@VRAM", gpu.GetVRAM);
+                                cmdGpu.Parameters.AddWithValue("@BaseClock", gpu.GetBaseClock);
+                                cmdGpu.Parameters.AddWithValue("@OverClock", gpu.GetBoostClock);
+                                cmdGpu.ExecuteNonQuery();
                             }
                             break;
 
                         case Cpu cpu:
-
                             string queryCpu = "UPDATE Cpu SET Cache = @Cache, Socket = @Socket, MemorySupport = @MemorySupport, Frequency = @Frequency WHERE ProductId = @ProductId";
-                            using (SqlCommand cmd = new SqlCommand(queryCpu, conn))
+                            using (SqlCommand cmdCpu = new SqlCommand(queryCpu, conn))
                             {
-                                cmd.Parameters.AddWithValue("@ProductId", Id);
-                                cmd.Parameters.AddWithValue("@Cache", cpu.GetCache);
-                                cmd.Parameters.AddWithValue("@Socket", cpu.GetSocket);
-                                cmd.Parameters.AddWithValue("@MemorySupport", cpu.GetMemorySupport);
-                                cmd.Parameters.AddWithValue("@Frequency", cpu.GetFrequency);
-                                cmd.ExecuteNonQuery();
+                                cmdCpu.Parameters.AddWithValue("@ProductId", Id);
+                                cmdCpu.Parameters.AddWithValue("@Cache", cpu.GetCache);
+                                cmdCpu.Parameters.AddWithValue("@Socket", cpu.GetSocket);
+                                cmdCpu.Parameters.AddWithValue("@MemorySupport", cpu.GetMemorySupport);
+                                cmdCpu.Parameters.AddWithValue("@Frequency", cpu.GetFrequency);
+                                cmdCpu.ExecuteNonQuery();
                             }
                             break;
 
                         case Motherboard motherboard:
-
                             string queryMotherboard = "UPDATE Motherboard SET Socket = @Socket, MemorySupport = @MemorySupport, FormFactor = @FormFactor WHERE ProductId = @ProductId";
-                            using (SqlCommand cmd = new SqlCommand(queryMotherboard, conn))
+                            using (SqlCommand cmdMotherboard = new SqlCommand(queryMotherboard, conn))
                             {
-                                cmd.Parameters.AddWithValue("@ProductId", Id);
-                                cmd.Parameters.AddWithValue("@Socket", motherboard.SocketMotherboard);
-                                cmd.Parameters.AddWithValue("@MemorySupport", motherboard.MemorySupportMotherboard);
-                                cmd.Parameters.AddWithValue("@FormFactor", motherboard.FormFactorMotherboard);
-                                cmd.ExecuteNonQuery();
+                                cmdMotherboard.Parameters.AddWithValue("@ProductId", Id);
+                                cmdMotherboard.Parameters.AddWithValue("@Socket", motherboard.SocketMotherboard);
+                                cmdMotherboard.Parameters.AddWithValue("@MemorySupport", motherboard.MemorySupportMotherboard);
+                                cmdMotherboard.Parameters.AddWithValue("@FormFactor", motherboard.FormFactorMotherboard);
+                                cmdMotherboard.ExecuteNonQuery();
                             }
                             break;
 
                         case RAM ram:
-
                             string queryRam = "UPDATE Ram SET Capacity = @Capacity, Type = @Type, Frequency = @Frequency, Latency = @Latency WHERE ProductId = @ProductId";
-                            using (SqlCommand cmd = new SqlCommand(queryRam, conn))
+                            using (SqlCommand cmdRam = new SqlCommand(queryRam, conn))
                             {
-                                cmd.Parameters.AddWithValue("@ProductId", Id);
-                                cmd.Parameters.AddWithValue("@Capacity", ram.GetCapacity);
-                                cmd.Parameters.AddWithValue("@Type", ram.GetType);
-                                cmd.Parameters.AddWithValue("@Frequency", ram.GetFrequency);
-                                cmd.Parameters.AddWithValue("@Latency", ram.GetLatency);
-                                cmd.ExecuteNonQuery();
+                                cmdRam.Parameters.AddWithValue("@ProductId", Id);
+                                cmdRam.Parameters.AddWithValue("@Capacity", ram.GetCapacity);
+                                cmdRam.Parameters.AddWithValue("@Type", ram.GetType);
+                                cmdRam.Parameters.AddWithValue("@Frequency", ram.GetFrequency);
+                                cmdRam.Parameters.AddWithValue("@Latency", ram.GetLatency);
+                                cmdRam.ExecuteNonQuery();
                             }
                             break;
 
                         default:
                             throw new ArgumentException("Tipo de produto desconhecido.");
-
                     }
+
                     return true;
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
+
+                throw new Exception("Erro ao atualizar o produto.", ex);
                 return false;
             }
         }
+
 
         public bool DeleteProduct(int id)
         {
