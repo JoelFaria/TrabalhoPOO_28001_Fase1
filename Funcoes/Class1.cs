@@ -56,8 +56,68 @@ namespace Funcoes
                         cmd.Parameters.AddWithValue("@Stock", produto.StockProduto);
                         cmd.Parameters.AddWithValue("@Brand", produto.MarcaProduto);
                         cmd.Parameters.AddWithValue("@Guarantee", produto.GarantiaMesesProdutos);
-                        cmd.Parameters.AddWithValue("@Id", Id);
                         cmd.ExecuteNonQuery();
+
+                    }
+
+                    switch (produto)
+                    {
+                        case Gpu gpu:
+
+                            string queryGpu = "UPDATE Gpu SET VRAM = @VRAM, BaseClock = @BaseClock, OverClock = @OverClock WHERE ProductId = @ProductId";
+                            using (SqlCommand cmd = new SqlCommand(queryGpu, conn))
+                            {
+                                cmd.Parameters.AddWithValue("@ProductId", Id);
+                                cmd.Parameters.AddWithValue("@VRAM", gpu.GetVRAM);
+                                cmd.Parameters.AddWithValue("@BaseClock", gpu.GetBaseClock);
+                                cmd.Parameters.AddWithValue("@OverClock", gpu.GetBoostClock);
+                                cmd.ExecuteNonQuery();
+                            }
+                            break;
+
+                        case Cpu cpu:
+
+                            string queryCpu = "UPDATE Cpu SET Cache = @Cache, Socket = @Socket, MemorySupport = @MemorySupport, Frequency = @Frequency WHERE ProductId = @ProductId";
+                            using (SqlCommand cmd = new SqlCommand(queryCpu, conn))
+                            {
+                                cmd.Parameters.AddWithValue("@ProductId", Id);
+                                cmd.Parameters.AddWithValue("@Cache", cpu.GetCache);
+                                cmd.Parameters.AddWithValue("@Socket", cpu.GetSocket);
+                                cmd.Parameters.AddWithValue("@MemorySupport", cpu.GetMemorySupport);
+                                cmd.Parameters.AddWithValue("@Frequency", cpu.GetFrequency);
+                                cmd.ExecuteNonQuery();
+                            }
+                            break;
+
+                        case Motherboard motherboard:
+
+                            string queryMotherboard = "UPDATE Motherboard SET Socket = @Socket, MemorySupport = @MemorySupport, FormFactor = @FormFactor WHERE ProductId = @ProductId";
+                            using (SqlCommand cmd = new SqlCommand(queryMotherboard, conn))
+                            {
+                                cmd.Parameters.AddWithValue("@ProductId", Id);
+                                cmd.Parameters.AddWithValue("@Socket", motherboard.SocketMotherboard);
+                                cmd.Parameters.AddWithValue("@MemorySupport", motherboard.MemorySupportMotherboard);
+                                cmd.Parameters.AddWithValue("@FormFactor", motherboard.FormFactorMotherboard);
+                                cmd.ExecuteNonQuery();
+                            }
+                            break;
+
+                        case RAM ram:
+
+                            string queryRam = "UPDATE Ram SET Capacity = @Capacity, Type = @Type, Frequency = @Frequency, Latency = @Latency WHERE ProductId = @ProductId";
+                            using (SqlCommand cmd = new SqlCommand(queryRam, conn))
+                            {
+                                cmd.Parameters.AddWithValue("@ProductId", Id);
+                                cmd.Parameters.AddWithValue("@Capacity", ram.GetCapacity);
+                                cmd.Parameters.AddWithValue("@Type", ram.GetType);
+                                cmd.Parameters.AddWithValue("@Frequency", ram.GetFrequency);
+                                cmd.Parameters.AddWithValue("@Latency", ram.GetLatency);
+                                cmd.ExecuteNonQuery();
+                            }
+                            break;
+
+                        default:
+                            throw new ArgumentException("Tipo de produto desconhecido.");
 
                     }
                     return true;
@@ -100,15 +160,15 @@ namespace Funcoes
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    string query = "INSERT INTO Gpu (ProdutoId, VRAM, BaseClock, BoostClock) " +
-                          "VALUES (@ProdutoId, @VRAM, @BaseClock, @BoostClock)";
+                    string query = "INSERT INTO Gpu (ProductId, VRAM, BaseClock, OverClock) " +
+                          "VALUES (@ProductId, @VRAM, @BaseClock, @OverClock)";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@ProdutoId", ProductId);
+                        cmd.Parameters.AddWithValue("@ProductId", ProductId);
                         cmd.Parameters.AddWithValue("@VRAM", gpu.GetVRAM);
                         cmd.Parameters.AddWithValue("@BaseClock", gpu.GetBaseClock);
-                        cmd.Parameters.AddWithValue("@BoostClock", gpu.GetBoostClock);
+                        cmd.Parameters.AddWithValue("@OverClock", gpu.GetBoostClock);
 
                         cmd.ExecuteNonQuery();
                     }
@@ -128,12 +188,12 @@ namespace Funcoes
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    string query = "INSERT INTO Motherboard (ProdutoId, Socket, MemorySupport, FormFactor) " +
-                          "VALUES (@ProdutoId, @Socket, @MemorySupport, @FormFactor)";
+                    string query = "INSERT INTO Motherboard (ProductId, Socket, MemorySupport, FormFactor) " +
+                          "VALUES (@ProductId, @Socket, @MemorySupport, @FormFactor)";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@ProdutoId", ProductId);
+                        cmd.Parameters.AddWithValue("@ProductId", ProductId);
                         cmd.Parameters.AddWithValue("@Socket", motherboard.SocketMotherboard);
                         cmd.Parameters.AddWithValue("@MemorySupport", motherboard.MemorySupportMotherboard);
                         cmd.Parameters.AddWithValue("@FormFactor", motherboard.FormFactorMotherboard);
@@ -156,12 +216,12 @@ namespace Funcoes
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    string query = "INSERT INTO Ram (ProdutoId, Capacity, Type, Frequency, Latency) " +
-                          "VALUES (@ProdutoId, @Capacity, @Type, @Frequency, @Latency)";
+                    string query = "INSERT INTO Ram (ProductId, Capacity, Type, Frequency, Latency) " +
+                          "VALUES (@ProductId, @Capacity, @Type, @Frequency, @Latency)";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@ProdutoId", ProductId);
+                        cmd.Parameters.AddWithValue("@ProductId", ProductId);
                         cmd.Parameters.AddWithValue("@Capacity", ram.GetCapacity);
                         cmd.Parameters.AddWithValue("@Type", ram.GetType);
                         cmd.Parameters.AddWithValue("@Frequency", ram.GetFrequency);
@@ -178,19 +238,19 @@ namespace Funcoes
             }
         }
 
-        public bool AddCPU(Cpu cpu, int produtoId)
+        public bool AddCPU(Cpu cpu, int ProductId)
         {
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    string query = "INSERT INTO Cpu (ProdutoId, Cache, Socket, MemorySupport, Frequency) " +
-                                   "VALUES (@ProdutoId, @Cache, @Socket, @MemorySupport, @Frequency)";
+                    string query = "INSERT INTO Cpu (ProductId, Cache, Socket, MemorySupport, Frequency) " +
+                                   "VALUES (@ProductId, @Cache, @Socket, @MemorySupport, @Frequency)";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@ProdutoId", produtoId); // Usando o ProdutoId
+                        cmd.Parameters.AddWithValue("@ProductId", ProductId); // Usando o ProductId
                         cmd.Parameters.AddWithValue("@Cache", cpu.GetCache);
                         cmd.Parameters.AddWithValue("@Socket", cpu.GetSocket);
                         cmd.Parameters.AddWithValue("@MemorySupport", cpu.GetMemorySupport);
@@ -210,24 +270,42 @@ namespace Funcoes
         public void AddNewProduct(Produto produto)
         {
             // Adicionar o produto principal à tabela Produto
-            int produtoId = AddProductWithId(produto);
+            int ProductId = AddProductWithId(produto);
 
             // Adicionar as informações específicas de cada tipo de produto
             if (produto is Gpu gpu)
             {
-                AddGpu(gpu, produtoId);
+                bool a = AddGpu(gpu, ProductId);
+                if(a == false)
+                {
+                    throw new ArgumentException("Erro ao adicionar a GPU.");
+                }
             }
             else if (produto is Cpu cpu)
             {
-                AddCPU(cpu, produtoId);
+               bool b = AddCPU(cpu, ProductId);
+                if (b == false)
+                {
+                    throw new ArgumentException("Erro ao adicionar Cpu");
+                }
+
             }
             else if (produto is RAM ram)
             {
-                AddRam(ram, produtoId);
+               bool c = AddRam(ram, ProductId);
+                if (c == false)
+                {
+                    throw new ArgumentException("Erro ao adicionar Ram");
+                }
+
             }
             else if (produto is Motherboard motherboard)
             {
-                AddMotherboard(motherboard, produtoId);
+                bool d = AddMotherboard(motherboard, ProductId);
+                if (d == false)
+                {
+                    throw new ArgumentException("Erro ao adicionar Motherboard");
+                }
             }
             else
             {

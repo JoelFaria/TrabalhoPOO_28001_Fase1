@@ -279,7 +279,14 @@ namespace TrabalhoPOOwinforms
         /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
-            SaveProduct();
+            try
+            {
+                SaveProduct();
+            } 
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao adicionar produto.", ex.Message);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
