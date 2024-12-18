@@ -35,9 +35,6 @@ namespace TrabalhoPOOwinforms
         string connectionString = "Data Source=JOELFARIA\\SQLEXPRESS;Initial Catalog=LoginApp;Integrated Security=True;TrustServerCertificate=True";
 
 
-        /// <summary>
-        /// Insere os dados do produto na DataGridView
-        /// </summary>
         private void LoadStockData()
         {
             string query = "SELECT * FROM StockTable";
@@ -312,34 +309,24 @@ namespace TrabalhoPOOwinforms
             }
         }
 
-        /// <summary>
-        /// Butao para eliminar um produto
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
       private void button3_Click(object sender, EventArgs e)
        {
-            /* Produto produto = new Produto(
-             nome: textName.Text,
-             descricao: textDescription.Text,
-             preco: double.Parse(textPrice.Text),
-             cat: comboBox1.SelectedItem?.ToString() ?? string.Empty,
-             stock: int.Parse(textStock.Text),
-             marca: textBrand.Text,
-             garantia: int.Parse(textGuarantee.Text)
-             );
+            try
+            {
+                int id = int.Parse(textId.Text); // Pegar o Id do produto da caixa de texto
+                bool sucesso = a.DeleteProduct(id);
 
-             bool Sucesso = a.DeleteProduct(int.Parse(textId.Text));
-
-             if (Sucesso) {
-                 MessageBox.Show("Produto eliminado com sucesso!");
-                 LoadStockData();
-             }
-             else
-             {
-                 MessageBox.Show("Erro ao eliminar produto.");
-             }
-       */
+                if (sucesso)
+                {
+                    MessageBox.Show("Produto eliminado com sucesso!");
+                    LoadStockData(); // Recarregar dados para refletir a exclusão
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro: {ex.Message}");
+            }
         }
 
         #endregion

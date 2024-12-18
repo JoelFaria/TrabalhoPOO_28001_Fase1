@@ -140,22 +140,61 @@ namespace Funcoes
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    string querry = "DELETE FROM StockTable WHERE Id = @Id";
 
-                    using (SqlCommand cmd = new SqlCommand(querry, conn))
+                    // Eliminar registros de tabelas específicas
+                    string deleteGpu = "DELETE FROM Gpu WHERE ProductId = @ProductId";
+                    string deleteCpu = "DELETE FROM Cpu WHERE ProductId = @ProductId";
+                    string deleteMotherboard = "DELETE FROM Motherboard WHERE ProductId = @ProductId";
+                    string deleteRam = "DELETE FROM Ram WHERE ProductId = @ProductId";
+
+                    using (SqlCommand cmdGpu = new SqlCommand(deleteGpu, conn))
                     {
-                        cmd.Parameters.AddWithValue("@Id", id);
-                        cmd.ExecuteNonQuery();
-
+                        cmdGpu.Parameters.AddWithValue("@ProductId", id);
+                        cmdGpu.ExecuteNonQuery();
                     }
-                    return true;
+
+                    using (SqlCommand cmdCpu = new SqlCommand(deleteCpu, conn))
+                    {
+                        cmdCpu.Parameters.AddWithValue("@ProductId", id);
+                        cmdCpu.ExecuteNonQuery();
+                    }
+
+                    using (SqlCommand cmdMotherboard = new SqlCommand(deleteMotherboard, conn))
+                    {
+                        cmdMotherboard.Parameters.AddWithValue("@ProductId", id);
+                        cmdMotherboard.ExecuteNonQuery();
+                    }
+
+                    using (SqlCommand cmdRam = new SqlCommand(deleteRam, conn))
+                    {
+                        cmdRam.Parameters.AddWithValue("@ProductId", id);
+                        cmdRam.ExecuteNonQuery();
+                    }
+
+                    // Eliminar o registro principal na tabela StockTable
+                    string deleteStock = "DELETE FROM StockTable WHERE Id = @Id";
+                    using (SqlCommand cmdStock = new SqlCommand(deleteStock, conn))
+                    {
+                        cmdStock.Parameters.AddWithValue("@Id", id);
+                        int rowsAffected = cmdStock.ExecuteNonQuery();
+
+                        // Verificar se algum registro foi removido
+                        if (rowsAffected == 0)
+                        {
+                            throw new ArgumentException("Nenhum produto encontrado com o Id especificado.");
+                        }
+                    }
                 }
+
+                return true; // Produto eliminado com sucesso
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return false;
+                // Registar ou lançar a exceção
+                throw new ArgumentException("Erro ao eliminar o produto.", ex);
             }
         }
+
 
         public bool AddGpu(Gpu gpu, int ProductId)
         {
