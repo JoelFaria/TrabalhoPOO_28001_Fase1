@@ -29,9 +29,9 @@ namespace TrabalhoPOO
         public Gpu(int vram, int baseClock, int boostClock, string nome, string descricao, double preco, string cat, int stock, string marca, int garantia)
             : base(nome, descricao, preco, cat, stock, marca, garantia)
         {
-            VRAM = vram;
-            BaseClock = baseClock;
-            BoostClock = boostClock;
+            this.VRAM = vram;
+            this.BaseClock = baseClock;
+            this.BoostClock = boostClock;
         }
 
         #endregion

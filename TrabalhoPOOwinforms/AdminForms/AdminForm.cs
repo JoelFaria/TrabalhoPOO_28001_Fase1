@@ -213,6 +213,7 @@ namespace TrabalhoPOOwinforms
             try
             {
                 SaveProduct();
+                LoadStockData();
             } 
             catch (Exception ex)
             {
@@ -467,6 +468,5 @@ namespace TrabalhoPOOwinforms
                 comboBox1.SelectedItem = selectedRow.Cells["type"].Value.ToString();
             }
         }
-
     }
 }

@@ -38,10 +38,10 @@ namespace TrabalhoPOO
         public RAM(int capacity, string type, int frequency, int latency, string nome, string descricao, double preco, string cat, int stock, string marca, int garantia)
             : base(nome, descricao, preco, cat, stock, marca, garantia)
         {
-            Capacity = capacity;
-            Type = type;
-            Frequency = frequency;
-            Latency = latency;
+            this.Capacity = capacity;
+            this.Type = type;
+            this.Frequency = frequency;
+            this.Latency = latency;
         }
 
         #endregion
