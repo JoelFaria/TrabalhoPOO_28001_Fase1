@@ -53,7 +53,6 @@
             label1.Size = new Size(84, 21);
             label1.TabIndex = 0;
             label1.Text = "Username:";
-            label1.Click += label1_Click;
             // 
             // label2
             // 
@@ -64,7 +63,6 @@
             label2.Size = new Size(51, 21);
             label2.TabIndex = 1;
             label2.Text = "Email:";
-            label2.Click += label2_Click;
             // 
             // label3
             // 
@@ -75,7 +73,6 @@
             label3.Size = new Size(79, 21);
             label3.TabIndex = 2;
             label3.Text = "Password:";
-            label3.Click += label3_Click;
             // 
             // textBox1
             // 
@@ -83,7 +80,6 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(100, 23);
             textBox1.TabIndex = 3;
-            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // textBox2
             // 
@@ -91,7 +87,6 @@
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(100, 23);
             textBox2.TabIndex = 4;
-            textBox2.TextChanged += textBox2_TextChanged;
             // 
             // textBox3
             // 
@@ -100,7 +95,6 @@
             textBox3.PasswordChar = '*';
             textBox3.Size = new Size(100, 23);
             textBox3.TabIndex = 5;
-            textBox3.TextChanged += textBox3_TextChanged;
             // 
             // checkBox1
             // 

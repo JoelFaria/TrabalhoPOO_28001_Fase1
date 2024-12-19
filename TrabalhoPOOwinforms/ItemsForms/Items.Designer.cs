@@ -61,7 +61,6 @@
             textBox1.Size = new Size(123, 22);
             textBox1.TabIndex = 2;
             textBox1.Text = "User's Page";
-            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // pictureBox1
             // 
@@ -92,7 +91,6 @@
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(850, 321);
             dataGridView1.TabIndex = 21;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick_1;
             // 
             // textBox2
             // 
@@ -117,7 +115,6 @@
             Margin = new Padding(3, 2, 3, 2);
             Name = "Items";
             Text = "Items";
-            Load += Items_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
