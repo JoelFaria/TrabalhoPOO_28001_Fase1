@@ -34,6 +34,7 @@
             button4 = new Button();
             dataGridView1 = new DataGridView();
             textBox2 = new TextBox();
+            button1 = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -91,6 +92,7 @@
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(850, 321);
             dataGridView1.TabIndex = 21;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // textBox2
             // 
@@ -104,11 +106,24 @@
             textBox2.TabIndex = 3;
             textBox2.Text = "Tabela de Itens Disponiveis";
             // 
+            // button1
+            // 
+            button1.BackColor = Color.MediumSpringGreen;
+            button1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button1.Location = new Point(1016, 549);
+            button1.Name = "button1";
+            button1.Size = new Size(118, 58);
+            button1.TabIndex = 3;
+            button1.Text = "Comprar";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
             // Items
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1157, 628);
+            Controls.Add(button1);
             Controls.Add(textBox2);
             Controls.Add(dataGridView1);
             Controls.Add(panel1);
@@ -130,5 +145,6 @@
         private Button button4;
         private DataGridView dataGridView1;
         private TextBox textBox2;
+        private Button button1;
     }
 }
