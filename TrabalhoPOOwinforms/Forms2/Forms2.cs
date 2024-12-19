@@ -32,30 +32,13 @@ namespace TrabalhoPOOwinforms
             {
                 using (SqlConnection con = new SqlConnection(connectingString))
                 {
+                    con.Open();
                     SqlCommand cmd = new SqlCommand(query, con);
                     cmd.Parameters.AddWithValue("@Username", user.nomeUser);
                     cmd.Parameters.AddWithValue("@Password", user.PasswordUser);
                     cmd.Parameters.AddWithValue("@Email", user.emailUser);
                     int a = Convert.ToInt32(cmd.ExecuteScalar());
-
-                    if (a > 0)
-                    {
-                        MessageBox.Show("User already exists!");
-                    }
-                    else
-                    {
-                        try
-                        {
-                            con.Open();
-                            cmd.ExecuteNonQuery();
-                            MessageBox.Show("User registered successfully!");
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Error: " + ex.Message);
-                        }
-                    }
-
+                    
                 }
             }
 

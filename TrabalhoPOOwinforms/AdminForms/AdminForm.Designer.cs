@@ -223,7 +223,6 @@
             label4.Size = new Size(44, 21);
             label4.TabIndex = 3;
             label4.Text = "Price";
-            label4.Click += label4_Click;
             // 
             // label3
             // 
@@ -234,7 +233,6 @@
             label3.Size = new Size(89, 21);
             label3.TabIndex = 2;
             label3.Text = "Description";
-            label3.Click += label3_Click;
             // 
             // label2
             // 
@@ -255,7 +253,6 @@
             label1.Size = new Size(42, 21);
             label1.TabIndex = 0;
             label1.Text = "Type";
-            label1.Click += label1_Click;
             // 
             // label8
             // 
@@ -266,7 +263,6 @@
             label8.Size = new Size(130, 25);
             label8.TabIndex = 16;
             label8.Text = "Manage Stock";
-            label8.Click += label8_Click_1;
             // 
             // button1
             // 
@@ -331,7 +327,6 @@
             label9.Size = new Size(23, 21);
             label9.TabIndex = 22;
             label9.Text = "Id";
-            label9.Click += label9_Click;
             // 
             // textVRAM
             // 
@@ -530,7 +525,6 @@
             Capacitylabel.Size = new Size(56, 15);
             Capacitylabel.TabIndex = 47;
             Capacitylabel.Text = "Capacity:";
-            Capacitylabel.Click += Capacitylabel_Click;
             // 
             // Typelabel
             // 

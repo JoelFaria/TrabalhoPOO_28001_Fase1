@@ -35,27 +35,6 @@ namespace TrabalhoPOOwinforms
         string connectionString = "Data Source=JOELFARIA\\SQLEXPRESS;Initial Catalog=LoginApp;Integrated Security=True;TrustServerCertificate=True";
 
 
-        private void LoadStockData()
-        {
-            string query = "SELECT * FROM StockTable";
-
-            using (SqlConnection con = new SqlConnection(connectionString))
-            {
-                try
-                {
-                    con.Open();
-                    SqlDataAdapter adapter = new SqlDataAdapter(query, con);
-                    DataTable dataTable = new DataTable();
-                    adapter.Fill(dataTable);
-                    dataGridView1.DataSource = dataTable;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Erro ao carregar dados: " + ex.Message);
-                }
-            }
-        }
-
         #region Metodo de salvar produtos
 
         public void SaveGPU()
@@ -166,36 +145,12 @@ namespace TrabalhoPOOwinforms
                     break;
             }
         }
-        #endregion
+
+#endregion
 
         #region coisas que nao sao usadas
-        private void label8_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-        }
-     
-
-        private void label8_Click_1(object sender, EventArgs e)
-        {
-        }
       
         private void AdminForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label9_Click(object sender, EventArgs e)
         {
 
         }
@@ -351,11 +306,6 @@ namespace TrabalhoPOOwinforms
 
         }
 
-        private void Capacitylabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void textName_TextChanged(object sender, EventArgs e)
         {
 
@@ -452,12 +402,116 @@ namespace TrabalhoPOOwinforms
 
         #endregion
 
+        #region Metodo de carregar detalhes de produtos
+
+        private void LoadStockData()
+        {
+            string query = "SELECT * FROM StockTable";
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    con.Open();
+                    SqlDataAdapter adapter = new SqlDataAdapter(query, con);
+                    DataTable dataTable = new DataTable();
+                    adapter.Fill(dataTable);
+                    dataGridView1.DataSource = dataTable;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro ao carregar dados: " + ex.Message);
+                }
+            }
+        }
+
+
+
+        private void LoadGpuDetails(int productId)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                string query = "SELECT VRAM, BaseClock, OverClock FROM Gpu WHERE ProductId = @ProductId";
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@ProductId", productId);
+
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    textVRAM.Text = reader["VRAM"].ToString();
+                    textBaseClock.Text = reader["BaseClock"].ToString();
+                    textBoostClock.Text = reader["OverClock"].ToString();
+                }
+            }
+        }
+
+        private void LoadCpuDetails(int productId)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                string query = "SELECT Cache, Socket, MemorySupport, Frequency FROM Cpu WHERE ProductId = @ProductId";
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@ProductId", productId);
+
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    textCache.Text = reader["Cache"].ToString();
+                    textSocket.Text = reader["Socket"].ToString();
+                    textMem.Text = reader["MemorySupport"].ToString();
+                    textFrequency.Text = reader["Frequency"].ToString();
+                }
+            }
+        }
+
+        private void LoadMotherboardDetails(int productId)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                string query = "SELECT Socket, MemorySupport, FormFactor FROM Motherboard WHERE ProductId = @ProductId";
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@ProductId", productId);
+
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    textSocketMB.Text = reader["Socket"].ToString();
+                    textMemorySupport.Text = reader["MemorySupport"].ToString();
+                    textFormFactor.Text = reader["FormFactor"].ToString();
+                }
+            }
+        }
+
+        private void LoadRamDetails(int productId)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                string query = "SELECT Frequency, Capacity, Type, Latency FROM Ram WHERE ProductId = @ProductId";
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@ProductId", productId);
+
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    textFrequencyRAM.Text = reader["Frequency"].ToString();
+                    textCapacity.Text = reader["Capacity"].ToString();
+                    textType.Text = reader["Type"].ToString();
+                    textLatency.Text = reader["Latency"].ToString();
+                }
+            }
+        }
+
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0) // Ignora cabeçalhos
             {
                 DataGridViewRow selectedRow = dataGridView1.Rows[e.RowIndex];
 
+                // Dados comuns
                 textId.Text = selectedRow.Cells["id"].Value.ToString();
                 textName.Text = selectedRow.Cells["name"].Value.ToString();
                 textDescription.Text = selectedRow.Cells["description"].Value.ToString();
@@ -466,7 +520,32 @@ namespace TrabalhoPOOwinforms
                 textBrand.Text = selectedRow.Cells["brand"].Value.ToString();
                 textGuarantee.Text = selectedRow.Cells["guarantee"].Value.ToString();
                 comboBox1.SelectedItem = selectedRow.Cells["type"].Value.ToString();
+
+                // Identifica o tipo de produto
+                string productType = selectedRow.Cells["type"].Value.ToString();
+                int productId = int.Parse(textId.Text);
+
+                // Busca dados adicionais com base no tipo
+                if (productType.ToLower() == "gpu")
+                {
+                    LoadGpuDetails(productId);
+                }
+                else if (productType.ToLower() == "cpu")
+                {
+                    LoadCpuDetails(productId);
+                }
+                else if (productType.ToLower() == "motherboard")
+                {
+                    LoadMotherboardDetails(productId);
+                }
+                else if (productType.ToLower() == "ram")
+                {
+                    LoadRamDetails(productId);
+                }
             }
         }
+
+        #endregion
+
     }
 }
