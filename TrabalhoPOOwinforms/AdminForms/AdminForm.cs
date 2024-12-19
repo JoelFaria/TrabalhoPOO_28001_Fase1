@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 using TrabalhoPOO;
 using Funcoes;
-using System.Text.RegularExpressions;
-
 
 namespace TrabalhoPOOwinforms
 {
@@ -34,6 +26,15 @@ namespace TrabalhoPOOwinforms
         Funcoes1 a = new Funcoes1();
         string connectionString = "Data Source=JOELFARIA\\SQLEXPRESS;Initial Catalog=LoginApp;Integrated Security=True;TrustServerCertificate=True";
 
+        #region Login
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Login login = new Login();
+            login.Show();
+            this.Hide();
+        }
+
+        #endregion
 
         #region Metodo de salvar produtos
 
@@ -51,10 +52,7 @@ namespace TrabalhoPOOwinforms
                 marca: textBrand.Text,
                 garantia: int.Parse(textGuarantee.Text)
             );
-
                 a.AddNewProduct(gpu);
-
-
         }
 
         public void SaveCPU()
@@ -72,9 +70,7 @@ namespace TrabalhoPOOwinforms
                 marca: textBrand.Text,
                 garantia: int.Parse(textGuarantee.Text)
             );
-
-                 a.AddNewProduct(cpu);
-
+            a.AddNewProduct(cpu);
         }
 
         public void SaveMotherboard()
@@ -93,7 +89,6 @@ namespace TrabalhoPOOwinforms
             );
 
             a.AddNewProduct(motherboard);
-
         }
 
         public void SaveRAM()
@@ -113,11 +108,7 @@ namespace TrabalhoPOOwinforms
             );
 
              a.AddNewProduct(ram);
-
-        }
-
-        
-
+        }      
         public void SaveProduct()
         {
             string SelectedItem = comboBox1.SelectedItem.ToString();
@@ -148,20 +139,6 @@ namespace TrabalhoPOOwinforms
 
 #endregion
 
-        #region coisas que nao sao usadas
-      
-        private void AdminForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        #endregion
-
         #region Butoes de adicionar, atualizar e eliminar produtos
         private void button2_Click(object sender, EventArgs e)
         {
@@ -175,7 +152,6 @@ namespace TrabalhoPOOwinforms
                 MessageBox.Show("Erro ao adicionar produto.", ex.Message);
             }
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
             int id = int.Parse(textId.Text);
@@ -265,7 +241,6 @@ namespace TrabalhoPOOwinforms
             }
         }
 
-
       private void button3_Click(object sender, EventArgs e)
        {
             try
@@ -287,32 +262,6 @@ namespace TrabalhoPOOwinforms
 
         #endregion
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            Login login = new Login();
-            login.Show();
-            this.Hide();
-        }
-
-        #region Coisas nao usadas
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textCache_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        #endregion
-
         #region Metodo de Esconder campos
         private void HideFields()
         {
@@ -330,14 +279,14 @@ namespace TrabalhoPOOwinforms
             textFrequency.Visible = false;
             CacheLabel.Visible = false;
             SocketLabel.Visible = false;
-            MemoryLabel.Visible = false;  // Para CPU
+            MemoryLabel.Visible = false;  
             FrequencyLabel.Visible = false;
 
             textSocketMB.Visible = false;
-            textMemorySupport.Visible = false;  // Torna textMemorySupport invisível
+            textMemorySupport.Visible = false;  
             textFormFactor.Visible = false;
             SocketLabelMB.Visible = false;
-            MemorySupportLabelMB.Visible = false; // Rótulo específico para Memory Support da Motherboard
+            MemorySupportLabelMB.Visible = false; 
             FormFactorLabel.Visible = false;
 
             textFrequencyRAM.Visible = false;
@@ -349,7 +298,6 @@ namespace TrabalhoPOOwinforms
             Typelabel.Visible = false;
             Latencylabel.Visible = false;
         }
-
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Primeiro, oculta todos os campos

@@ -108,7 +108,6 @@
             textBox1.Size = new Size(123, 22);
             textBox1.TabIndex = 2;
             textBox1.Text = "Admin's Page";
-            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // pictureBox1
             // 
@@ -173,7 +172,6 @@
             textName.Name = "textName";
             textName.Size = new Size(141, 23);
             textName.TabIndex = 9;
-            textName.TextChanged += textName_TextChanged;
             // 
             // comboBox1
             // 
@@ -316,7 +314,6 @@
             textId.ReadOnly = true;
             textId.Size = new Size(141, 23);
             textId.TabIndex = 21;
-            textId.TextChanged += textBox6_TextChanged;
             // 
             // label9
             // 
@@ -382,7 +379,6 @@
             textCache.Name = "textCache";
             textCache.Size = new Size(100, 23);
             textCache.TabIndex = 29;
-            textCache.TextChanged += textCache_TextChanged;
             // 
             // textSocket
             // 
@@ -611,7 +607,6 @@
             Controls.Add(label7);
             Name = "AdminForm";
             Text = "AdminForm";
-            Load += AdminForm_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

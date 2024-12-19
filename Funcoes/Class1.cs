@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using TrabalhoPOO;
 
@@ -15,28 +8,7 @@ namespace Funcoes
     {
         private const string connectionString = "Data Source=JOELFARIA\\SQLEXPRESS;Initial Catalog=LoginApp;Integrated Security=True;TrustServerCertificate=True";
 
-        public int AddProductWithId(Produto produto)
-        {
-            string query = "INSERT INTO StockTable (name, description, price, stock, brand, guarantee, type) OUTPUT INSERTED.Id VALUES (@name, @description, @price, @stock, @brand, @guarantee, @type)";
-
-            using (SqlConnection con = new SqlConnection(connectionString))
-            {
-                con.Open();
-                using (SqlCommand cmd = new SqlCommand(query, con))
-                {
-                    cmd.Parameters.AddWithValue("@name", produto.NomeProduto);
-                    cmd.Parameters.AddWithValue("@description", produto.DescricaoProduto);
-                    cmd.Parameters.AddWithValue("@price", produto.PrecoProduto);
-                    cmd.Parameters.AddWithValue("@stock", produto.StockProduto);
-                    cmd.Parameters.AddWithValue("@brand", produto.MarcaProduto);
-                    cmd.Parameters.AddWithValue("@guarantee", produto.GarantiaMesesProdutos);
-                    cmd.Parameters.AddWithValue("@type", produto.CategoriaProduto);
-
-                    // Retorna o ID do produto gerado
-                    return (int)cmd.ExecuteScalar();
-                }
-            }
-        }
+        #region Funções de Atualização
 
         public bool UpdateProduct(Produto produto, int Id)
         {
@@ -132,6 +104,9 @@ namespace Funcoes
             }
         }
 
+        #endregion
+
+        #region Funções de Eliminação
 
         public bool DeleteProduct(int id)
         {
@@ -194,8 +169,9 @@ namespace Funcoes
                 throw new ArgumentException("Erro ao eliminar o produto.", ex);
             }
         }
+        #endregion
 
-
+        #region Funções de Add Produto específico
         public bool AddGpu(Gpu gpu, int ProductId)
         {
             try
@@ -310,6 +286,33 @@ namespace Funcoes
             }
         }
 
+        #endregion
+
+        #region Adicionar Produto
+
+        public int AddProductWithId(Produto produto)
+        {
+            string query = "INSERT INTO StockTable (name, description, price, stock, brand, guarantee, type) OUTPUT INSERTED.Id VALUES (@name, @description, @price, @stock, @brand, @guarantee, @type)";
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@name", produto.NomeProduto);
+                    cmd.Parameters.AddWithValue("@description", produto.DescricaoProduto);
+                    cmd.Parameters.AddWithValue("@price", produto.PrecoProduto);
+                    cmd.Parameters.AddWithValue("@stock", produto.StockProduto);
+                    cmd.Parameters.AddWithValue("@brand", produto.MarcaProduto);
+                    cmd.Parameters.AddWithValue("@guarantee", produto.GarantiaMesesProdutos);
+                    cmd.Parameters.AddWithValue("@type", produto.CategoriaProduto);
+
+                    // Retorna o ID do produto gerado
+                    return (int)cmd.ExecuteScalar();
+                }
+            }
+        }     
+
         public void AddNewProduct(Produto produto)
         {
             // Adicionar o produto principal à tabela Produto
@@ -358,7 +361,7 @@ namespace Funcoes
         }
 
 
-
+        #endregion
 
     }
 }
