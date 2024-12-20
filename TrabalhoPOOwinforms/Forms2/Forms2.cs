@@ -41,7 +41,14 @@ namespace TrabalhoPOOwinforms
 
             User user = new User(username, email, password);
 
-            registerClass.RegisterUser(user);
+            try { 
+                registerClass.RegisterUser(user);
+                MessageBox.Show("Registo efetuado com sucesso!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao registar: " + ex.Message);
+            }
 
         }
 
