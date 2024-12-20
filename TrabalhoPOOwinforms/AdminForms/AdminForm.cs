@@ -373,8 +373,6 @@ namespace TrabalhoPOOwinforms
             }
         }
 
-
-
         private void LoadGpuDetails(int productId)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
