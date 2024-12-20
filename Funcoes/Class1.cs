@@ -8,22 +8,25 @@ namespace Funcoes
     {
         private const string connectionString = "Data Source=JOELFARIA\\SQLEXPRESS;Initial Catalog=LoginApp;Integrated Security=True;TrustServerCertificate=True";
 
-        #region Funções de Atualização
+        #region Função de Atualização
 
+        // Função para atualizar um produto no banco de dados
         public bool UpdateProduct(Produto produto, int Id)
         {
             try
             {
+                // Estabelece a conexão com o banco de dados
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
 
-                    // Atualizar tabela StockTable
+                    // Atualiza a tabela StockTable com os dados do produto
                     string queryStock = "UPDATE StockTable SET Name = @Name, Description = @Description, Price = @Price, " +
                                         "Type = @Type, Stock = @Stock, Brand = @Brand, Guarantee = @Guarantee WHERE Id = @Id";
 
                     using (SqlCommand cmdStock = new SqlCommand(queryStock, conn))
                     {
+                        // Adiciona os parâmetros à consulta
                         cmdStock.Parameters.AddWithValue("@Name", produto.NomeProduto);
                         cmdStock.Parameters.AddWithValue("@Description", produto.DescricaoProduto);
                         cmdStock.Parameters.AddWithValue("@Price", produto.PrecoProduto);
@@ -31,15 +34,17 @@ namespace Funcoes
                         cmdStock.Parameters.AddWithValue("@Stock", produto.StockProduto);
                         cmdStock.Parameters.AddWithValue("@Brand", produto.MarcaProduto);
                         cmdStock.Parameters.AddWithValue("@Guarantee", produto.GarantiaMesesProdutos);
-                        cmdStock.Parameters.AddWithValue("@Id", Id); // Adicionado corretamente
+                        cmdStock.Parameters.AddWithValue("@Id", Id);
 
+                        // Executa a consulta para atualizar a tabela StockTable
                         cmdStock.ExecuteNonQuery();
                     }
 
-                    // Atualizar tabela específica com base no tipo do produto
+                    // Atualiza a tabela específica com base no tipo do produto
                     switch (produto)
                     {
                         case Gpu gpu:
+                            // Atualiza a tabela Gpu com os dados específicos da GPU
                             string queryGpu = "UPDATE Gpu SET VRAM = @VRAM, BaseClock = @BaseClock, OverClock = @OverClock WHERE ProductId = @ProductId";
                             using (SqlCommand cmdGpu = new SqlCommand(queryGpu, conn))
                             {
@@ -52,6 +57,7 @@ namespace Funcoes
                             break;
 
                         case Cpu cpu:
+                            // Atualiza a tabela Cpu com os dados específicos da CPU
                             string queryCpu = "UPDATE Cpu SET Cache = @Cache, Socket = @Socket, MemorySupport = @MemorySupport, Frequency = @Frequency WHERE ProductId = @ProductId";
                             using (SqlCommand cmdCpu = new SqlCommand(queryCpu, conn))
                             {
@@ -65,6 +71,7 @@ namespace Funcoes
                             break;
 
                         case Motherboard motherboard:
+                            // Atualiza a tabela Motherboard com os dados específicos da placa-mãe
                             string queryMotherboard = "UPDATE Motherboard SET Socket = @Socket, MemorySupport = @MemorySupport, FormFactor = @FormFactor WHERE ProductId = @ProductId";
                             using (SqlCommand cmdMotherboard = new SqlCommand(queryMotherboard, conn))
                             {
@@ -77,6 +84,7 @@ namespace Funcoes
                             break;
 
                         case RAM ram:
+                            // Atualiza a tabela Ram com os dados específicos da RAM
                             string queryRam = "UPDATE Ram SET Capacity = @Capacity, Type = @Type, Frequency = @Frequency, Latency = @Latency WHERE ProductId = @ProductId";
                             using (SqlCommand cmdRam = new SqlCommand(queryRam, conn))
                             {
@@ -90,17 +98,18 @@ namespace Funcoes
                             break;
 
                         default:
+                            // Lança uma exceção se o tipo de produto for desconhecido
                             throw new ArgumentException("Tipo de produto desconhecido.");
                     }
 
-                    return true;
+                    return true; // Retorna true se a atualização for bem-sucedida
                 }
             }
             catch (Exception ex)
             {
-
+                // Lança uma exceção se ocorrer um erro durante a atualização
                 throw new Exception("Erro ao atualizar o produto.", ex);
-                return false;
+                return false; // Retorna false se a atualização falhar
             }
         }
 
@@ -172,117 +181,137 @@ namespace Funcoes
         #endregion
 
         #region Funções de Add Produto específico
+        // Função para adicionar uma GPU ao banco de dados
         public bool AddGpu(Gpu gpu, int ProductId)
         {
             try
             {
+                // Estabelece a conexão com o banco de dados
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
+                    // Consulta SQL para inserir uma nova GPU
                     string query = "INSERT INTO Gpu (ProductId, VRAM, BaseClock, OverClock) " +
-                          "VALUES (@ProductId, @VRAM, @BaseClock, @OverClock)";
+                                   "VALUES (@ProductId, @VRAM, @BaseClock, @OverClock)";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
+                        // Adiciona os parâmetros à consulta
                         cmd.Parameters.AddWithValue("@ProductId", ProductId);
                         cmd.Parameters.AddWithValue("@VRAM", gpu.GetVRAM);
                         cmd.Parameters.AddWithValue("@BaseClock", gpu.GetBaseClock);
                         cmd.Parameters.AddWithValue("@OverClock", gpu.GetBoostClock);
 
+                        // Executa a consulta para inserir a GPU
                         cmd.ExecuteNonQuery();
                     }
                 }
-                return true;
+                return true; // Retorna true se a inserção for bem-sucedida
             }
             catch
             {
-                return false;
+                return false; // Retorna false se ocorrer um erro
             }
         }
 
+        // Função para adicionar uma placa-mãe ao banco de dados
         public bool AddMotherboard(Motherboard motherboard, int ProductId)
         {
             try
             {
+                // Estabelece a conexão com o banco de dados
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
+                    // Consulta SQL para inserir uma nova placa-mãe
                     string query = "INSERT INTO Motherboard (ProductId, Socket, MemorySupport, FormFactor) " +
-                          "VALUES (@ProductId, @Socket, @MemorySupport, @FormFactor)";
+                                   "VALUES (@ProductId, @Socket, @MemorySupport, @FormFactor)";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
+                        // Adiciona os parâmetros à consulta
                         cmd.Parameters.AddWithValue("@ProductId", ProductId);
                         cmd.Parameters.AddWithValue("@Socket", motherboard.SocketMotherboard);
                         cmd.Parameters.AddWithValue("@MemorySupport", motherboard.MemorySupportMotherboard);
                         cmd.Parameters.AddWithValue("@FormFactor", motherboard.FormFactorMotherboard);
 
+                        // Executa a consulta para inserir a placa-mãe
                         cmd.ExecuteNonQuery();
                     }
                 }
-                return true;
+                return true; // Retorna true se a inserção for bem-sucedida
             }
             catch
             {
-                return false;
+                return false; // Retorna false se ocorrer um erro
             }
         }
 
+        // Função para adicionar uma RAM ao banco de dados
         public bool AddRam(RAM ram, int ProductId)
         {
             try
             {
+                // Estabelece a conexão com o banco de dados
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
+                    // Consulta SQL para inserir uma nova RAM
                     string query = "INSERT INTO Ram (ProductId, Capacity, Type, Frequency, Latency) " +
-                          "VALUES (@ProductId, @Capacity, @Type, @Frequency, @Latency)";
+                                   "VALUES (@ProductId, @Capacity, @Type, @Frequency, @Latency)";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
+                        // Adiciona os parâmetros à consulta
                         cmd.Parameters.AddWithValue("@ProductId", ProductId);
                         cmd.Parameters.AddWithValue("@Capacity", ram.GetCapacity);
                         cmd.Parameters.AddWithValue("@Type", ram.GetType);
                         cmd.Parameters.AddWithValue("@Frequency", ram.GetFrequency);
                         cmd.Parameters.AddWithValue("@Latency", ram.GetLatency);
 
+                        // Executa a consulta para inserir a RAM
                         cmd.ExecuteNonQuery();
                     }
                 }
-                return true;
+                return true; // Retorna true se a inserção for bem-sucedida
             }
             catch
             {
-                return false;
+                return false; // Retorna false se ocorrer um erro
             }
         }
 
+        // Função para adicionar uma CPU ao banco de dados
         public bool AddCPU(Cpu cpu, int ProductId)
         {
             try
             {
+                // Estabelece a conexão com o banco de dados
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
+                    // Consulta SQL para inserir uma nova CPU
                     string query = "INSERT INTO Cpu (ProductId, Cache, Socket, MemorySupport, Frequency) " +
                                    "VALUES (@ProductId, @Cache, @Socket, @MemorySupport, @Frequency)";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@ProductId", ProductId); // Usando o ProductId
+                        // Adiciona os parâmetros à consulta
+                        cmd.Parameters.AddWithValue("@ProductId", ProductId);
                         cmd.Parameters.AddWithValue("@Cache", cpu.GetCache);
                         cmd.Parameters.AddWithValue("@Socket", cpu.GetSocket);
                         cmd.Parameters.AddWithValue("@MemorySupport", cpu.GetMemorySupport);
                         cmd.Parameters.AddWithValue("@Frequency", cpu.GetFrequency);
 
+                        // Executa a consulta para inserir a CPU
                         cmd.ExecuteNonQuery();
                     }
                 }
-                return true;
+                return true; // Retorna true se a inserção for bem-sucedida
             }
             catch
             {
-                return false;
+                return false; // Retorna false se ocorrer um erro
             }
         }
 
@@ -290,8 +319,10 @@ namespace Funcoes
 
         #region Adicionar Produto
 
+        // Função para adicionar um produto à tabela StockTable e retornar o ID gerado
         public int AddProductWithId(Produto produto)
         {
+            // Consulta SQL para inserir um novo produto e retornar o ID gerado
             string query = "INSERT INTO StockTable (name, description, price, stock, brand, guarantee, type) OUTPUT INSERTED.Id VALUES (@name, @description, @price, @stock, @brand, @guarantee, @type)";
 
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -299,6 +330,7 @@ namespace Funcoes
                 con.Open();
                 using (SqlCommand cmd = new SqlCommand(query, con))
                 {
+                    // Adiciona os parâmetros à consulta
                     cmd.Parameters.AddWithValue("@name", produto.NomeProduto);
                     cmd.Parameters.AddWithValue("@description", produto.DescricaoProduto);
                     cmd.Parameters.AddWithValue("@price", produto.PrecoProduto);
@@ -307,60 +339,61 @@ namespace Funcoes
                     cmd.Parameters.AddWithValue("@guarantee", produto.GarantiaMesesProdutos);
                     cmd.Parameters.AddWithValue("@type", produto.CategoriaProduto);
 
-                    // Retorna o ID do produto gerado
+                    // Executa a consulta e retorna o ID do produto gerado
                     return (int)cmd.ExecuteScalar();
                 }
             }
-        }     
+        }
 
+        // Função para adicionar um novo produto e suas informações específicas ao banco de dados
         public void AddNewProduct(Produto produto)
         {
-            // Adicionar o produto principal à tabela Produto
+            // Adiciona o produto principal à tabela StockTable e obtém o ID gerado
             int ProductId = AddProductWithId(produto);
 
-            // Adicionar as informações específicas de cada tipo de produto
+            // Adiciona as informações específicas de cada tipo de produto
             if (produto is Gpu gpu)
             {
+                // Adiciona uma GPU ao banco de dados
                 bool a = AddGpu(gpu, ProductId);
-                if(a == false)
+                if (a == false)
                 {
                     throw new ArgumentException("Erro ao adicionar a GPU.");
                 }
             }
             else if (produto is Cpu cpu)
             {
-               bool b = AddCPU(cpu, ProductId);
+                // Adiciona uma CPU ao banco de dados
+                bool b = AddCPU(cpu, ProductId);
                 if (b == false)
                 {
-                    throw new ArgumentException("Erro ao adicionar Cpu");
+                    throw new ArgumentException("Erro ao adicionar CPU.");
                 }
-
             }
             else if (produto is RAM ram)
             {
-               bool c = AddRam(ram, ProductId);
+                // Adiciona uma RAM ao banco de dados
+                bool c = AddRam(ram, ProductId);
                 if (c == false)
                 {
-                    throw new ArgumentException("Erro ao adicionar Ram");
+                    throw new ArgumentException("Erro ao adicionar RAM.");
                 }
-
             }
             else if (produto is Motherboard motherboard)
             {
+                // Adiciona uma placa-mãe ao banco de dados
                 bool d = AddMotherboard(motherboard, ProductId);
                 if (d == false)
                 {
-                    throw new ArgumentException("Erro ao adicionar Motherboard");
+                    throw new ArgumentException("Erro ao adicionar placa-mãe.");
                 }
             }
             else
             {
-                // Caso o tipo de produto não seja reconhecido
+                // Lança uma exceção se o tipo de produto não for reconhecido
                 throw new ArgumentException("Tipo de produto desconhecido.");
             }
         }
-
-
         #endregion
 
     }

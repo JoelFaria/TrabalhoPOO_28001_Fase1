@@ -27,6 +27,8 @@ namespace TrabalhoPOOwinforms
         string connectionString = "Data Source=JOELFARIA\\SQLEXPRESS;Initial Catalog=LoginApp;Integrated Security=True;TrustServerCertificate=True";
 
         #region Login
+
+        // Botão para voltar ao formulário de login
         private void button4_Click(object sender, EventArgs e)
         {
             Login login = new Login();
@@ -38,6 +40,7 @@ namespace TrabalhoPOOwinforms
 
         #region Metodo de salvar produtos
 
+        // Método para salvar uma GPU
         public void SaveGPU()
         {
             Gpu gpu = new Gpu(
@@ -52,9 +55,11 @@ namespace TrabalhoPOOwinforms
                 marca: textBrand.Text,
                 garantia: int.Parse(textGuarantee.Text)
             );
-                a.AddNewProduct(gpu);
+            // Adiciona a nova GPU ao banco de dados
+            a.AddNewProduct(gpu);
         }
 
+        // Método para salvar uma CPU
         public void SaveCPU()
         {
             Cpu cpu = new Cpu(
@@ -70,9 +75,11 @@ namespace TrabalhoPOOwinforms
                 marca: textBrand.Text,
                 garantia: int.Parse(textGuarantee.Text)
             );
+            // Adiciona a nova CPU ao banco de dados
             a.AddNewProduct(cpu);
         }
 
+        // Método para salvar uma placa-mãe
         public void SaveMotherboard()
         {
             Motherboard motherboard = new Motherboard(
@@ -87,10 +94,11 @@ namespace TrabalhoPOOwinforms
                 marca: textBrand.Text,
                 garantia: int.Parse(textGuarantee.Text)
             );
-
+            // Adiciona a nova placa-mãe ao banco de dados
             a.AddNewProduct(motherboard);
         }
 
+        // Método para salvar uma RAM
         public void SaveRAM()
         {
             RAM ram = new RAM(
@@ -106,9 +114,11 @@ namespace TrabalhoPOOwinforms
                 marca: textBrand.Text,
                 garantia: int.Parse(textGuarantee.Text)
             );
+            // Adiciona a nova RAM ao banco de dados
+            a.AddNewProduct(ram);
+        }
 
-             a.AddNewProduct(ram);
-        }      
+        // Método para salvar um produto com base no tipo selecionado
         public void SaveProduct()
         {
             string SelectedItem = comboBox1.SelectedItem.ToString();
@@ -132,26 +142,31 @@ namespace TrabalhoPOOwinforms
                     break;
 
                 default:
+                    // Exibe uma mensagem se nenhum tipo de produto for selecionado
                     MessageBox.Show("Selecione um tipo de produto.");
                     break;
             }
         }
 
-#endregion
+        #endregion
 
         #region Butoes de adicionar, atualizar e eliminar produtos
         private void button2_Click(object sender, EventArgs e)
         {
             try
             {
+                // Salva o produto no banco de dados
                 SaveProduct();
+                // Carrega os dados do estoque para atualizar a interface
                 LoadStockData();
-            } 
+            }
             catch (Exception ex)
             {
+                // Exibe uma mensagem de erro se ocorrer um problema ao adicionar o produto
                 MessageBox.Show("Erro ao adicionar produto.", ex.Message);
             }
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
             int id = int.Parse(textId.Text);
@@ -224,38 +239,44 @@ namespace TrabalhoPOOwinforms
             }
             else
             {
+                // Exibe uma mensagem se o tipo de produto não for selecionado ou for inválido
                 MessageBox.Show("Tipo de produto não selecionado ou inválido.");
                 return;
             }
 
+            // Atualiza o produto no banco de dados
             bool sucesso = a.UpdateProduct(produto, id);
 
             if (sucesso)
             {
+                // Exibe uma mensagem de sucesso e recarrega os dados do estoque
                 MessageBox.Show("Produto atualizado com sucesso!");
                 LoadStockData();
             }
             else
             {
+                // Exibe uma mensagem de erro se a atualização falhar
                 MessageBox.Show("Erro ao atualizar produto.");
             }
         }
 
-      private void button3_Click(object sender, EventArgs e)
-       {
+        private void button3_Click(object sender, EventArgs e)
+        {
             try
             {
-                int id = int.Parse(textId.Text); // Pegar o Id do produto da caixa de texto
+                int id = int.Parse(textId.Text); // Pega o Id do produto da caixa de texto
                 bool sucesso = a.DeleteProduct(id);
 
                 if (sucesso)
                 {
+                    // Exibe uma mensagem de sucesso e recarrega os dados do estoque
                     MessageBox.Show("Produto eliminado com sucesso!");
-                    LoadStockData(); // Recarregar dados para refletir a exclusão
+                    LoadStockData(); // Recarrega os dados para refletir a exclusão
                 }
             }
             catch (Exception ex)
             {
+                // Exibe uma mensagem de erro se ocorrer um problema ao eliminar o produto
                 MessageBox.Show($"Erro: {ex.Message}");
             }
         }
@@ -352,6 +373,7 @@ namespace TrabalhoPOOwinforms
 
         #region Metodo de carregar detalhes de produtos
 
+        // Método para carregar os dados do estoque
         private void LoadStockData()
         {
             string query = "SELECT * FROM StockTable";
@@ -364,15 +386,17 @@ namespace TrabalhoPOOwinforms
                     SqlDataAdapter adapter = new SqlDataAdapter(query, con);
                     DataTable dataTable = new DataTable();
                     adapter.Fill(dataTable);
-                    dataGridView1.DataSource = dataTable;
+                    dataGridView1.DataSource = dataTable; // Exibe os dados no DataGridView
                 }
                 catch (Exception ex)
                 {
+                    // Exibe uma mensagem de erro se ocorrer um problema ao carregar os dados
                     MessageBox.Show("Erro ao carregar dados: " + ex.Message);
                 }
             }
         }
 
+        // Método para carregar os detalhes de uma GPU
         private void LoadGpuDetails(int productId)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -385,6 +409,7 @@ namespace TrabalhoPOOwinforms
                 SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
+                    // Preenche os campos de texto com os detalhes da GPU
                     textVRAM.Text = reader["VRAM"].ToString();
                     textBaseClock.Text = reader["BaseClock"].ToString();
                     textBoostClock.Text = reader["OverClock"].ToString();
@@ -392,6 +417,7 @@ namespace TrabalhoPOOwinforms
             }
         }
 
+        // Método para carregar os detalhes de uma CPU
         private void LoadCpuDetails(int productId)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -404,6 +430,7 @@ namespace TrabalhoPOOwinforms
                 SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
+                    // Preenche os campos de texto com os detalhes da CPU
                     textCache.Text = reader["Cache"].ToString();
                     textSocket.Text = reader["Socket"].ToString();
                     textMem.Text = reader["MemorySupport"].ToString();
@@ -412,6 +439,7 @@ namespace TrabalhoPOOwinforms
             }
         }
 
+        // Método para carregar os detalhes de uma placa-mãe
         private void LoadMotherboardDetails(int productId)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -424,6 +452,7 @@ namespace TrabalhoPOOwinforms
                 SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
+                    // Preenche os campos de texto com os detalhes da placa-mãe
                     textSocketMB.Text = reader["Socket"].ToString();
                     textMemorySupport.Text = reader["MemorySupport"].ToString();
                     textFormFactor.Text = reader["FormFactor"].ToString();
@@ -431,6 +460,7 @@ namespace TrabalhoPOOwinforms
             }
         }
 
+        // Método para carregar os detalhes de uma RAM
         private void LoadRamDetails(int productId)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -443,6 +473,7 @@ namespace TrabalhoPOOwinforms
                 SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
+                    // Preenche os campos de texto com os detalhes da RAM
                     textFrequencyRAM.Text = reader["Frequency"].ToString();
                     textCapacity.Text = reader["Capacity"].ToString();
                     textType.Text = reader["Type"].ToString();
@@ -451,13 +482,14 @@ namespace TrabalhoPOOwinforms
             }
         }
 
+        // Evento para carregar os detalhes do produto selecionado no DataGridView
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0) // Ignora cabeçalhos
             {
                 DataGridViewRow selectedRow = dataGridView1.Rows[e.RowIndex];
 
-                // Dados comuns
+                // Preenche os campos de texto com os dados comuns do produto
                 textId.Text = selectedRow.Cells["id"].Value.ToString();
                 textName.Text = selectedRow.Cells["name"].Value.ToString();
                 textDescription.Text = selectedRow.Cells["description"].Value.ToString();
@@ -471,7 +503,7 @@ namespace TrabalhoPOOwinforms
                 string productType = selectedRow.Cells["type"].Value.ToString();
                 int productId = int.Parse(textId.Text);
 
-                // Busca dados adicionais com base no tipo
+                // Carrega os detalhes adicionais com base no tipo de produto
                 if (productType.ToLower() == "gpu")
                 {
                     LoadGpuDetails(productId);
@@ -492,6 +524,5 @@ namespace TrabalhoPOOwinforms
         }
 
         #endregion
-
     }
 }
