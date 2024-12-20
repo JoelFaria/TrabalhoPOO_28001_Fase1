@@ -14,7 +14,10 @@ namespace TrabalhoPOOwinforms
             LoadData();
         }
 
-        private int selctedproductid;
+        private string selectedProduct; // Produto selecionado
+        private int selectedProductId; // ID do produto selecionado
+        private List<string> carrinho = new List<string>(); // Lista de itens no carrinho
+
 
         private void LoadData()
         {
@@ -29,7 +32,7 @@ namespace TrabalhoPOOwinforms
                     SqlDataAdapter adapter = new SqlDataAdapter(query, con);
                     DataTable dataTable = new DataTable();
                     adapter.Fill(dataTable);
-                    dataGridView1.DataSource = dataTable;
+                    dataGridView1.DataSource = dataTable; // Exibe os dados na DataGridView
                 }
                 catch (Exception ex)
                 {
@@ -61,7 +64,7 @@ namespace TrabalhoPOOwinforms
 
                         if (rowsAffected > 0)
                         {
-                            MessageBox.Show("Compra realizada com sucesso!");
+                            MessageBox.Show("Produto comprado com sucesso!");
                         }
                         else
                         {
@@ -78,23 +81,69 @@ namespace TrabalhoPOOwinforms
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if (e.RowIndex >= 0) // Ignorar cabeçalhos
             {
-                DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
-                selctedproductid = Convert.ToInt32(row.Cells["Id"].Value);
+                DataGridViewRow selectedRow = dataGridView1.Rows[e.RowIndex];
+                string nomeProduto = selectedRow.Cells["name"].Value.ToString();
+                string precoProduto = selectedRow.Cells["price"].Value.ToString();
+
+                // Capturar o ID e os detalhes do produto
+                selectedProductId = Convert.ToInt32(selectedRow.Cells["id"].Value); // Atualiza o ID selecionado
+                selectedProduct = $"Produto: {nomeProduto}, Preço: {precoProduto}€";
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(selctedproductid > 0)
+            if (!string.IsNullOrEmpty(selectedProduct))
             {
-                UpdateStock(selctedproductid);
-                LoadData();
+                // Adicionar o item ao carrinho
+                carrinho.Add(selectedProduct);
+
+                // Exibir mensagem de confirmação
+                MessageBox.Show($"Item adicionado ao carrinho:\n\n{selectedProduct}", "Carrinho", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show("Selecione um produto para comprar!");
+                MessageBox.Show("Selecione um produto antes de adicionar ao carrinho!");
+            }
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (carrinho.Count > 0)
+            {
+                // Exibir todos os itens no carrinho
+                string carrinhoDetalhes = string.Join("\n", carrinho);
+
+                DialogResult result = MessageBox.Show(
+                    $"Itens no carrinho:\n\n{carrinhoDetalhes}\n\nDeseja confirmar a compra?",
+                    "Confirmação de Compra",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
+
+                if (result == DialogResult.Yes)
+                {
+                    // Atualizar o estoque para cada item no carrinho
+                    foreach (var item in carrinho)
+                    {
+                        UpdateStock(selectedProductId);
+                    }
+
+                    MessageBox.Show("Compra realizada com sucesso!");
+                    carrinho.Clear(); // Limpar o carrinho após a compra
+                    LoadData(); // Recarregar a tabela
+                }
+                else
+                {
+                    MessageBox.Show("Compra cancelada.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("O carrinho está vazio!");
             }
         }
     }

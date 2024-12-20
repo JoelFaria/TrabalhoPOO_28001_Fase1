@@ -35,6 +35,7 @@
             dataGridView1 = new DataGridView();
             textBox2 = new TextBox();
             button1 = new Button();
+            button2 = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -114,15 +115,28 @@
             button1.Name = "button1";
             button1.Size = new Size(118, 58);
             button1.TabIndex = 3;
-            button1.Text = "Comprar";
+            button1.Text = "Adicionar ao Carrinho";
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
+            // 
+            // button2
+            // 
+            button2.BackColor = Color.MediumSpringGreen;
+            button2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button2.Location = new Point(859, 549);
+            button2.Name = "button2";
+            button2.Size = new Size(118, 58);
+            button2.TabIndex = 22;
+            button2.Text = "Checkout";
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
             // 
             // Items
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1157, 628);
+            Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(textBox2);
             Controls.Add(dataGridView1);
@@ -146,5 +160,6 @@
         private DataGridView dataGridView1;
         private TextBox textBox2;
         private Button button1;
+        private Button button2;
     }
 }
