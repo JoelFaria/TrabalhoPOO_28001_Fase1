@@ -10,7 +10,7 @@ Gestão de Produtos: Permite adicionar, editar e remover produtos, com informaç
 
 Categorias de Produtos: Organiza os produtos em categorias, como CPU, GPU, RAM, entre outras.
 
-Controle de Estoque: Acompanha a quantidade disponível de cada produto e gera alertas caso o stock esteja baixo.
+Controle de Estoque: Acompanha a quantidade disponível de cada produto.
 
 Garantia e Suporte: Cada produto tem um período de garantia associado, oferecendo suporte ao cliente em caso de problemas com os produtos.
 
