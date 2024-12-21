@@ -11,7 +11,13 @@ namespace Funcoes
 
         #region Função de Atualização
 
-        // Função para atualizar um produto no banco de dados
+        /// <summary>
+        /// Função para atualizar um produto no banco de dados 
+        /// </summary>
+        /// <param name="produto"></param>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public bool UpdateProduct(Produto produto, int Id)
         {
             try
@@ -117,6 +123,12 @@ namespace Funcoes
 
         #region Funções de Eliminação
 
+        /// <summary>
+        /// Função para eliminar um produto do banco de dados
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public bool DeleteProduct(int id)
         {
             try
@@ -181,7 +193,14 @@ namespace Funcoes
         #endregion
 
         #region Funções de Add Produto específico
-        // Função para adicionar uma GPU ao banco de dados
+
+        /// <summary>
+        /// Função para adicionar uma GPU ao banco de dados 
+        /// </summary>
+        /// <param name="gpu"></param>
+        /// <param name="ProductId"></param>
+        /// <returns></returns>
+       
         public bool AddGpu(Gpu gpu, int ProductId)
         {
             try
@@ -214,7 +233,13 @@ namespace Funcoes
             }
         }
 
-        // Função para adicionar uma placa-mãe ao banco de dados
+        /// <summary>
+        /// Função para adicionar uma placa-mãe ao banco de dados 
+        /// </summary>
+        /// <param name="motherboard"></param>
+        /// <param name="ProductId"></param>
+        /// <returns></returns>
+
         public bool AddMotherboard(Motherboard motherboard, int ProductId)
         {
             try
@@ -247,7 +272,13 @@ namespace Funcoes
             }
         }
 
-        // Função para adicionar uma RAM ao banco de dados
+        /// <summary>
+        /// Função para adicionar uma RAM ao banco de dados 
+        /// </summary>
+        /// <param name="ram"></param>
+        /// <param name="ProductId"></param>
+        /// <returns></returns>
+
         public bool AddRam(RAM ram, int ProductId)
         {
             try
@@ -281,7 +312,12 @@ namespace Funcoes
             }
         }
 
-        // Função para adicionar uma CPU ao banco de dados
+        /// <summary>
+        /// Função para adicionar uma CPU ao banco de dados
+        /// </summary>
+        /// <param name="cpu"></param>
+        /// <param name="ProductId"></param>
+        /// <returns></returns>
         public bool AddCPU(Cpu cpu, int ProductId)
         {
             try
@@ -319,7 +355,12 @@ namespace Funcoes
 
         #region Adicionar Produto
 
-        // Função para adicionar um produto à tabela StockTable e retornar o ID gerado
+        /// <summary>
+        /// // Função para adicionar um produto à tabela StockTable e retornar o ID gerado
+        /// </summary>
+        /// <param name="produto"></param>
+        /// <returns></returns>
+
         public int AddProductWithId(Produto produto)
         {
             // Consulta SQL para inserir um novo produto e retornar o ID gerado
@@ -346,7 +387,11 @@ namespace Funcoes
             }
         }
 
-        // Função para adicionar um novo produto e suas informações específicas ao banco de dados
+        /// <summary>
+        /// Função para adicionar um novo produto ao banco de dados
+        /// </summary>
+        /// <param name="produto"></param>
+        /// <exception cref="ArgumentException"></exception>
         public void AddNewProduct(Produto produto)
         {
             // Adiciona o produto principal à tabela StockTable e obtém o ID gerado

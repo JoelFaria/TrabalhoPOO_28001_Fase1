@@ -7,6 +7,7 @@ using Funcoes;
 
 namespace TrabalhoPOOwinforms
 {
+
     public partial class AdminForm : Form
     {
         public AdminForm()
@@ -148,9 +149,12 @@ namespace TrabalhoPOOwinforms
             }
         }
 
-        #endregion
-
-        #region Butoes de adicionar, atualizar e eliminar produtos
+        /// <summary>
+        /// Manipula o evento de clique do botão 2. 
+        /// Salva o produto no banco de dados e atualiza os dados do estoque na interface.
+        /// </summary>
+        /// <param name="sender">O objeto que disparou o evento.</param>
+        /// <param name="e">Os dados do evento.</param>
         private void button2_Click(object sender, EventArgs e)
         {
             try
@@ -167,6 +171,13 @@ namespace TrabalhoPOOwinforms
             }
         }
 
+        /// <summary>
+        /// Manipula o evento de clique do botão para atualizar um produto existente no banco de dados.
+        /// Verifica o tipo de produto selecionado no ComboBox e instancia o objeto correspondente.
+        /// Atualiza o produto no banco de dados e exibe uma mensagem de sucesso ou erro.
+        /// </summary>
+        /// <param name="sender">O objeto que disparou o evento.</param>
+        /// <param name="e">Os dados do evento.</param>
         private void button1_Click(object sender, EventArgs e)
         {
             int id = int.Parse(textId.Text);
@@ -260,6 +271,11 @@ namespace TrabalhoPOOwinforms
             }
         }
 
+        /// <summary>
+        /// Manipula o evento de clique do botão para excluir um produto.
+        /// </summary>
+        /// <param name="sender">O objeto que disparou o evento.</param>
+        /// <param name="e">Os dados do evento.</param>
         private void button3_Click(object sender, EventArgs e)
         {
             try
@@ -284,6 +300,10 @@ namespace TrabalhoPOOwinforms
         #endregion
 
         #region Metodo de Esconder campos
+
+        /// <summary>
+        /// Oculta todos os campos relacionados a todos os tipos de produtos
+        /// </summary>
         private void HideFields()
         {
             // Oculta todos os campos relacionados a todos os tipos de produtos
@@ -319,6 +339,13 @@ namespace TrabalhoPOOwinforms
             Typelabel.Visible = false;
             Latencylabel.Visible = false;
         }
+
+        /// <summary>
+        /// Manipula o evento de alteração de seleção do comboBox1.
+        /// Oculta todos os campos e exibe apenas os campos específicos do tipo de produto selecionado.
+        /// </summary>
+        /// <param name="sender">O objeto que disparou o evento.</param>
+        /// <param name="e">Os dados do evento.</param>
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Primeiro, oculta todos os campos
@@ -373,7 +400,10 @@ namespace TrabalhoPOOwinforms
 
         #region Metodo de carregar detalhes de produtos
 
-        // Método para carregar os dados do estoque
+        /// <summary>
+        /// Método para carregar os dados do estoque
+        /// </summary>
+
         private void LoadStockData()
         {
             string query = "SELECT * FROM StockTable";
@@ -395,8 +425,11 @@ namespace TrabalhoPOOwinforms
                 }
             }
         }
-
-        // Método para carregar os detalhes de uma GPU
+        /// <summary>
+        /// Método para carregar os detalhes de uma GPU
+        /// </summary>
+        /// <param name="productId"></param>
+      
         private void LoadGpuDetails(int productId)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -417,7 +450,11 @@ namespace TrabalhoPOOwinforms
             }
         }
 
-        // Método para carregar os detalhes de uma CPU
+        /// <summary>
+        /// Método para carregar os detalhes de uma CPU
+        /// </summary>
+        /// <param name="productId"></param>
+
         private void LoadCpuDetails(int productId)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -438,8 +475,11 @@ namespace TrabalhoPOOwinforms
                 }
             }
         }
+        /// <summary>
+        /// Método para carregar os detalhes de uma placa-mãe
+        /// </summary>
+        /// <param name="productId"></param>
 
-        // Método para carregar os detalhes de uma placa-mãe
         private void LoadMotherboardDetails(int productId)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -459,8 +499,10 @@ namespace TrabalhoPOOwinforms
                 }
             }
         }
-
-        // Método para carregar os detalhes de uma RAM
+        /// <summary>
+        /// Método para carregar os detalhes de uma RAM
+        /// </summary>
+        /// <param name="productId"></param>
         private void LoadRamDetails(int productId)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -482,7 +524,11 @@ namespace TrabalhoPOOwinforms
             }
         }
 
-        // Evento para carregar os detalhes do produto selecionado no DataGridView
+        /// <summary>
+        /// Evento para carregar os detalhes do produto selecionado no DataGridView
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0) // Ignora cabeçalhos
