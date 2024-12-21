@@ -4,6 +4,7 @@ using TrabalhoPOO;
 
 namespace Funcoes
 {
+
     public class Funcoes1
     {
         private const string connectionString = "Data Source=JOELFARIA\\SQLEXPRESS;Initial Catalog=LoginApp;Integrated Security=True;TrustServerCertificate=True";
@@ -109,7 +110,6 @@ namespace Funcoes
             {
                 // Lança uma exceção se ocorrer um erro durante a atualização
                 throw new Exception("Erro ao atualizar o produto.", ex);
-                return false; // Retorna false se a atualização falhar
             }
         }
 
@@ -323,7 +323,8 @@ namespace Funcoes
         public int AddProductWithId(Produto produto)
         {
             // Consulta SQL para inserir um novo produto e retornar o ID gerado
-            string query = "INSERT INTO StockTable (name, description, price, stock, brand, guarantee, type) OUTPUT INSERTED.Id VALUES (@name, @description, @price, @stock, @brand, @guarantee, @type)";
+            string query = "INSERT INTO StockTable (name, description, price, stock, brand, guarantee, type) " +
+                "OUTPUT INSERTED.Id VALUES (@name, @description, @price, @stock, @brand, @guarantee, @type)";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
