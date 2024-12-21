@@ -47,6 +47,10 @@ namespace TrabalhoPOOwinforms
             login.Show();
             this.Hide();
         }
+        /// <summary>
+        /// Atualiza o estoque do produto decrementando a quantidade em 1.
+        /// </summary>
+        /// <param name="productId">ID do produto a ser atualizado.</param>
         private void UpdateStock(int productId)
         {
             string connectionString = "Data Source=JOELFARIA\\SQLEXPRESS;Initial Catalog=LoginApp;Integrated Security=True;TrustServerCertificate=True";
@@ -79,6 +83,12 @@ namespace TrabalhoPOOwinforms
             }
         }
 
+        /// <summary>
+        /// Manipula o evento de clique em uma célula do DataGridView.
+        /// Captura o ID e os detalhes do produto selecionado.
+        /// </summary>
+        /// <param name="sender">O objeto que disparou o evento.</param>
+        /// <param name="e">Os dados do evento de clique na célula.</param>
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0) // Ignorar cabeçalhos
@@ -93,6 +103,11 @@ namespace TrabalhoPOOwinforms
             }
         }
 
+        /// <summary>
+        /// Botão para adicionar um item ao carrinho.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(selectedProduct))
@@ -110,6 +125,11 @@ namespace TrabalhoPOOwinforms
 
         }
 
+        /// <summary>
+        /// Botão para confirmar a compra dos itens no carrinho.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
             if (carrinho.Count > 0)
